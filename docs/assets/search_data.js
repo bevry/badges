@@ -1,1 +1,0 @@
-window.searchData = [{"t":"README.md","p":"README.md.html"},{"t":"HISTORY.md","p":"HISTORY.md.html"},{"t":"LICENSE.md","p":"LICENSE.md.html"}]

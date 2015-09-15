@@ -179,11 +179,50 @@ export function travisci ({repoSlug}) {
 	// Create
 	const image = `//img.shields.io/travis/${repoSlug}/master.svg`
 	const url = `http://travis-ci.org/${repoSlug}`
-	const alt = 'Build Status'
+	const alt = 'Travis CI Build Status'
 	const title = "Check this project's build status on TravisCI"
 	return badge({image, alt, url, title})
 }
 travisci.badgeCategory = 'testing'
+
+/**
+Codeship Badge
+@method codeship
+@param {String} config.codeshipProjectUUID The UUID for a specific project, which is available on the General tab in your project settings
+@param {String} config.codeshipProjectID The ID for a specific project, which is available via the URL for the codeship project page
+@return {String} the result badge
+*/
+export function codeship ({codeshipProjectUUID, codeshipProjectID}) {
+	// Check
+	if ( !codeshipProjectUUID )  throw new Error('codeshipProjectUUID is missing')
+
+	// Create
+	const image = `//img.shields.io/codeship/${codeshipProjectUUID}/master.svg`
+	const url = `https://www.codeship.io/projects/${codeshipProjectID}`
+	const alt = 'Codeship Status'
+	const title = "Check this project's status on Codeship"
+	return badge({image, alt, url, title})
+}
+codeship.badgeCategory = 'testing'
+
+/**
+Coveralls Badge
+@method coveralls
+@param {String} config.repoSlug The repository slug (username/reponame)
+@return {String} the result badge
+*/
+export function coveralls ({repoSlug}) {
+	// Check
+	if ( !repoSlug )  throw new Error('repoSlug is missing')
+
+	// Create
+	const image = `//img.shields.io/coveralls/${repoSlug}.svg`
+	const url = `https://coveralls.io/r/${repoSlug}`
+	const alt = 'Coverage Status'
+	const title = "View this project's coverage on Coveralls"
+	return badge({image, alt, url, title})
+}
+coveralls.badgeCategory = 'testing'
 
 /**
 Waffle Badge
@@ -204,25 +243,6 @@ export function waffle ({repoSlug}) {
 	return badge({image, alt, url, title})
 }
 waffle.badgeCategory = 'testing'
-
-/**
-Coveralls Badge
-@method coveralls
-@param {String} config.repoSlug The repository slug (username/reponame)
-@return {String} the result badge
-*/
-export function coveralls ({repoSlug}) {
-	// Check
-	if ( !repoSlug )  throw new Error('repoSlug is missing')
-
-	// Create
-	const image = `//img.shields.io/coveralls/${repoSlug}.svg`
-	const url = `https://coveralls.io/r/${repoSlug}`
-	const alt = 'Coverage Status'
-	const title = "View this project's coverage on Coveralls"
-	return badge({image, alt, url, title})
-}
-coveralls.badgeCategory = 'testing'
 
 
 // ====================================

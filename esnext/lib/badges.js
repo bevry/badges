@@ -1,442 +1,593 @@
-# The badges were taken from:
-# https://github.com/bevry/projectz/blob/master/src/lib/badge-util.coffee
-#
-# And from:
-# https://github.com/docpad/docpad-plugin-services/blob/master/src/services.plugin.coffee#L103-L343
-
-###
-@TODO
-1. Ensure that opts are consistent for all badges
-	1. Badges that receive a "services" argument were taken from the docpad-plugin-services, and should be updated for the opts format
-2. Convert markdown output to HTML input (this has been done for the travis badge)
-3. Document all options and badges, inside the get badges example
-4. Write tests for all badges
-5. Write README documentation
-###
-
-###
-Get Badges
-
-require('badges')({
-	username: 'bevry'
-	name: 'docpad'
-	repo: 'docpad/bevry'
-	badges:
-		travis: true  # the branch to apply, if `true` defaults to `master
-		npm: true
-		npmdownloads: false
-		waffleio: true  # the filter to apply, if `true` defaults to `ready`
-})
-###
-badges = module.exports = (opts) ->
-	result = []
-	
-	unless opts.badges
-		opts.badges = {}
-		for own key,value of badges
-			opts.badges[key] = true
-	
-	for own key,value of opts.badges
-		if value
-			badge = """
-				<!-- #{key}/ -->
-				#{badges[key]?(opts)}
-				<!-- /#{key} -->
-				"""
-			result.push(badge)
-	
-	result = result.join('\n')
-	return result
-
-
-# ====================================
-# Development Badges
-
-# Get Travis CI Badge
-module.exports.travis = (opts={}) ->
-	# Check
-	if !opts.repo
-		return ''
-	else
-		branch = opts.badges.travis
-		branch = 'master'  if branch is true
-		image = "https://img.shields.io/travis/#{opts.repo}/#{branch}.svg"
-		url = "http://travis-ci.org/#{opts.repo}"
-
-	# Return
-	return """
-		<a href="#{url}" title="Check this project's build status on TravisCI"><img src="#{image}" alt="Build Status"></a>
-		"""
-
-# Get NPM Version Badge
-module.exports.npm = (opts={}) ->
-	# Check
-	if !opts.name
-		return ''
-	else
-		image = "https://img.shields.io/npm/v/#{opts.name}.svg"
-		url = "https://npmjs.org/package/#{opts.name}"
-
-	# Return
-	return """
-		[![NPM version](#{image})](#{url} "View this project on NPM")
-		"""
-
-# Get NPM Downloads Badge
-module.exports.npmdownloads = (opts={}) ->
-	# Check
-	if !opts.name
-		return ''
-	else
-		image = "https://img.shields.io/npm/dm/#{opts.name}.svg"
-		url = "https://npmjs.org/package/#{opts.name}"
-
-	# Return
-	return """
-		[![NPM downloads](#{image})](#{url} "View this project on NPM")
-		"""
-
-# Get Waffle.io Badge
-module.exports.waffleio = (opts={}) ->
-	# Check
-	if !opts.repo
-		return ''
-	else
-		label = opts.badges.waffleio
-		label = 'ready'  if label is true
-		image = "https://badge.waffle.io/#{opts.repo}.png?label=#{label}"
-		url = "http://waffle.io/#{opts.repo}"
-
-	# Return
-	return """
-		[![Stories in Ready](#{image})](#{url})
-		"""
-
-# Get Coveralls Badge
-module.exports.coveralls = (opts={}) ->
-	# Check
-	if !opts.repo
-		return ''
-
-	image = "https://img.shields.io/coveralls/#{opts.repo}.svg"
-	url = "https://coveralls.io/r/#{opts.repo}"
-	label = opts.badges.coveralls
-	label = 'Coverage Status'  if label is true
-
-	# Return
-	return """
-		[![#{label}](#{image})](#{url})
-		"""
-
-# Get David DM Dependencies Badge
-# @NOTE: Don't try and simplify this, it is already as simply as it can get
-module.exports.david = (opts={}) ->
-	# Check
-	if !opts.badges.david
-		return ''
-
-	# Custom Value
-	else if opts.badges.daviddev isnt true
-		repo = opts.badges.david
-
-	# Repo Value
-	else if opts.repo
-		repo = opts.repo
-
-	# No Value
-	else
-		return ''
-
-	# Assign
-	image = "https://img.shields.io/david/#{repo}.svg"
-	url = "https://david-dm.org/#{repo}"
-
-	# Return
-	return """
-		[![Dependency Status](#{image})](#{url})
-		"""
-
-# Get David DM Dev Dependencies Badge
-# @NOTE: Don't try and simplify this, it is already as simply as it can get
-module.exports.daviddev = (opts={}) ->
-	# Check
-	if !opts.badges.daviddev
-		return ''
-
-	# Custom Value
-	else if opts.badges.daviddev isnt true
-		repo = opts.badges.daviddev
-
-	# Repo Value
-	else if opts.repo
-		repo = opts.repo
-
-	# No Value
-	else
-		return ''
-
-	# Assign
-	image = "https://img.shields.io/david/dev/#{repo}.svg"
-	url = "https://david-dm.org/#{repo}#info=devDependencies"
-
-	# Return
-	return """
-		[![Dev Dependency Status](#{image})](#{url})
-		"""
-
-# Get Sauce Labs Browser Matrix
-module.exports.saucebm = (opts={}) ->
-	# Check
-	if !opts.badges.saucebm  # < @TODO things like this check are probably not necessary anymore, as they are now handled by our getBadges function
-		return ''
-	else
-		image = "https://saucelabs.com/browser-matrix/#{opts.badges.saucebm}.svg"
-		url = "https://saucelabs.com/u/#{opts.badges.saucebm}.svg"
-	# Return
-	return """
-		[![Sauce Labs Browser Matrix](#{image})](#{url} "Check this project's browser tests on Sauce Labs")
-		"""
-
-
-# ====================================
-# Donation Badges
-
-# Get Gittip Badge
-module.exports.gratipay = (opts={}) ->
-	# Prepare
-	name = (opts.badges.gratipay or opts.badges.gittip)
-
-	# Check
-	if !name
-		return ''
-	else
-		image = "https://img.shields.io/gratipay/#{name}.svg"
-		url = "https://www.gratipay.com/#{name}/"
-
-	# Return
-	return """
-		[![Gratipay donate button](#{image})](#{url} "Donate weekly to this project using Gratipay")
-		"""
-
-# Get Flattr Badge
-module.exports.flattr = (opts={}) ->
-	# Check
-	if !opts.badges.flattr
-		return ''
-	else
-		image = "https://img.shields.io/badge/flattr-donate-yellow.svg"
-		url = "http://flattr.com/thing/#{opts.badges.flattr}"
-
-	# Return
-	return """
-		[![Flattr donate button](#{image})](#{url} "Donate monthly to this project using Flattr")
-		"""
-
-# Get Paypal Badge
-module.exports.paypal = (opts={}) ->
-	# Check
-	if !opts.badges.paypal
-		return ''
-	else
-		image = "https://img.shields.io/badge/paypal-donate-yellow.svg"
-		url = "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=#{opts.badges.paypal}"
-
-	# Return
-	return """
-		[![PayPayl donate button](#{image})](#{url} "Donate once-off to this project using Paypal")
-		"""
-
-# Get Bitcoin Badge
-module.exports.bitcoin = (opts={}) ->
-	# Check
-	if !opts.badges.bitcoin
-		return ''
-	else
-		image = "https://img.shields.io/badge/bitcoin-donate-yellow.svg"
-		url = opts.badges.bitcoin
-
-	# Return
-	return """
-		[![BitCoin donate button](#{image})](#{url} "Donate once-off to this project using BitCoin")
-		"""
-
-# Get Wishlist
-module.exports.wishlist = (opts={}) ->
-	# Check
-	if !opts.badges.wishlist
-		return ''
-	else
-		image = "https://img.shields.io/badge/wishlist-donate-yellow.svg"
-		url = opts.badges.wishlist
-
-	# Return
-	return """
-		[![Wishlist browse button](#{image})](#{url} "Buy an item on our wishlist for us")
-		"""
-
-
-# ====================================
-# Social Badges
-# These need to be updated for the above style
-
-# Get Google Plus One Button
-module.exports.googleplusone = (services) ->
-	# Prepare
-	services ?= @getServices()
-	return ''  if services.googlePlusOneButton is false
-	pageUrl = @getPageUrl()
-
-	# Return
-	return """
-		<div class="google-plus-one-button service-button">
-			<div class="g-plusone" data-size="medium" data-href="#{pageUrl}"></div>
-			<script>
-				(function() {
-					var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-					po.src = 'https://apis.google.com/js/plusone.js';
-					var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-				})();
-			</script>
-		</div>
-		"""
-
-# Get Reddit Submit Button
-module.exports.redditsubmit = (services) ->
-	# Prepare
-	services ?= @getServices()
-	return ''  if services.redditSubmitButton is false
-	pageUrl = @getPageUrl()
-
-	# Return
-	return """
-		<div class="reddit-submit-button service-button">
-			<script>reddit_url="#{pageUrl}"</script>
-			<script src="http://en.reddit.com/static/button/button1.js"></script>
-		</div>
-		"""
-
-# Get Hacker News Submit Button
-module.exports.hackernewssubmit = (services) ->
-	# Prepare
-	services ?= @getServices()
-	return ''  if  services.hackerNewsSubmitButton is false
-	#pageTitle = (@document.title or @document.name or @site.title)
-	pageUrl = @getPageUrl()
-
-	# Return
-	return """
-		<div class="hacker-news-submit-button service-button">
-			<a href="https://news.ycombinator.com/submit" class="hn-button" data-url="#{pageUrl}" data-count="horizontal">Vote on Hacker News</a>
-			<script>var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();</script>
-		</div>
-		"""
-
-# Get Facebook Like Button
-module.exports.facebooklike = (services) ->
-	# Prepare
-	services ?= @getServices()
-	facebookApplicationId = services.facebookLikeButton?.applicationId ? '266367676718271'
-	return ''  unless facebookApplicationId
-	pageUrl = @getPageUrl()
-
-	# Return
-	return """
-		<div class="facebook-like-button service-button">
-			<iframe src="//www.facebook.com/plugins/like.php?href=#{escape pageUrl}&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;font&amp;colorscheme=light&amp;action=like&amp;height=21&amp;appId=#{escape facebookApplicationId}" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe>
-		</div>
-		"""
-
-# Get Facebook Follow Button
-module.exports.facebookfollow = (services) ->
-	# Prepare
-	services ?= @getServices()
-	facebookApplicationId = services.facebookFollowButton?.applicationId ? '266367676718271'
-	facebookUsername = services.facebookFollowButton?.username
-	return ''  unless (facebookUsername and facebookApplicationId)
-
-	# Return
-	return """
-		<div class="facebook-follow-button service-button">
-			<iframe src="//www.facebook.com/plugins/follow.php?href=https%3A%2F%2Fwww.facebook.com%2F#{escape facebookUsername}&amp;layout=button_count&amp;show_faces=false&amp;colorscheme=light&amp;font&amp;width=450&amp;appId=#{escape facebookApplicationId}" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height: 20px;" allowTransparency="true"></iframe>
-		</div>
-		"""
-
-
-# Get Twitter Tweet Button
-module.exports.twittertweet = (services) ->
-	# Prepare
-	services ?= @getServices()
-	twitterUsername = services.twitterTweetButton
-	return ''  unless twitterUsername
-
-	# Return
-	return """
-		<div class="twitter-tweet-button service-button">
-			<a href="https://twitter.com/share" class="twitter-share-button" data-via="#{twitterUsername}" data-related="#{twitterUsername}">Tweet</a>
-			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-		</div>
-		"""
-
-# Get Twitter Follow Button
-module.exports.twitterfollow = (services) ->
-	# Prepare
-	services ?= @getServices()
-	twitterUsername = services.twitterFollowButton
-	return ''  unless twitterUsername
-
-	# Return
-	return """
-		<div class="twitter-follow-button service-button">
-			<a href="https://twitter.com/#{twitterUsername}" class="twitter-follow-button" data-show-count="false">Follow @#{twitterUsername}</a>
-			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-		</div>
-		"""
-
-# Get Github Follow Button
-module.exports.githubfollow = (services) ->
-	# Prepare
-	services ?= @getServices()
-	githubUsername = services.githubFollowButton
-	return ''  unless githubUsername
-
-	# Return
-	return """
-		<div class="github-follow-button service-button">
-			<iframe src="//ghbtns.com/github-btn.html?user=#{githubUsername}&amp;type=follow&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="165" height="20"></iframe>
-		</div>
-		"""
-
-# Get GitHub Star Button
-module.exports.githubstar = (services) ->
-	# Prepare
-	services ?= @getServices()
-	parts = services.githubStarButton?.split('/')
-	return ''  unless parts?.length is 2 and parts[0] and parts[1]
-	githubUsername = parts[0]
-	githubRepo = parts[1]
-
-	# Return
-	return """
-		<div class="github-star-button service-button">
-			<iframe src="//ghbtns.com/github-btn.html?user=#{githubUsername}&amp;repo=#{githubRepo}&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
-		</div>
-		"""
-
-# Get Quora Follow Button
-module.exports.quaorafollow = (services) ->
-	# Prepare
-	services ?= @getServices()
-	quoraUsername = services.quoraFollowButton ? ''
-	return ''  unless quoraUsername
-	quoraRealname = quoraUsername.replace(/-/g,' ')
-	quoraCode = '7N31XJs'
-
-	# Return
-	return """
-		<div class="quora-follow-button service-button">
-			<span class="quora-follow-button" data-name="#{quoraUsername}">
-				Follow <a href="http://www.quora.com/#{quoraUsername}">#{quoraRealname}</a> on <a href="http://www.quora.com">Quora</a>
-				<script src="//www.quora.com/widgets/follow?embed_code=#{quoraCode}"></script>
-			</span>
-		</div>
-		"""
+// ====================================
+// Custom Badges
+
+/**
+Generate a HTML badge
+@private
+@method badge
+@param {String} config.image The URL to the image
+@param {String} config.alt The alt attribute for the image
+@param {String} [config.url] The URL for the link
+@param {String} [config.title] The title attribute for the link
+@return {String} the result badge
+*/
+export function badge ({image, alt, url, title}) {
+	// Check
+	if ( !image )  throw new Error('image is missing')
+
+	// Create
+	return url
+		? `<a href="${url}" title="${title}"><img src="${image}" alt="${alt}" /></a>`
+		: `<img src="${image}" alt="${alt}" />`
+}
+badge.badgeCategory = 'custom'
+
+/**
+Shields Custom Badge
+@method shields
+@param {String} config.repoSlug The repository slug (username/reponame)
+@return {String} the result badge
+*/
+export function shields ({left, right, color = 'yellow', alt, url, title}) {
+	// Check
+	if ( !left )  throw new Error('left is missing')
+	if ( !right )  throw new Error('right is missing')
+
+	// Create
+	const image = `//img.shields.io/badge/${left}-${right}-${color}.svg`
+	return badge({image, alt, url, title})
+}
+shields.badgeCategory = 'custom'
+
+
+// ====================================
+// Development Badges
+
+/**
+NPM Version Badge
+@method npmversion
+@param {String} config.npmPackageName The repository slug (username/reponame)
+@return {String} the result badge
+*/
+export function npmversion ({npmPackageName}) {
+	// Check
+	if ( !npmPackageName )  throw new Error('npmPackageName is missing')
+
+	// Create
+	const image = `//img.shields.io/npm/v/${npmPackageName}.svg`
+	const url = `https://npmjs.org/package/${npmPackageName}`
+	const alt = 'NPM version'
+	const title = 'View this project on NPM'
+	return badge({image, alt, url, title})
+}
+npmversion.badgeCategory = 'development'
+
+/**
+NPM Downloads Badge
+@method npmdownloads
+@param {String} config.npmPackageName The repository slug (username/reponame)
+@return {String} the result badge
+*/
+export function npmdownloads ({npmPackageName}) {
+	// Check
+	if ( !npmPackageName )  throw new Error('npmPackageName is missing')
+
+	const image = `//img.shields.io/npm/dm/${npmPackageName}.svg`
+	const url = `https://npmjs.org/package/${npmPackageName}`
+	const alt = 'NPM downloads'
+	const title = 'View this project on NPM'
+	return badge({image, alt, url, title})
+}
+npmdownloads.badgeCategory = 'development'
+
+/**
+David DM Dependencies Badge
+@method daviddm
+@param {String} config.repoSlug The repository slug (username/reponame)
+@return {String} the result badge
+*/
+export function daviddm ({repoSlug}) {
+	// Check
+	if ( !repoSlug )  throw new Error('repoSlug is missing')
+
+	// Create
+	const image = `//img.shields.io/david/${repoSlug}.svg`
+	const url = `https://david-dm.org/${repoSlug}`
+	const alt = 'Dependency Status'
+	const title = "View the status of this project's dependencies on DavidDM"
+	return badge({image, alt, url, title})
+}
+daviddm.badgeCategory = 'development'
+
+/**
+David DM Dev Dependencies Badge
+@method daviddmdev
+@param {String} config.repoSlug The repository slug (username/reponame)
+@return {String} the result badge
+*/
+export function daviddmdev ({repoSlug}) {
+	// Check
+	if ( !repoSlug )  throw new Error('repoSlug is missing')
+
+	// Create
+	const image = `//img.shields.io/david/dev/${repoSlug}.svg`
+	const url = `https://david-dm.org/${repoSlug}#info=devDependencies`
+	const alt = 'Dev Dependency Status'
+	const title = "View the status of this project's development dependencies on DavidDM"
+	return badge({image, alt, url, title})
+}
+daviddmdev.badgeCategory = 'development'
+
+
+// ====================================
+// Testing Badges
+
+/**
+Sauce Labs Browser Matrix Badge
+@method saucelabsbm
+@param {String} config.repoSlug The repository slug (username/reponame)
+@return {String} the result badge
+*/
+export function saucelabsbm ({saucelabsUsername, saucelabsAuthToken}) {
+	// Check
+	if ( !saucelabsUsername )  throw new Error('saucelabsUsername is missing')
+	saucelabsAuthToken = saucelabsAuthToken || process.env.SAUCELABS_AUTH_TOKEN
+	if ( !saucelabsAuthToken )  throw new Error('saucelabsAuthToken is missing')
+
+	// Create
+	const image = `//saucelabs.com/browser-matrix/${saucelabsUsername}.svg?auth=${escape(saucelabsAuthToken)}`
+	const url = `https://saucelabs.com/u/${saucelabsUsername}`
+	const alt = 'Sauce Labs Browser Matrix'
+	const title = "Check this project's browser tests on Sauce Labs"
+	return badge({image, alt, url, title})
+}
+saucelabsbm.badgeCategory = 'testing'
+saucelabsbm.badgeInline = false
+
+/**
+Sauce Labs Badge
+@method saucelabsbm
+@param {String} config.saucelabsUsername The saucelabs username
+@param {String} config.saucelabsAuthToken The saucelabs authorisation token
+@return {String} the result badge
+*/
+export function saucelabs ({saucelabsUsername, saucelabsAuthToken}) {
+	// Check
+	if ( !saucelabsUsername )  throw new Error('saucelabsUsername is missing')
+	saucelabsAuthToken = saucelabsAuthToken || process.env.SAUCELABS_AUTH_TOKEN
+	if ( !saucelabsAuthToken )  throw new Error('saucelabsAuthToken is missing')
+
+	// Create
+	const image = `//saucelabs.com/browser-matrix/${saucelabsUsername}.svg?auth=${escape(saucelabsAuthToken)}`
+	const url = `https://saucelabs.com/u/${saucelabsUsername}`
+	const alt = 'Sauce Labs Browser Matrix'
+	const title = "Check this project's browser tests on Sauce Labs"
+	return badge({image, alt, url, title})
+}
+saucelabs.badgeCategory = 'testing'
+
+/**
+Travis CI Badge
+@method travisci
+@param {String} config.repoSlug The repository slug (username/reponame)
+@return {String} the result badge
+*/
+export function travisci ({repoSlug}) {
+	// Check
+	if ( !repoSlug )  throw new Error('repoSlug is missing')
+
+	// Create
+	const image = `//img.shields.io/travis/${repoSlug}/master.svg`
+	const url = `http://travis-ci.org/${repoSlug}`
+	const alt = 'Build Status'
+	const title = "Check this project's build status on TravisCI"
+	return badge({image, alt, url, title})
+}
+travisci.badgeCategory = 'testing'
+
+/**
+Waffle Badge
+@method waffle
+@param {String} config.repoSlug The repository slug (username/reponame)
+@return {String} the result badge
+*/
+export function waffle ({repoSlug}) {
+	// Check
+	if ( !repoSlug )  throw new Error('repoSlug is missing')
+
+	// Create
+	let label = 'ready'
+	const image = `//badge.waffle.io/${repoSlug}.png?label=${escape(label)}`
+	const url = `http://waffle.io/${repoSlug}`
+	const alt = 'Stories in Ready'
+	const title = "View this project's stories on Waffle.io"
+	return badge({image, alt, url, title})
+}
+waffle.badgeCategory = 'testing'
+
+/**
+Coveralls Badge
+@method coveralls
+@param {String} config.repoSlug The repository slug (username/reponame)
+@return {String} the result badge
+*/
+export function coveralls ({repoSlug}) {
+	// Check
+	if ( !repoSlug )  throw new Error('repoSlug is missing')
+
+	// Create
+	const image = `//img.shields.io/coveralls/${repoSlug}.svg`
+	const url = `https://coveralls.io/r/${repoSlug}`
+	const alt = 'Coverage Status'
+	const title = "View this project's coverage on Coveralls"
+	return badge({image, alt, url, title})
+}
+coveralls.badgeCategory = 'testing'
+
+
+// ====================================
+// Funding Badges
+
+/**
+Patreon Badge
+@method patreon
+@param {String} config.patreonUsername The patreon username to donate to
+@return {String} the result badge
+*/
+export function patreon ({patreonUsername}) {
+	// Check
+	if ( !patreonUsername )  throw new Error('patreonUsername is missing')
+
+	// Create
+	const image = `//img.shields.io/badge/patreon-donate-yellow.svg`
+	const url = `http://patreon.com/${patreonUsername}`
+	const alt = 'Patreon donate button'
+	const title = 'Donate to this project using Patreon'
+	return badge({image, alt, url, title})
+}
+patreon.badgeCategory = 'funding'
+
+/**
+Gratipay Badge
+@method gratipay
+@param {String} config.gratipayUsername The gratipay username to donate to
+@return {String} the result badge
+*/
+export function gratipay ({gratipayUsername}) {
+	// Check
+	if ( !gratipayUsername )  throw new Error('gratipayUsername is missing')
+
+	// Create
+	const image = `//img.shields.io/badge/gratipay-donate-yellow.svg`
+	const url = `https://www.gratipay.com/${gratipayUsername}`
+	const alt = 'Gratipay donate button'
+	const title = 'Donate weekly to this project using Gratipay'
+	return badge({image, alt, url, title})
+}
+gratipay.badgeCategory = 'funding'
+
+/**
+Flattr Badge
+@method flattr
+@param {String} config.flattrUsername The flattr code to donate to (e.g. 344188/balupton-on-Flattr)
+@return {String} the result badge
+*/
+export function flattr ({flattrCode}) {
+	// Check
+	if ( !flattrCode )  throw new Error('flattrCode is missing')
+
+	// Create
+	const image = 'https://img.shields.io/badge/flattr-donate-yellow.svg'
+	const url = `http://flattr.com/thing/${flattrCode}`
+	const alt = 'Flattr donate button'
+	const title = 'Donate to this project using Flattr'
+	return badge({image, alt, url, title})
+}
+flattr.badgeCategory = 'funding'
+
+/**
+Paypal Badge
+@method paypal
+@param {String} config.paypalURL The url to the paypal donate page
+@param {String} config.paypalButtonID The paypal button id
+@param {String} config.paypalUsername The paypal.me username
+@return {String} the result badge
+*/
+export function paypal ({paypalURL, paypalButtonID, paypalUsername}) {
+	// Check
+	if ( !paypalURL ) {
+		if ( paypalButtonID ) {
+			paypalURL = `https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=${escape(paypalButtonID)}`
+		}
+		else if ( paypalUsername ) {
+			paypalURL = `https://paypal.me/${paypalUsername}`
+		}
+		else {
+			throw new Error('paypalURL, paypalButtonID, or paypalUsername is missing, at least one must exist')
+		}
+	}
+
+	// Create
+	const image = `//img.shields.io/badge/paypal-donate-yellow.svg`
+	const url = paypalURL
+	const alt = 'PayPal donate button'
+	const title = 'Donate to this project using Paypal'
+	return badge({image, alt, url, title})
+}
+paypal.badgeCategory = 'funding'
+
+/**
+Bitcoin Badge
+@method bitcoin
+@param {String} config.bitcoinURL The url to the bitcoin donation page
+@return {String} the result badge
+*/
+export function bitcoin ({bitcoinURL}) {
+	// Check
+	if ( !bitcoinURL )  throw new Error('bitcoinURL is missing')
+
+	// Create
+	const image = `//img.shields.io/badge/bitcoin-donate-yellow.svg`
+	const url = bitcoinURL
+	const alt = 'Bitcoin donate button'
+	const title = 'Donate once-off to this project using Bitcoin'
+	return badge({image, alt, url, title})
+}
+bitcoin.badgeCategory = 'funding'
+
+/**
+Wishlist Badge
+@method wishlist
+@param {String} config.wishlistURL The url to the wishlist page
+@return {String} the result badge
+*/
+export function wishlist ({wishlistURL}) {
+	// Check
+	if ( !wishlistURL )  throw new Error('wishlistURL is missing')
+
+	// Create
+	const image = `//img.shields.io/badge/wishlist-donate-yellow.svg`
+	const url = wishlistURL
+	const alt = 'Wishlist browse button'
+	const title = 'Buy an item on our wishlist for us'
+	return badge({image, alt, url, title})
+}
+wishlist.badgeCategory = 'funding'
+
+
+// ====================================
+// Social Badges
+
+/**
+Slackin Script Badge
+@method slackinscript
+@param {String} config.slackinURL The slackin url (e.g. https://slack.bevry.me)
+@return {String} the result badge
+*/
+export function slackinscript ({slackinURL}) {
+	// Check
+	if ( !slackinURL )  throw new Error('slackinURL is missing')
+
+	// Create
+	return `<script async defer src="${slackinURL}/slackin.js"></script>`
+}
+slackinscript.badgeCategory = 'social'
+slackinscript.badgeScript = true
+
+/**
+Slackin Badge
+@method slackin
+@param {String} config.slackinURL The slackin url (e.g. https://slack.bevry.me)
+@return {String} the result badge
+*/
+export function slackin ({slackinURL}) {
+	// Check
+	if ( !slackinURL )  throw new Error('slackinURL is missing')
+
+	// Create
+	const image = `${slackinURL}/badge.svg`
+	const url = slackinURL
+	const alt = 'Slack community badge'
+	const title = 'Join this project\'s slack community'
+	return badge({image, alt, url, title})
+}
+slackin.badgeCategory = 'social'
+
+/**
+Google Analytics Beacon Badge
+https://github.com/igrigorik/ga-beacon
+@method gabeacon
+@param {String} config.gaTrackingID The google analytics tracing id (e.g. UA-XXXXX-XX)
+@return {String} the result badge
+*/
+export function gabeacon ({gaTrackingID, repoSlug}) {
+	// Check
+	if ( !gaTrackingID )  throw new Error('gaTrackingID is missing')
+	if ( !repoSlug )  throw new Error('repoSlug is missing')
+
+	// Create
+	const image = `//ga-beacon.appspot.com/${gaTrackingID}/${repoSlug}`
+	const url = 'https://github.com/igrigorik/ga-beacon'
+	const alt = 'Google Analytics beacon image'
+	const title = 'Get Google Analytics for your project'
+	return badge({image, alt, url, title})
+}
+gabeacon.badgeCategory = 'social'
+
+/**
+Google Plus One Button
+@method googleplusone
+@param {String} config.homepage The page url that the badge will be for
+@return {String} the result badge
+*/
+export function googleplusone ({homepage}) {
+	// Check
+	if ( !homepage )  throw new Error('homepage is missing')
+
+	// Create
+	return `<span class="g-plusone" data-size="medium" data-href="${homepage}"></span><script>(function() {var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true; po.src = '//apis.google.com/js/plusone.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);})();</script>`
+}
+googleplusone.badgeCategory = 'social'
+googleplusone.badgeScript = true
+
+/**
+Reddit Submit Button
+@method redditsubmit
+@param {String} config.homepage The page url that the badge will be for
+@return {String} the result badge
+*/
+export function redditsubmit ({homepage}) {
+	// Check
+	if ( !homepage )  throw new Error('homepage is missing')
+
+	// Create
+	return `<script>reddit_url="${homepage}"</script><script src="//en.reddit.com/static/button/button1.js"></script>`
+}
+redditsubmit.badgeCategory = 'social'
+redditsubmit.badgeScript = true
+
+/**
+Hacker News Submit Button
+@method hackernewssubmit
+@param {String} config.homepage The page url that the badge will be for
+@return {String} the result badge
+*/
+export function hackernewssubmit ({homepage}) {
+	// Check
+	if ( !homepage )  throw new Error('homepage is missing')
+
+	// Create
+	return `<a href="https://news.ycombinator.com/submit" class="hn-button" data-url="${homepage}" data-count="horizontal">Vote on Hacker News</a><script>var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();</script>`
+}
+hackernewssubmit.badgeCategory = 'social'
+hackernewssubmit.badgeScript = true
+
+/**
+Facebook Like Button
+@method facebooklike
+@param {String} config.homepage The page url that the badge will be for
+@param {String} config.facebookApplicationId The facebook application id that the badge is for
+@return {String} the result badge
+*/
+export function facebooklike ({homepage, facebookApplicationId}) {
+	// Prepare
+	if ( !homepage )  throw new Error('homepage is missing')
+	facebookApplicationId = facebookApplicationId || process.env.FACEBOOK_APPLICATION_ID
+	if ( !facebookApplicationId )  throw new Error('facebookApplicationId is missing')
+
+	// Return
+	return `<iframe src="//www.facebook.com/plugins/like.php?href=${escape(homepage)}&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;font&amp;colorscheme=light&amp;action=like&amp;height=21&amp;appId=${escape(facebookApplicationId)}" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe>`
+}
+facebooklike.badgeCategory = 'social'
+facebooklike.badgeScript = true
+
+/**
+Facebook Follow Button
+@method facebookfollow
+@param {String} config.facebookUsername The facebook username to follow
+@param {String} config.facebookApplicationId The facebook application id that the badge is for
+@return {String} the result badge
+*/
+export function facebookfollow ({facebookUsername, facebookApplicationId}) {
+	// Prepare
+	if ( !facebookUsername )  throw new Error('facebookUsername is missing')
+	facebookApplicationId = facebookApplicationId || process.env.FACEBOOK_APPLICATION_ID
+	if ( !facebookApplicationId )  throw new Error('facebookApplicationId is missing')
+
+	// Return
+	return `<iframe src="//www.facebook.com/plugins/follow.php?href=https%3A%2F%2Fwww.facebook.com%2F${escape(facebookUsername)}&amp;layout=button_count&amp;show_faces=false&amp;colorscheme=light&amp;font&amp;width=450&amp;appId=${escape(facebookApplicationId)}" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height: 20px;" allowTransparency="true"></iframe>`
+}
+facebookfollow.badgeCategory = 'social'
+facebookfollow.badgeScript = true
+
+/**
+Twitter Tweet Button
+@method twittertweet
+@param {String} config.twitterUsername The twitter username to tweet at
+@return {String} the result badge
+*/
+export function twittertweet ({twitterUsername}) {
+	// Prepare
+	if ( !twitterUsername )  throw new Error('twitterUsername is missing')
+
+	// Return
+	return `<a href="https://twitter.com/share" class="twitter-share-button" data-via="${twitterUsername}" data-related="${twitterUsername}">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>`
+}
+twittertweet.badgeCategory = 'social'
+twittertweet.badgeScript = true
+
+/**
+Twitter Follow Button
+@method twitterfollow
+@param {String} config.twitterUsername The twitter username to follow
+@return {String} the result badge
+*/
+export function twitterfollow ({twitterUsername}) {
+	// Prepare
+	if ( !twitterUsername )  throw new Error('twitterUsername is missing')
+
+	// Return
+	return `<a href="https://twitter.com/${escape(twitterUsername)}" class="twitter-follow-button" data-show-count="false">Follow @${twitterUsername}</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>`
+}
+twitterfollow.badgeCategory = 'social'
+twitterfollow.badgeScript = true
+
+/**
+Github Follow Button
+@method githubfollow
+@param {String} config.githubUsername The github user to follow
+@return {String} the result badge
+*/
+export function githubfollow ({githubUsername}) {
+	// Prepare
+	if ( !githubUsername )  throw new Error('githubUsername is missing')
+
+	// Return
+	return `<iframe src="//ghbtns.com/github-btn.html?user=${escape(githubUsername)}&amp;type=follow&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="165" height="20"></iframe>`
+}
+githubfollow.badgeCategory = 'social'
+githubfollow.badgeScript = true
+
+/**
+GitHub Star Button
+@method githubstar
+@param {String} config.repoSlug The repository slug (username/reponame)
+@return {String} the result badge
+*/
+export function githubstar ({repoSlug}) {
+	// Prepare
+	const split = (repoSlug || '').split('/')
+	const githubUsername = split[0]
+	const githubReponame = split[1]
+	if ( !repoSlug )  throw new Error('repoSlug is missing')
+	if ( !githubUsername || !githubUsername )  throw new Error('repoSlug is incorrect')
+
+	// Return
+	return `<iframe src="//ghbtns.com/github-btn.html?user=${escape(githubUsername)}&amp;repo=${escape(githubReponame)}&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>`
+}
+githubstar.badgeCategory = 'social'
+githubstar.badgeScript = true
+
+/**
+Quora Follow Button
+@method quorafollow
+@param {String} config.quoraUsername The quora user to follow
+@param {String} [config.quoraRealname] The quora user's name
+@param {String} [config.quoraCode] Some code
+@return {String} the result badge
+*/
+export function quorafollow ({quoraUsername, quoraRealname, quoraCode}) {
+	// Prepare
+	if ( !quoraUsername )  throw new Error('quoraUsername is missing')
+	quoraRealname = quoraRealname || quoraUsername.replace(/-/g, ' ')
+	quoraCode = quoraCode || '7N31XJs'
+
+	// Return
+	return `
+		<span data-name="${quoraUsername}">
+			Follow <a href="http://www.quora.com/${quoraUsername}">${quoraRealname}</a> on <a href="http://www.quora.com">Quora</a>
+			<script src="//www.quora.com/widgets/follow?embed_code=${escape(quoraCode)}"></script>
+		</span>`.replace(/\n\s*/g, '')
+}
+quorafollow.badgeCategory = 'social'
+quorafollow.badgeScript = true

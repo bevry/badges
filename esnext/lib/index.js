@@ -49,14 +49,11 @@ export function renderBadges (list, config = {}, options = {filterCategory: fals
 			badgeName = badgeName[0]
 		}
 
-		// Separator?
-		else if ( badgeName !== '---' ) {
-			// Category?
-			if ( options.filterCategory && options.filterCategory !== badges[badgeName].badgeCategory )  return
+		// Category?
+		if ( options.filterCategory && (badgeName === '---' || options.filterCategory !== badges[badgeName].badgeCategory) )  return
 
-			// Script?
-			if ( options.filterScripts === true && badges[badgeName].badgeScript )  return
-		}
+		// Script?
+		if ( options.filterScripts === true && badgeName !== '---' && badges[badgeName].badgeScript )  return
 
 		// Render
 		const badgeResult = renderBadge(badgeName, badgeConfig).trim()

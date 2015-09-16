@@ -1,6 +1,6 @@
 {
   "name": "badges",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "The definitive collection of badges for rendering",
   "homepage": "https://github.com/bevry/badges",
   "license": "MIT",
@@ -54,36 +54,38 @@
     "star"
   ],
   "badges": {
-  	"list": [
-  		"travisci",
-  		"npmversion",
-  		"npmdownloads",
-  		"daviddm",
-  		"daviddmdev",
-  		"---",
-  		"slackin",
-  		"patreon",
-  		"gratipay",
-  		"flattr",
-  		"paypal",
-  		"bitcoin",
-  		"wishlist"
-  	],
-  	"config": {
-  		"patreonUsername": "bevry",
-  		"gratipayUsername": "bevry",
+    "list": [
+      "travisci",
+      "npmversion",
+      "npmdownloads",
+      "daviddm",
+      "daviddmdev",
+      "---",
+      "slackin",
+      "patreon",
+      "gratipay",
+      "flattr",
+      "paypal",
+      "bitcoin",
+      "wishlist"
+    ],
+    "config": {
+      "patreonUsername": "bevry",
+      "gratipayUsername": "bevry",
       "flattrCode": "344188/balupton-on-Flattr",
       "paypalButtonID": "QB8GQPZAH84N6",
       "bitcoinURL": "https://bevry.me/bitcoin",
       "wishlistURL": "https://bevry.me/wishlist",
       "slackinURL": "https://slack.bevry.me"
-  	}
+    }
   },
   "author": "2015+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
   "maintainers": [
-    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
+    "Benjamin Lupton <b@lupton.cc> (http://balupton.com)"
   ],
-  "contributors": [],
+  "contributors": [
+    "Benjamin Lupton <b@lupton.cc> (http://balupton.com)"
+  ],
   "bugs": {
     "url": "https://github.com/bevry/badges/issues"
   },
@@ -91,6 +93,7 @@
     "type": "git",
     "url": "http://github.com/bevry/badges.git"
   },
+  "browsers": true,
   "engines": {
     "node": ">=0.12"
   },
@@ -114,7 +117,6 @@
     "meta": "node --harmony nakefile.js meta",
     "prepare": "node --harmony nakefile.js prepare",
     "release": "node --harmony nakefile.js release",
-
     "test": "node --harmony ./es5/test/index-test.js"
   },
   "nakeConfiguration": {

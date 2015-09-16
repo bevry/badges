@@ -41,7 +41,7 @@ export function shields ({left, right, color = 'yellow', alt, url, title}) {
 	if ( !right )  throw new Error('right is missing')
 
 	// Create
-	const image = `//img.shields.io/badge/${left}-${right}-${color}.svg`
+	const image = `https://img.shields.io/badge/${left}-${right}-${color}.svg`
 	return badge({image, alt, url, title})
 }
 shields.badgeCategory = 'custom'
@@ -61,7 +61,7 @@ export function npmversion ({npmPackageName}) {
 	if ( !npmPackageName )  throw new Error('npmPackageName is missing')
 
 	// Create
-	const image = `//img.shields.io/npm/v/${npmPackageName}.svg`
+	const image = `https://img.shields.io/npm/v/${npmPackageName}.svg`
 	const url = `https://npmjs.org/package/${npmPackageName}`
 	const alt = 'NPM version'
 	const title = 'View this project on NPM'
@@ -79,7 +79,7 @@ export function npmdownloads ({npmPackageName}) {
 	// Check
 	if ( !npmPackageName )  throw new Error('npmPackageName is missing')
 
-	const image = `//img.shields.io/npm/dm/${npmPackageName}.svg`
+	const image = `https://img.shields.io/npm/dm/${npmPackageName}.svg`
 	const url = `https://npmjs.org/package/${npmPackageName}`
 	const alt = 'NPM downloads'
 	const title = 'View this project on NPM'
@@ -98,7 +98,7 @@ export function daviddm ({githubSlug}) {
 	if ( !githubSlug )  throw new Error('githubSlug is missing')
 
 	// Create
-	const image = `//img.shields.io/david/${githubSlug}.svg`
+	const image = `https://img.shields.io/david/${githubSlug}.svg`
 	const url = `https://david-dm.org/${githubSlug}`
 	const alt = 'Dependency Status'
 	const title = "View the status of this project's dependencies on DavidDM"
@@ -117,7 +117,7 @@ export function daviddmdev ({githubSlug}) {
 	if ( !githubSlug )  throw new Error('githubSlug is missing')
 
 	// Create
-	const image = `//img.shields.io/david/dev/${githubSlug}.svg`
+	const image = `https://img.shields.io/david/dev/${githubSlug}.svg`
 	const url = `https://david-dm.org/${githubSlug}#info=devDependencies`
 	const alt = 'Dev Dependency Status'
 	const title = "View the status of this project's development dependencies on DavidDM"
@@ -142,7 +142,7 @@ export function saucelabsbm ({saucelabsUsername, saucelabsAuthToken}) {
 	if ( !saucelabsAuthToken )  throw new Error('saucelabsAuthToken is missing')
 
 	// Create
-	const image = `//saucelabs.com/browser-matrix/${saucelabsUsername}.svg?auth=${escape(saucelabsAuthToken)}`
+	const image = `https://saucelabs.com/browser-matrix/${saucelabsUsername}.svg?auth=${escape(saucelabsAuthToken)}`
 	const url = `https://saucelabs.com/u/${saucelabsUsername}`
 	const alt = 'Sauce Labs Browser Matrix'
 	const title = "Check this project's browser tests on Sauce Labs"
@@ -165,7 +165,7 @@ export function saucelabs ({saucelabsUsername, saucelabsAuthToken}) {
 	if ( !saucelabsAuthToken )  throw new Error('saucelabsAuthToken is missing')
 
 	// Create
-	const image = `//saucelabs.com/browser-matrix/${saucelabsUsername}.svg?auth=${escape(saucelabsAuthToken)}`
+	const image = `https://saucelabs.com/browser-matrix/${saucelabsUsername}.svg?auth=${escape(saucelabsAuthToken)}`
 	const url = `https://saucelabs.com/u/${saucelabsUsername}`
 	const alt = 'Sauce Labs Browser Matrix'
 	const title = "Check this project's browser tests on Sauce Labs"
@@ -184,7 +184,7 @@ export function travisci ({githubSlug}) {
 	if ( !githubSlug )  throw new Error('githubSlug is missing')
 
 	// Create
-	const image = `//img.shields.io/travis/${githubSlug}/master.svg`
+	const image = `https://img.shields.io/travis/${githubSlug}/master.svg`
 	const url = `http://travis-ci.org/${githubSlug}`
 	const alt = 'Travis CI Build Status'
 	const title = "Check this project's build status on TravisCI"
@@ -205,7 +205,7 @@ export function codeship ({codeshipProjectUUID, codeshipProjectID}) {
 	if ( !codeshipProjectID )  throw new Error('codeshipProjectID is missing')
 
 	// Create
-	const image = `//img.shields.io/codeship/${codeshipProjectUUID}/master.svg`
+	const image = `https://img.shields.io/codeship/${codeshipProjectUUID}/master.svg`
 	const url = `https://www.codeship.io/projects/${codeshipProjectID}`
 	const alt = 'Codeship Status'
 	const title = "Check this project's status on Codeship"
@@ -224,7 +224,7 @@ export function coveralls ({githubSlug}) {
 	if ( !githubSlug )  throw new Error('githubSlug is missing')
 
 	// Create
-	const image = `//img.shields.io/coveralls/${githubSlug}.svg`
+	const image = `https://img.shields.io/coveralls/${githubSlug}.svg`
 	const url = `https://coveralls.io/r/${githubSlug}`
 	const alt = 'Coverage Status'
 	const title = "View this project's coverage on Coveralls"
@@ -244,7 +244,7 @@ export function waffle ({githubSlug}) {
 
 	// Create
 	let label = 'ready'
-	const image = `//badge.waffle.io/${githubSlug}.png?label=${escape(label)}`
+	const image = `https://badge.waffle.io/${githubSlug}.png?label=${escape(label)}`
 	const url = `http://waffle.io/${githubSlug}`
 	const alt = 'Stories in Ready'
 	const title = "View this project's stories on Waffle.io"
@@ -267,7 +267,7 @@ export function patreon ({patreonUsername}) {
 	if ( !patreonUsername )  throw new Error('patreonUsername is missing')
 
 	// Create
-	const image = `//img.shields.io/badge/patreon-donate-yellow.svg`
+	const image = `https://img.shields.io/badge/patreon-donate-yellow.svg`
 	const url = `http://patreon.com/${patreonUsername}`
 	const alt = 'Patreon donate button'
 	const title = 'Donate to this project using Patreon'
@@ -286,7 +286,7 @@ export function gratipay ({gratipayUsername}) {
 	if ( !gratipayUsername )  throw new Error('gratipayUsername is missing')
 
 	// Create
-	const image = `//img.shields.io/badge/gratipay-donate-yellow.svg`
+	const image = `https://img.shields.io/badge/gratipay-donate-yellow.svg`
 	const url = `https://www.gratipay.com/${gratipayUsername}`
 	const alt = 'Gratipay donate button'
 	const title = 'Donate weekly to this project using Gratipay'
@@ -336,7 +336,7 @@ export function paypal ({paypalURL, paypalButtonID, paypalUsername}) {
 	}
 
 	// Create
-	const image = `//img.shields.io/badge/paypal-donate-yellow.svg`
+	const image = `https://img.shields.io/badge/paypal-donate-yellow.svg`
 	const url = paypalURL
 	const alt = 'PayPal donate button'
 	const title = 'Donate to this project using Paypal'
@@ -355,7 +355,7 @@ export function bitcoin ({bitcoinURL}) {
 	if ( !bitcoinURL )  throw new Error('bitcoinURL is missing')
 
 	// Create
-	const image = `//img.shields.io/badge/bitcoin-donate-yellow.svg`
+	const image = `https://img.shields.io/badge/bitcoin-donate-yellow.svg`
 	const url = bitcoinURL
 	const alt = 'Bitcoin donate button'
 	const title = 'Donate once-off to this project using Bitcoin'
@@ -374,7 +374,7 @@ export function wishlist ({wishlistURL}) {
 	if ( !wishlistURL )  throw new Error('wishlistURL is missing')
 
 	// Create
-	const image = `//img.shields.io/badge/wishlist-donate-yellow.svg`
+	const image = `https://img.shields.io/badge/wishlist-donate-yellow.svg`
 	const url = wishlistURL
 	const alt = 'Wishlist browse button'
 	const title = 'Buy an item on our wishlist for us'
@@ -435,7 +435,7 @@ export function gabeacon ({gaTrackingID, githubSlug}) {
 	if ( !githubSlug )  throw new Error('githubSlug is missing')
 
 	// Create
-	const image = `//ga-beacon.appspot.com/${gaTrackingID}/${githubSlug}`
+	const image = `https://ga-beacon.appspot.com/${gaTrackingID}/${githubSlug}`
 	const url = 'https://github.com/igrigorik/ga-beacon'
 	const alt = 'Google Analytics beacon image'
 	const title = 'Get Google Analytics for your project'
@@ -470,7 +470,7 @@ export function redditsubmit ({homepage}) {
 	if ( !homepage )  throw new Error('homepage is missing')
 
 	// Create
-	return `<script>reddit_url="${homepage}"</script><script src="//en.reddit.com/static/button/button1.js"></script>`
+	return `<script>reddit_url="${homepage}"</script><script src="https://en.reddit.com/static/button/button1.js"></script>`
 }
 redditsubmit.badgeCategory = 'social'
 redditsubmit.badgeScript = true
@@ -486,7 +486,7 @@ export function hackernewssubmit ({homepage}) {
 	if ( !homepage )  throw new Error('homepage is missing')
 
 	// Create
-	return `<a href="https://news.ycombinator.com/submit" class="hn-button" data-url="${homepage}" data-count="horizontal">Vote on Hacker News</a><script>var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();</script>`
+	return `<a href="https://news.ycombinator.com/submit" class="hn-button" data-url="${homepage}" data-count="horizontal">Vote on Hacker News</a><script>var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="https://hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();</script>`
 }
 hackernewssubmit.badgeCategory = 'social'
 hackernewssubmit.badgeScript = true
@@ -505,7 +505,7 @@ export function facebooklike ({homepage, facebookApplicationID}) {
 	if ( !facebookApplicationID )  throw new Error('facebookApplicationID is missing')
 
 	// Return
-	return `<iframe src="//www.facebook.com/plugins/like.php?href=${escape(homepage)}&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;font&amp;colorscheme=light&amp;action=like&amp;height=21&amp;appId=${escape(facebookApplicationID)}" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe>`
+	return `<iframe src="https://www.facebook.com/plugins/like.php?href=${escape(homepage)}&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;font&amp;colorscheme=light&amp;action=like&amp;height=21&amp;appId=${escape(facebookApplicationID)}" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe>`
 }
 facebooklike.badgeCategory = 'social'
 facebooklike.badgeScript = true
@@ -524,7 +524,7 @@ export function facebookfollow ({facebookUsername, facebookApplicationID}) {
 	if ( !facebookApplicationID )  throw new Error('facebookApplicationID is missing')
 
 	// Return
-	return `<iframe src="//www.facebook.com/plugins/follow.php?href=https%3A%2F%2Fwww.facebook.com%2F${escape(facebookUsername)}&amp;layout=button_count&amp;show_faces=false&amp;colorscheme=light&amp;font&amp;width=450&amp;appId=${escape(facebookApplicationID)}" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height: 20px;" allowTransparency="true"></iframe>`
+	return `<iframe src="https://www.facebook.com/plugins/follow.php?href=https%3A%2F%2Fwww.facebook.com%2F${escape(facebookUsername)}&amp;layout=button_count&amp;show_faces=false&amp;colorscheme=light&amp;font&amp;width=450&amp;appId=${escape(facebookApplicationID)}" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height: 20px;" allowTransparency="true"></iframe>`
 }
 facebookfollow.badgeCategory = 'social'
 facebookfollow.badgeScript = true
@@ -540,7 +540,7 @@ export function twittertweet ({twitterUsername}) {
 	if ( !twitterUsername )  throw new Error('twitterUsername is missing')
 
 	// Return
-	return `<a href="https://twitter.com/share" class="twitter-share-button" data-via="${twitterUsername}" data-related="${twitterUsername}">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>`
+	return `<a href="https://twitter.com/share" class="twitter-share-button" data-via="${twitterUsername}" data-related="${twitterUsername}">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>`
 }
 twittertweet.badgeCategory = 'social'
 twittertweet.badgeScript = true
@@ -556,7 +556,7 @@ export function twitterfollow ({twitterUsername}) {
 	if ( !twitterUsername )  throw new Error('twitterUsername is missing')
 
 	// Return
-	return `<a href="https://twitter.com/${escape(twitterUsername)}" class="twitter-follow-button" data-show-count="false">Follow @${twitterUsername}</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>`
+	return `<a href="https://twitter.com/${escape(twitterUsername)}" class="twitter-follow-button" data-show-count="false">Follow @${twitterUsername}</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>`
 }
 twitterfollow.badgeCategory = 'social'
 twitterfollow.badgeScript = true
@@ -572,7 +572,7 @@ export function githubfollow ({githubUsername}) {
 	if ( !githubUsername )  throw new Error('githubUsername is missing')
 
 	// Return
-	return `<iframe src="//ghbtns.com/github-btn.html?user=${escape(githubUsername)}&amp;type=follow&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="165" height="20"></iframe>`
+	return `<iframe src="https://ghbtns.com/github-btn.html?user=${escape(githubUsername)}&amp;type=follow&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="165" height="20"></iframe>`
 }
 githubfollow.badgeCategory = 'social'
 githubfollow.badgeScript = true
@@ -592,7 +592,7 @@ export function githubstar ({githubSlug}) {
 	if ( !githubUsername || !githubRepository )  throw new Error('githubSlug is invalid')
 
 	// Return
-	return `<iframe src="//ghbtns.com/github-btn.html?user=${escape(githubUsername)}&amp;repo=${escape(githubRepository)}&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>`
+	return `<iframe src="https://ghbtns.com/github-btn.html?user=${escape(githubUsername)}&amp;repo=${escape(githubRepository)}&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>`
 }
 githubstar.badgeCategory = 'social'
 githubstar.badgeScript = true
@@ -615,7 +615,7 @@ export function quorafollow ({quoraUsername, quoraRealname, quoraCode}) {
 	return `
 		<span data-name="${quoraUsername}">
 			Follow <a href="http://www.quora.com/${quoraUsername}">${quoraRealname}</a> on <a href="http://www.quora.com">Quora</a>
-			<script src="//www.quora.com/widgets/follow?embed_code=${escape(quoraCode)}"></script>
+			<script src="https://www.quora.com/widgets/follow?embed_code=${escape(quoraCode)}"></script>
 		</span>`.replace(/\n\s*/g, '')
 }
 quorafollow.badgeCategory = 'social'

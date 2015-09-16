@@ -1,5 +1,8 @@
 # History
 
+## v1.0.1 September 16, 2015
+- Always use https
+
 ## v1.0.0 September 16, 2015
 - Initial working release
 - Consolidated badges from:

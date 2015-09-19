@@ -1,6 +1,6 @@
 {
   "name": "badges",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "The definitive collection of badges for rendering",
   "homepage": "https://github.com/bevry/badges",
   "license": "MIT",
@@ -23,6 +23,8 @@
     "coveralls.io",
     "david",
     "david dm",
+    "60devs",
+    "sixtydevs",
     "patreon",
     "gratipay",
     "flattr",
@@ -51,6 +53,9 @@
     "plus one",
     "+1",
     "donate",
+    "donation",
+    "tip",
+    "tips",
     "star"
   ],
   "badges": {
@@ -93,11 +98,12 @@
     "type": "git",
     "url": "http://github.com/bevry/badges.git"
   },
-  "browsers": true,
   "engines": {
     "node": ">=0.12"
   },
-  "dependencies": {},
+  "dependencies": {
+    "esnextguardian": "^1.0.2"
+  },
   "devDependencies": {
     "assert-helpers": "^3.0.0",
     "babel": "^5.8.23",
@@ -105,8 +111,9 @@
     "eslint": "^1.4.1",
     "joe": "^1.6.0",
     "joe-reporter-console": "^1.2.1",
-    "projectz": "^0.5.0"
+    "projectz": "^1.0.2"
   },
+  "browser": "./es5/lib/index.js",
   "main": "./esnextguardian.js",
   "scripts": {
     "clean": "node --harmony nakefile.js clean",

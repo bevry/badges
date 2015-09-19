@@ -27,6 +27,7 @@ joe.suite('badges', function (suite, test) {
 		'waffle',
 		'---',
 		// Funding Badges
+		'sixtydevstips',
 		'patreon',
 		'gratipay',
 		'flattr',
@@ -58,6 +59,7 @@ joe.suite('badges', function (suite, test) {
 		codeshipProjectID: '123',
 		githubSlug: 'bevry/getbadges',
 
+		sixtydevstipsID: 'd2dcf439c9759e88f3ccec1cef394c10',
 		patreonUsername: 'bevry',
 		gratipayUsername: 'bevry',
 		flattrCode: '344188/balupton-on-Flattr',
@@ -100,6 +102,7 @@ joe.suite('badges', function (suite, test) {
 		`<span class="badge-coveralls"><a href="https://coveralls.io/r/bevry/getbadges" title="View this project's coverage on Coveralls"><img src="https://img.shields.io/coveralls/bevry/getbadges.svg" alt="Coverage Status" /></a></span>`,
 		`<span class="badge-waffle"><a href="http://waffle.io/bevry/getbadges" title="View this project's stories on Waffle.io"><img src="https://badge.waffle.io/bevry/getbadges.png?label=ready" alt="Stories in Ready" /></a></span>`,
 		`<br class="badge-separator" />`,
+		`<span class="badge-sixtydevstips"><a href="https://tips.60devs.com/tip/d2dcf439c9759e88f3ccec1cef394c10" title="Donate to this project using 60devs tips"><img src="https://img.shields.io/badge/60devs-donate-yellow.svg" alt="60devs tips donate button" /></a></span>`,
 		`<span class="badge-patreon"><a href="http://patreon.com/bevry" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" /></a></span>`,
 		`<span class="badge-gratipay"><a href="https://www.gratipay.com/bevry" title="Donate weekly to this project using Gratipay"><img src="https://img.shields.io/badge/gratipay-donate-yellow.svg" alt="Gratipay donate button" /></a></span>`,
 		`<span class="badge-flattr"><a href="http://flattr.com/thing/344188/balupton-on-Flattr" title="Donate to this project using Flattr"><img src="https://img.shields.io/badge/flattr-donate-yellow.svg" alt="Flattr donate button" /></a></span>`,

@@ -39,15 +39,6 @@ The definitive collection of badges for rendering
 <li>Install: <code>npm install --save badges</code></li>
 <li>Use: <code>require('badges')</code></li></ul>
 
-<a href="http://browserify.org" title="Browserify lets you require('modules') in the browser by bundling up all of your dependencies"><h3>Browserify</h3></a><ul>
-<li>Install: <code>npm install --save badges</code></li>
-<li>Use: <code>require('badges')</code></li>
-<li>CDN URL: <code>//wzrd.in/bundle/badges@1.0.0</code></li></ul>
-
-<a href="http://enderjs.com" title="Ender is a full featured package manager for your browser"><h3>Ender</h3></a><ul>
-<li>Install: <code>ender add badges</code></li>
-<li>Use: <code>require('badges')</code></li></ul>
-
 <!-- /INSTALL -->
 
 
@@ -78,6 +69,7 @@ const list = [
 	'waffle',
 	'---',
 	// Funding Badges
+	'sixtydevstips',
 	'patreon',
 	'gratipay',
 	'flattr',
@@ -111,6 +103,7 @@ const config = {
 	codeshipProjectID: '123',
 	githubSlug: 'bevry/getbadges',
 
+	sixtydevstipsID: 'd2dcf439c9759e88f3ccec1cef394c10',
 	patreonUsername: 'bevry',
 	gratipayUsername: 'bevry',
 	flattrCode: '344188/balupton-on-Flattr',

@@ -257,6 +257,25 @@ waffle.badgeCategory = 'testing'
 // Funding Badges
 
 /**
+60devs Tips Badge
+@method patreon
+@param {String} config.sixtydevsUsername The 60devs username to donate to
+@return {String} the result badge
+*/
+export function sixtydevstips ({sixtydevstipsID}) {
+	// Check
+	if ( !sixtydevstipsID )  throw new Error('sixtydevstipsID is missing')
+
+	// Create
+	const image = `https://img.shields.io/badge/60devs-donate-yellow.svg`
+	const url = `https://tips.60devs.com/tip/${sixtydevstipsID}`
+	const alt = '60devs tips donate button'
+	const title = 'Donate to this project using 60devs tips'
+	return badge({image, alt, url, title})
+}
+sixtydevstips.badgeCategory = 'funding'
+
+/**
 Patreon Badge
 @method patreon
 @param {String} config.patreonUsername The patreon username to donate to

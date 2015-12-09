@@ -1,3 +1,5 @@
+'use strict'
+
 // ====================================
 // Custom Badges
 
@@ -11,7 +13,7 @@ Generate a HTML badge
 @param {String} [config.title] The title attribute for the link
 @return {String} the result badge
 */
-export function badge ({image, alt, url, title}) {
+function badge ({image, alt, url, title}) {
 	// Check
 	if ( !image )  throw new Error('image is missing')
 
@@ -35,7 +37,7 @@ Shields Custom Badge
 @param {String} [config.title] The title attribute for the link
 @return {String} the result badge
 */
-export function shields ({left, right, color = 'yellow', alt, url, title}) {
+function shields ({left, right, color = 'yellow', alt, url, title}) {
 	// Check
 	if ( !left )  throw new Error('left is missing')
 	if ( !right )  throw new Error('right is missing')
@@ -56,7 +58,7 @@ NPM Version Badge
 @param {String} config.npmPackageName The repository slug (username/reponame)
 @return {String} the result badge
 */
-export function npmversion ({npmPackageName}) {
+function npmversion ({npmPackageName}) {
 	// Check
 	if ( !npmPackageName )  throw new Error('npmPackageName is missing')
 
@@ -75,7 +77,7 @@ NPM Downloads Badge
 @param {String} config.npmPackageName The repository slug (username/reponame)
 @return {String} the result badge
 */
-export function npmdownloads ({npmPackageName}) {
+function npmdownloads ({npmPackageName}) {
 	// Check
 	if ( !npmPackageName )  throw new Error('npmPackageName is missing')
 
@@ -93,7 +95,7 @@ David DM Dependencies Badge
 @param {String} config.githubSlug The github slug that the project lives at (e.g. bevry/badges)
 @return {String} the result badge
 */
-export function daviddm ({githubSlug}) {
+function daviddm ({githubSlug}) {
 	// Check
 	if ( !githubSlug )  throw new Error('githubSlug is missing')
 
@@ -112,7 +114,7 @@ David DM Dev Dependencies Badge
 @param {String} config.githubSlug The github slug that the project lives at (e.g. bevry/badges)
 @return {String} the result badge
 */
-export function daviddmdev ({githubSlug}) {
+function daviddmdev ({githubSlug}) {
 	// Check
 	if ( !githubSlug )  throw new Error('githubSlug is missing')
 
@@ -135,7 +137,7 @@ Sauce Labs Browser Matrix Badge
 @param {String} config.githubSlug The github slug that the project lives at (e.g. bevry/badges)
 @return {String} the result badge
 */
-export function saucelabsbm ({saucelabsUsername, saucelabsAuthToken}) {
+function saucelabsbm ({saucelabsUsername, saucelabsAuthToken}) {
 	// Check
 	if ( !saucelabsUsername )  throw new Error('saucelabsUsername is missing')
 	saucelabsAuthToken = saucelabsAuthToken || process.env.SAUCELABS_AUTH_TOKEN
@@ -158,7 +160,7 @@ Sauce Labs Badge
 @param {String} config.saucelabsAuthToken The saucelabs authorisation token
 @return {String} the result badge
 */
-export function saucelabs ({saucelabsUsername, saucelabsAuthToken}) {
+function saucelabs ({saucelabsUsername, saucelabsAuthToken}) {
 	// Check
 	if ( !saucelabsUsername )  throw new Error('saucelabsUsername is missing')
 	saucelabsAuthToken = saucelabsAuthToken || process.env.SAUCELABS_AUTH_TOKEN
@@ -179,7 +181,7 @@ Travis CI Badge
 @param {String} config.githubSlug The github slug that the project lives at (e.g. bevry/badges)
 @return {String} the result badge
 */
-export function travisci ({githubSlug}) {
+function travisci ({githubSlug}) {
 	// Check
 	if ( !githubSlug )  throw new Error('githubSlug is missing')
 
@@ -199,7 +201,7 @@ Codeship Badge
 @param {String} config.codeshipProjectID The ID for a specific project, which is available via the URL for the codeship project page
 @return {String} the result badge
 */
-export function codeship ({codeshipProjectUUID, codeshipProjectID}) {
+function codeship ({codeshipProjectUUID, codeshipProjectID}) {
 	// Check
 	if ( !codeshipProjectUUID )  throw new Error('codeshipProjectUUID is missing')
 	if ( !codeshipProjectID )  throw new Error('codeshipProjectID is missing')
@@ -219,7 +221,7 @@ Coveralls Badge
 @param {String} config.githubSlug The github slug that the project lives at (e.g. bevry/badges)
 @return {String} the result badge
 */
-export function coveralls ({githubSlug}) {
+function coveralls ({githubSlug}) {
 	// Check
 	if ( !githubSlug )  throw new Error('githubSlug is missing')
 
@@ -238,12 +240,12 @@ Waffle Badge
 @param {String} config.githubSlug The github slug that the project lives at (e.g. bevry/badges)
 @return {String} the result badge
 */
-export function waffle ({githubSlug}) {
+function waffle ({githubSlug}) {
 	// Check
 	if ( !githubSlug )  throw new Error('githubSlug is missing')
 
 	// Create
-	let label = 'ready'
+	const label = 'ready'
 	const image = `https://badge.waffle.io/${githubSlug}.png?label=${escape(label)}`
 	const url = `http://waffle.io/${githubSlug}`
 	const alt = 'Stories in Ready'
@@ -262,7 +264,7 @@ waffle.badgeCategory = 'testing'
 @param {String} config.sixtydevsUsername The 60devs username to donate to
 @return {String} the result badge
 */
-export function sixtydevstips ({sixtydevstipsID}) {
+function sixtydevstips ({sixtydevstipsID}) {
 	// Check
 	if ( !sixtydevstipsID )  throw new Error('sixtydevstipsID is missing')
 
@@ -281,7 +283,7 @@ Patreon Badge
 @param {String} config.patreonUsername The patreon username to donate to
 @return {String} the result badge
 */
-export function patreon ({patreonUsername}) {
+function patreon ({patreonUsername}) {
 	// Check
 	if ( !patreonUsername )  throw new Error('patreonUsername is missing')
 
@@ -300,7 +302,7 @@ Gratipay Badge
 @param {String} config.gratipayUsername The gratipay username to donate to
 @return {String} the result badge
 */
-export function gratipay ({gratipayUsername}) {
+function gratipay ({gratipayUsername}) {
 	// Check
 	if ( !gratipayUsername )  throw new Error('gratipayUsername is missing')
 
@@ -319,7 +321,7 @@ Flattr Badge
 @param {String} config.flattrUsername The flattr code to donate to (e.g. 344188/balupton-on-Flattr)
 @return {String} the result badge
 */
-export function flattr ({flattrCode}) {
+function flattr ({flattrCode}) {
 	// Check
 	if ( !flattrCode )  throw new Error('flattrCode is missing')
 
@@ -340,7 +342,7 @@ Paypal Badge
 @param {String} config.paypalUsername The paypal.me username
 @return {String} the result badge
 */
-export function paypal ({paypalURL, paypalButtonID, paypalUsername}) {
+function paypal ({paypalURL, paypalButtonID, paypalUsername}) {
 	// Check
 	if ( !paypalURL ) {
 		if ( paypalButtonID ) {
@@ -369,7 +371,7 @@ Bitcoin Badge
 @param {String} config.bitcoinURL The url to the bitcoin donation page
 @return {String} the result badge
 */
-export function bitcoin ({bitcoinURL}) {
+function bitcoin ({bitcoinURL}) {
 	// Check
 	if ( !bitcoinURL )  throw new Error('bitcoinURL is missing')
 
@@ -388,7 +390,7 @@ Wishlist Badge
 @param {String} config.wishlistURL The url to the wishlist page
 @return {String} the result badge
 */
-export function wishlist ({wishlistURL}) {
+function wishlist ({wishlistURL}) {
 	// Check
 	if ( !wishlistURL )  throw new Error('wishlistURL is missing')
 
@@ -411,7 +413,7 @@ Slackin Script Badge
 @param {String} config.slackinURL The slackin url (e.g. https://slack.bevry.me)
 @return {String} the result badge
 */
-export function slackinscript ({slackinURL}) {
+function slackinscript ({slackinURL}) {
 	// Check
 	if ( !slackinURL )  throw new Error('slackinURL is missing')
 
@@ -427,7 +429,7 @@ Slackin Badge
 @param {String} config.slackinURL The slackin url (e.g. https://slack.bevry.me)
 @return {String} the result badge
 */
-export function slackin ({slackinURL}) {
+function slackin ({slackinURL}) {
 	// Check
 	if ( !slackinURL )  throw new Error('slackinURL is missing')
 
@@ -448,7 +450,7 @@ https://github.com/igrigorik/ga-beacon
 @param {String} config.githubSlug The github slug that the project lives at (e.g. bevry/badges)
 @return {String} the result badge
 */
-export function gabeacon ({gaTrackingID, githubSlug}) {
+function gabeacon ({gaTrackingID, githubSlug}) {
 	// Check
 	if ( !gaTrackingID )  throw new Error('gaTrackingID is missing')
 	if ( !githubSlug )  throw new Error('githubSlug is missing')
@@ -468,7 +470,7 @@ Google Plus One Button
 @param {String} config.homepage The page url that the badge will be for
 @return {String} the result badge
 */
-export function googleplusone ({homepage}) {
+function googleplusone ({homepage}) {
 	// Check
 	if ( !homepage )  throw new Error('homepage is missing')
 
@@ -484,7 +486,7 @@ Reddit Submit Button
 @param {String} config.homepage The page url that the badge will be for
 @return {String} the result badge
 */
-export function redditsubmit ({homepage}) {
+function redditsubmit ({homepage}) {
 	// Check
 	if ( !homepage )  throw new Error('homepage is missing')
 
@@ -500,7 +502,7 @@ Hacker News Submit Button
 @param {String} config.homepage The page url that the badge will be for
 @return {String} the result badge
 */
-export function hackernewssubmit ({homepage}) {
+function hackernewssubmit ({homepage}) {
 	// Check
 	if ( !homepage )  throw new Error('homepage is missing')
 
@@ -517,7 +519,7 @@ Facebook Like Button
 @param {String} config.facebookApplicationID The facebook application id that the badge is for
 @return {String} the result badge
 */
-export function facebooklike ({homepage, facebookApplicationID}) {
+function facebooklike ({homepage, facebookApplicationID}) {
 	// Prepare
 	if ( !homepage )  throw new Error('homepage is missing')
 	facebookApplicationID = facebookApplicationID || process.env.FACEBOOK_APPLICATION_ID
@@ -536,7 +538,7 @@ Facebook Follow Button
 @param {String} config.facebookApplicationID The facebook application id that the badge is for
 @return {String} the result badge
 */
-export function facebookfollow ({facebookUsername, facebookApplicationID}) {
+function facebookfollow ({facebookUsername, facebookApplicationID}) {
 	// Prepare
 	if ( !facebookUsername )  throw new Error('facebookUsername is missing')
 	facebookApplicationID = facebookApplicationID || process.env.FACEBOOK_APPLICATION_ID
@@ -554,7 +556,7 @@ Twitter Tweet Button
 @param {String} config.twitterUsername The twitter username to tweet at
 @return {String} the result badge
 */
-export function twittertweet ({twitterUsername}) {
+function twittertweet ({twitterUsername}) {
 	// Prepare
 	if ( !twitterUsername )  throw new Error('twitterUsername is missing')
 
@@ -570,7 +572,7 @@ Twitter Follow Button
 @param {String} config.twitterUsername The twitter username to follow
 @return {String} the result badge
 */
-export function twitterfollow ({twitterUsername}) {
+function twitterfollow ({twitterUsername}) {
 	// Prepare
 	if ( !twitterUsername )  throw new Error('twitterUsername is missing')
 
@@ -586,7 +588,7 @@ Github Follow Button
 @param {String} config.githubUsername The github user to follow
 @return {String} the result badge
 */
-export function githubfollow ({githubUsername}) {
+function githubfollow ({githubUsername}) {
 	// Prepare
 	if ( !githubUsername )  throw new Error('githubUsername is missing')
 
@@ -602,7 +604,7 @@ GitHub Star Button
 @param {String} config.githubSlug The github slug that the project lives at (e.g. bevry/badges)
 @return {String} the result badge
 */
-export function githubstar ({githubSlug}) {
+function githubstar ({githubSlug}) {
 	// Prepare
 	if ( !githubSlug )  throw new Error('githubSlug is missing')
 	const split = githubSlug.split('/')
@@ -624,7 +626,7 @@ Quora Follow Button
 @param {String} [config.quoraCode] Some code
 @return {String} the result badge
 */
-export function quorafollow ({quoraUsername, quoraRealname, quoraCode}) {
+function quorafollow ({quoraUsername, quoraRealname, quoraCode}) {
 	// Prepare
 	if ( !quoraUsername )  throw new Error('quoraUsername is missing')
 	quoraRealname = quoraRealname || quoraUsername.replace(/-/g, ' ')
@@ -639,3 +641,39 @@ export function quorafollow ({quoraUsername, quoraRealname, quoraCode}) {
 }
 quorafollow.badgeCategory = 'social'
 quorafollow.badgeScript = true
+
+// Export
+module.exports = {
+	badge,
+	shields,
+	npmversion,
+	npmdownloads,
+	daviddm,
+	daviddmdev,
+	saucelabsbm,
+	saucelabs,
+	travisci,
+	codeship,
+	coveralls,
+	waffle,
+	sixtydevstips,
+	patreon,
+	gratipay,
+	flattr,
+	paypal,
+	bitcoin,
+	wishlist,
+	slackinscript,
+	slackin,
+	gabeacon,
+	googleplusone,
+	redditsubmit,
+	hackernewssubmit,
+	facebooklike,
+	facebookfollow,
+	twittertweet,
+	twitterfollow,
+	githubfollow,
+	githubstar,
+	quorafollow
+}

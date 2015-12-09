@@ -1,4 +1,6 @@
-export const badges = require('./badges')
+'use strict'
+
+const badges = require('./badges')
 
 /**
 Render a specified badge with the appropriate wrapping (div if block badge, span if inline badge)
@@ -7,7 +9,7 @@ Render a specified badge with the appropriate wrapping (div if block badge, span
 @param {Object} config The configuration to pass to the badge render method
 @return {String} The rendered badge
 */
-export function renderBadge (badgeName, config = {}) {
+function renderBadge (badgeName, config = {}) {
 	if ( badgeName === '---' ) {
 		return '<br class="badge-separator" />'
 	}
@@ -35,7 +37,7 @@ Render specified badges with wrapping
 @param {Object} options An object that defaults to `{filterCategory: false, filterScripts: false}`
 @return {String} The rendered badges
 */
-export function renderBadges (list, config = {}, options = {filterCategory: false, filterScripts: true}) {
+function renderBadges (list, config = {}, options = {filterCategory: false, filterScripts: true}) {
 	// Prepare
 	const results = []
 
@@ -65,4 +67,11 @@ export function renderBadges (list, config = {}, options = {filterCategory: fals
 
 	// Return
 	return results.join('\n')
+}
+
+// Export
+module.exports = {
+	badges,
+	renderBadge,
+	renderBadges
 }

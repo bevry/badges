@@ -1,4 +1,4 @@
-# 9 September 2015
+# 2015 December 9
 # https://github.com/bevry/base
 
 # Use the latest travis infrastructure
@@ -9,6 +9,7 @@ language: node_js
 node_js:
   - "0.12"
   - "4"
+  - "5"
 cache:
   directories:
     - node_modules

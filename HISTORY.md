@@ -2,10 +2,12 @@
 
 ## v1.1.2 2016 January 14
 - Repackaged
+- [This release was live coded. You can watch it here.](https://plus.google.com/u/0/b/100631142988286661025/events/c9k1pidfui89hfa39cr5831dmi8)
 
 ## v1.1.1 2016 January 14
 - Added `flattrUsername` and `flattrURL` for new flattr system
 - Added `sixtydevstipsURL`, `patreonURL`, and `gratipayURL` for consistency
+- [This release was live coded. You can watch it here.](https://plus.google.com/u/0/b/100631142988286661025/events/c9k1pidfui89hfa39cr5831dmi8)
 
 ## v1.1.0 2015 December 9
 - Updated internal conventions

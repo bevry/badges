@@ -1,5 +1,9 @@
 # History
 
+## v1.1.1 2016 January 14
+- Added `flattrUsername` and `flattrURL` for new flattr system
+- Added `sixtydevstipsURL`, `patreonURL`, and `gratipayURL` for consistency
+
 ## v1.1.0 2015 December 9
 - Updated internal conventions
 

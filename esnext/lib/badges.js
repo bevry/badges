@@ -262,15 +262,19 @@ waffle.badgeCategory = 'testing'
 60devs Tips Badge
 @method patreon
 @param {String} config.sixtydevsUsername The 60devs username to donate to
+@param {String} config.sixtydevstipsURL The url to the 60devs donate page
 @return {String} the result badge
 */
-function sixtydevstips ({sixtydevstipsID}) {
+function sixtydevstips ({sixtydevstipsID, sixtydevstipsURL}) {
 	// Check
-	if ( !sixtydevstipsID )  throw new Error('sixtydevstipsID is missing')
+	if ( !sixtydevstipsURL ) {
+		if ( !sixtydevstipsID )  throw new Error('sixtydevstipsID is missing')
+		sixtydevstipsURL = `https://tips.60devs.com/tip/${sixtydevstipsID}`
+	}
 
 	// Create
 	const image = `https://img.shields.io/badge/60devs-donate-yellow.svg`
-	const url = `https://tips.60devs.com/tip/${sixtydevstipsID}`
+	const url = sixtydevstipsURL
 	const alt = '60devs tips donate button'
 	const title = 'Donate to this project using 60devs tips'
 	return badge({image, alt, url, title})
@@ -281,15 +285,19 @@ sixtydevstips.badgeCategory = 'funding'
 Patreon Badge
 @method patreon
 @param {String} config.patreonUsername The patreon username to donate to
+@param {String} config.patreonURL The url to the patreon donate page
 @return {String} the result badge
 */
-function patreon ({patreonUsername}) {
+function patreon ({patreonUsername, patreonURL}) {
 	// Check
-	if ( !patreonUsername )  throw new Error('patreonUsername is missing')
+	if ( !patreonURL ) {
+		if ( !patreonUsername )  throw new Error('patreonUsername is missing')
+		patreonURL = `http://patreon.com/${patreonUsername}`
+	}
 
 	// Create
 	const image = `https://img.shields.io/badge/patreon-donate-yellow.svg`
-	const url = `http://patreon.com/${patreonUsername}`
+	const url = patreonURL
 	const alt = 'Patreon donate button'
 	const title = 'Donate to this project using Patreon'
 	return badge({image, alt, url, title})
@@ -300,15 +308,19 @@ patreon.badgeCategory = 'funding'
 Gratipay Badge
 @method gratipay
 @param {String} config.gratipayUsername The gratipay username to donate to
+@param {String} config.gratipayURL The url to the gratipay donate page
 @return {String} the result badge
 */
-function gratipay ({gratipayUsername}) {
+function gratipay ({gratipayUsername, gratipayURL}) {
 	// Check
-	if ( !gratipayUsername )  throw new Error('gratipayUsername is missing')
+	if ( !gratipayURL ) {
+		if ( !gratipayUsername )  throw new Error('gratipayUsername is missing')
+		gratipayURL = `https://www.gratipay.com/${gratipayUsername}`
+	}
 
 	// Create
 	const image = `https://img.shields.io/badge/gratipay-donate-yellow.svg`
-	const url = `https://www.gratipay.com/${gratipayUsername}`
+	const url = gratipayURL
 	const alt = 'Gratipay donate button'
 	const title = 'Donate weekly to this project using Gratipay'
 	return badge({image, alt, url, title})
@@ -318,16 +330,28 @@ gratipay.badgeCategory = 'funding'
 /**
 Flattr Badge
 @method flattr
-@param {String} config.flattrUsername The flattr code to donate to (e.g. 344188/balupton-on-Flattr)
+@param {String} config.flattrCode The flattr code to donate to (e.g. 344188/balupton-on-Flattr)
+@param {String} config.flattrUsername The flattr username to donate to (e.g. balupton)
+@param {String} config.flattrURL The url to the flattr donate page
 @return {String} the result badge
 */
-function flattr ({flattrCode}) {
+function flattr ({flattrCode, flattrUsername, flattrURL}) {
 	// Check
-	if ( !flattrCode )  throw new Error('flattrCode is missing')
+	if ( !flattrURL ) {
+		if ( flattrUsername ) {
+			flattrURL = `https://flattr.com/profile/${flattrUsername}`
+		}
+		else if ( flattrCode ) {
+			flattrURL = `https://flattr.com/thing/${flattrCode}`
+		}
+		else {
+			throw new Error('flattrUsername/flattrCode is missing')
+		}
+	}
 
 	// Create
 	const image = 'https://img.shields.io/badge/flattr-donate-yellow.svg'
-	const url = `http://flattr.com/thing/${flattrCode}`
+	const url = flattrURL
 	const alt = 'Flattr donate button'
 	const title = 'Donate to this project using Flattr'
 	return badge({image, alt, url, title})

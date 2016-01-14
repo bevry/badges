@@ -1,6 +1,6 @@
 {
   "name": "badges",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "The definitive collection of badges for rendering",
   "homepage": "https://github.com/bevry/badges",
   "license": "MIT",
@@ -77,8 +77,9 @@
     "config": {
       "patreonUsername": "bevry",
       "gratipayUsername": "bevry",
+      "flattrUsername": "balupton",
       "flattrCode": "344188/balupton-on-Flattr",
-      "paypalButtonID": "QB8GQPZAH84N6",
+      "paypalURL": "https://bevry.me/paypal",
       "bitcoinURL": "https://bevry.me/bitcoin",
       "wishlistURL": "https://bevry.me/wishlist",
       "slackinURL": "https://slack.bevry.me"

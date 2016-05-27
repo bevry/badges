@@ -1,5 +1,4 @@
-'use strict'
-
+// Import
 const badges = require('./badges')
 
 /**

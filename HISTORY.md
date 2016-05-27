@@ -1,5 +1,9 @@
 # History
 
+## v1.2.0 2016 May 27
+- Updated internal conventions
+  - Moved from [ESNextGuardian](https://github.com/bevry/esnextguardian) to [Editions](https://github.com/bevry/editions)
+
 ## v1.1.2 2016 January 14
 - Repackaged
 - [This release was live coded. You can watch it here.](https://plus.google.com/u/0/b/100631142988286661025/events/c9k1pidfui89hfa39cr5831dmi8)

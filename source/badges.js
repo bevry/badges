@@ -1,5 +1,3 @@
-'use strict'
-
 // ====================================
 // Custom Badges
 
@@ -273,7 +271,7 @@ function sixtydevstips ({sixtydevstipsID, sixtydevstipsURL}) {
 	}
 
 	// Create
-	const image = `https://img.shields.io/badge/60devs-donate-yellow.svg`
+	const image = 'https://img.shields.io/badge/60devs-donate-yellow.svg'
 	const url = sixtydevstipsURL
 	const alt = '60devs tips donate button'
 	const title = 'Donate to this project using 60devs tips'
@@ -296,7 +294,7 @@ function patreon ({patreonUsername, patreonURL}) {
 	}
 
 	// Create
-	const image = `https://img.shields.io/badge/patreon-donate-yellow.svg`
+	const image = 'https://img.shields.io/badge/patreon-donate-yellow.svg'
 	const url = patreonURL
 	const alt = 'Patreon donate button'
 	const title = 'Donate to this project using Patreon'
@@ -319,7 +317,7 @@ function gratipay ({gratipayUsername, gratipayURL}) {
 	}
 
 	// Create
-	const image = `https://img.shields.io/badge/gratipay-donate-yellow.svg`
+	const image = 'https://img.shields.io/badge/gratipay-donate-yellow.svg'
 	const url = gratipayURL
 	const alt = 'Gratipay donate button'
 	const title = 'Donate weekly to this project using Gratipay'
@@ -381,7 +379,7 @@ function paypal ({paypalURL, paypalButtonID, paypalUsername}) {
 	}
 
 	// Create
-	const image = `https://img.shields.io/badge/paypal-donate-yellow.svg`
+	const image = 'https://img.shields.io/badge/paypal-donate-yellow.svg'
 	const url = paypalURL
 	const alt = 'PayPal donate button'
 	const title = 'Donate to this project using Paypal'
@@ -400,7 +398,7 @@ function bitcoin ({bitcoinURL}) {
 	if ( !bitcoinURL )  throw new Error('bitcoinURL is missing')
 
 	// Create
-	const image = `https://img.shields.io/badge/bitcoin-donate-yellow.svg`
+	const image = 'https://img.shields.io/badge/bitcoin-donate-yellow.svg'
 	const url = bitcoinURL
 	const alt = 'Bitcoin donate button'
 	const title = 'Donate once-off to this project using Bitcoin'
@@ -419,7 +417,7 @@ function wishlist ({wishlistURL}) {
 	if ( !wishlistURL )  throw new Error('wishlistURL is missing')
 
 	// Create
-	const image = `https://img.shields.io/badge/wishlist-donate-yellow.svg`
+	const image = 'https://img.shields.io/badge/wishlist-donate-yellow.svg'
 	const url = wishlistURL
 	const alt = 'Wishlist browse button'
 	const title = 'Buy an item on our wishlist for us'

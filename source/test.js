@@ -1,9 +1,7 @@
-'use strict'
-
 // Import
 const {equal} = require('assert-helpers')
 const joe = require('joe')
-const badges = require('../../')
+const badges = require('../')
 
 // Tests
 joe.suite('badges', function (suite, test) {
@@ -87,6 +85,7 @@ joe.suite('badges', function (suite, test) {
 		filterScripts: false
 	}
 
+	/* eslint quotes:0 */
 	const expectations = [
 		`<span class="badge-badge"><img src="image" alt="alt" /></span>`,
 		`<span class="badge-badge"><a href="url" title="title"><img src="image" alt="alt" /></a></span>`,

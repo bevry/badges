@@ -126,6 +126,8 @@ const config = {
 	patreonUsername: 'bevry',
 	gratipayUsername: 'bevry',
 	flattrCode: '344188/balupton-on-Flattr',
+	flattrUsername: 'balupton',
+	flattrURL: 'https://flattr.com/profile/balupton',
 	paypalURL: 'https://paypal.me/bevry',
 	paypalButtonID: 'QB8GQPZAH84N6',  // another option instead of paypalURL
 	paypalUsername: 'bevry',  // another option instead of paypalURL

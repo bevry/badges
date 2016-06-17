@@ -149,7 +149,7 @@ const options = {
 	// When set to a string, will only render badges from the list that of the specified category
 	// Values can be 'development', 'testing', 'funding', or 'social'
 	// E.g. to render only funding badges, set to 'funding'
-	filterCategory: false
+	filterCategory: false,
 
 	// Filter Scripts
 	// When true, do not render any badges from the list that are scripts

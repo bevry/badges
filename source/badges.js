@@ -1,3 +1,5 @@
+const querystring = require('querystring')
+
 // ====================================
 // Custom Badges
 
@@ -125,6 +127,27 @@ function daviddmdev ({githubSlug}) {
 }
 daviddmdev.badgeCategory = 'development'
 
+/**
+Nodei.co Badge
+@method nodeico
+@param {String} config.npmPackageName
+@param {String} [config.nodeicoOptions] See https://nodei.co for options
+@return {String} the result badge
+*/
+function nodeico ({npmPackageName, nodeicoOptions}) {
+	// Prepare
+	if ( !npmPackageName )  throw new Error('npmPackageName is missing')
+
+	// Return
+	const url = `https://www.npmjs.com/package/${npmPackageName}`
+	const alt = 'Nodei.co badge'
+	const title = 'Nodei.co badge'
+	let image = `https://nodei.co/npm/${npmPackageName}.png`
+	const query = querystring.stringify(nodeicoOptions)
+	if (query) image += `?${query}`
+	return badge({image, alt, url, title})
+}
+nodeico.badgeCategory = 'development'
 
 // ====================================
 // Testing Badges
@@ -697,5 +720,6 @@ module.exports = {
 	twitterfollow,
 	githubfollow,
 	githubstar,
-	quorafollow
+	quorafollow,
+	nodeico
 }

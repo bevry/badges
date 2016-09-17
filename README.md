@@ -66,12 +66,10 @@ The definitive collection of badges for rendering
 ``` javascript
 // Listing of the badges to output
 const list = [
-	// Custom Badges
-	// Instead of using the global badge configuration, here we use an array in the format of [name, config]
-	['badge', {image: 'image', alt: 'alt'}],
-	['badge', {image: 'image', alt: 'alt', url: 'url', title: 'title'}],
-	['shields', {left: 'left', right: 'right', alt: 'alt', url: 'url', title: 'title'}],
-	['shields', {left: 'left', right: 'right', color: 'red', alt: 'alt', url: 'url', title: 'title'}],
+	// Custom image badge, `url` and `title` are optional
+	['badge', {image: 'image url', alt: 'image alt text', url: 'target url', title: 'title for mouseover'}],
+	// Custom shields.io badge, for options see the "Your Badge" section at the bottom of: http://shields.io
+	['shields', {left: 'subject', right: 'status', color: 'red', alt: 'badge alt text', url: 'target url', title: 'title for mouseover'}],
 	'---',
 	// Development Badges
 	'npmversion',

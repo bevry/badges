@@ -185,7 +185,8 @@ console.log(result)
 
 If you there is a badge that you believe will be common enough for others to benefit from, send in a pull request. Each pull request should:
 
-1. Add the badge rendering code to the appropriate section inside: https://github.com/bevry/badges/blob/master/source/badges.js
+1. Add the badge rendering code to the appropriate category section inside: https://github.com/bevry/badges/blob/master/source/badges.js
+  1. If your badge requires a script to run, it should have `badgeScript = true` - see other badges for an example
 2. Add the badges test data to the test file: https://github.com/bevry/badges/blob/master/source/test.js
 3. Add the badge configuration information to this readme file: https://github.com/bevry/badges/blob/master/README.md
 

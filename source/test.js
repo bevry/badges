@@ -59,7 +59,7 @@ joe.suite('badges', function (suite, test) {
 		codeshipProjectUUID: '123',
 		codeshipProjectID: '123',
 		githubSlug: 'bevry/getbadges',
-		nodeicoOptions: {downloads: true, compact: true, height: 2},
+		nodeicoQueryString: {downloads: true, compact: true, height: 2},
 
 		sixtydevstipsID: 'd2dcf439c9759e88f3ccec1cef394c10',
 		patreonUsername: 'bevry',

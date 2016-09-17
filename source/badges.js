@@ -131,19 +131,24 @@ daviddmdev.badgeCategory = 'development'
 Nodei.co Badge
 @method nodeico
 @param {String} config.npmPackageName
-@param {String} [config.nodeicoOptions] See https://nodei.co for options
+@param {String|Object} [config.nodeicoQueryString] See https://nodei.co for options
+	defined as either a string param1=&param2=
+	or an object {param1: '', param2: ''} that will be serialized to param1=&param2= etc.
 @return {String} the result badge
 */
-function nodeico ({npmPackageName, nodeicoOptions}) {
+function nodeico ({npmPackageName, nodeicoQueryString}) {
 	// Prepare
 	if ( !npmPackageName )  throw new Error('npmPackageName is missing')
+	if ( nodeicoQueryString && typeof nodeicoQueryString !== 'string' && typeof nodeicoQueryString !== 'object' ) {
+		throw new Error('nodeicoQueryString must be a string or an object')
+	}
 
 	// Return
 	const url = `https://www.npmjs.com/package/${npmPackageName}`
 	const alt = 'Nodei.co badge'
 	const title = 'Nodei.co badge'
 	let image = `https://nodei.co/npm/${npmPackageName}.png`
-	const query = querystring.stringify(nodeicoOptions)
+	const query = (typeof nodeicoQueryString === 'object') ? querystring.stringify(nodeicoQueryString) : nodeicoQueryString
 	if (query) image += `?${query}`
 	return badge({image, alt, url, title})
 }

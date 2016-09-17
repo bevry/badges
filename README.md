@@ -185,10 +185,11 @@ console.log(result)
 
 If you there is a badge that you believe will be common enough for others to benefit from, send in a pull request. Each pull request should:
 
-1. Add the badge rendering code to the appropriate category section inside: https://github.com/bevry/badges/blob/master/source/badges.js
+1. [Add the badge rendering code to the appropriate category section inside `source/badges.js`](https://github.com/bevry/badges/blob/master/source/badges.js)
   1. If your badge requires a script to run, it should have `badgeScript = true` - see other badges for an example
-2. Add the badges test data to the test file: https://github.com/bevry/badges/blob/master/source/test.js
-3. Add the badge configuration information to this readme file: https://github.com/bevry/badges/blob/master/README.md
+  2. [Also remember to export your badge.](https://github.com/bevry/badges/blob/0b4aab710fc676f635e49e702960db0d151a12d5/source/badges.js#L667-L668)
+2. [Add the badges test data to the test file `source/test.js`](https://github.com/bevry/badges/blob/master/source/test.js)
+3. [Add the badge configuration information to this readme file `README.md`](https://github.com/bevry/badges/blob/master/README.md)
 
 These changes can be done in multiple commits or the same, it doesn't matter, as we will squash the commits on merge. We will also the changelog entry, so you don't need to do.
 

@@ -156,7 +156,7 @@ const options = {
 	filterScripts: false
 }
 
-// Render the badges
+// Render the badges to a string
 const result = require('badges').renderBadges(list, config, options)
 
 // Output the result

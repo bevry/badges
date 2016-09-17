@@ -181,6 +181,16 @@ console.log(result)
 
 <!-- /CONTRIBUTE -->
 
+### Adding a badge
+
+If you there is a badge that you believe will be common enough for others to benefit from, send in a pull request. Each pull request should:
+
+1. Add the badge rendering code to the appropriate section inside: https://github.com/bevry/badges/blob/master/source/badges.js
+2. Add the badges test data to the test file: https://github.com/bevry/badges/blob/master/source/test.js
+3. Add the badge configuration information to this readme file: https://github.com/bevry/badges/blob/master/README.md
+
+These changes can be done in multiple commits or the same, it doesn't matter, as we will squash the commits on merge. We will also the changelog entry, so you don't need to do.
+
 
 <!-- BACKERS/ -->
 

@@ -17,6 +17,7 @@ joe.suite('badges', function (suite, test) {
 		'npmdownloads',
 		'daviddm',
 		'daviddmdev',
+		'nodeico',
 		'---',
 		// Testing Badges
 		'saucelabsbm',
@@ -58,6 +59,7 @@ joe.suite('badges', function (suite, test) {
 		codeshipProjectUUID: '123',
 		codeshipProjectID: '123',
 		githubSlug: 'bevry/getbadges',
+		nodeicoQueryString: {downloads: true, compact: true, height: 2},
 
 		sixtydevstipsID: 'd2dcf439c9759e88f3ccec1cef394c10',
 		patreonUsername: 'bevry',
@@ -96,6 +98,7 @@ joe.suite('badges', function (suite, test) {
 		`<span class="badge-npmdownloads"><a href="https://npmjs.org/package/getbadges" title="View this project on NPM"><img src="https://img.shields.io/npm/dm/getbadges.svg" alt="NPM downloads" /></a></span>`,
 		`<span class="badge-daviddm"><a href="https://david-dm.org/bevry/getbadges" title="View the status of this project's dependencies on DavidDM"><img src="https://img.shields.io/david/bevry/getbadges.svg" alt="Dependency Status" /></a></span>`,
 		`<span class="badge-daviddmdev"><a href="https://david-dm.org/bevry/getbadges#info=devDependencies" title="View the status of this project's development dependencies on DavidDM"><img src="https://img.shields.io/david/dev/bevry/getbadges.svg" alt="Dev Dependency Status" /></a></span>`,
+		`<span class="badge-nodeico"><a href="https://www.npmjs.com/package/getbadges" title="Nodei.co badge"><img src="https://nodei.co/npm/getbadges.png?downloads=true&compact=true&height=2" alt="Nodei.co badge" /></a></span>`,
 		`<br class="badge-separator" />`,
 		`<div class="badge-saucelabsbm"><a href="https://saucelabs.com/u/bevry" title="Check this project's browser tests on Sauce Labs"><img src="https://saucelabs.com/browser-matrix/bevry.svg?auth=123" alt="Sauce Labs Browser Matrix" /></a></div>`,
 		`<span class="badge-saucelabs"><a href="https://saucelabs.com/u/bevry" title="Check this project's browser tests on Sauce Labs"><img src="https://saucelabs.com/browser-matrix/bevry.svg?auth=123" alt="Sauce Labs Browser Matrix" /></a></span>`,

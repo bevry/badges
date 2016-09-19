@@ -1,5 +1,9 @@
 # History
 
+## v1.2.1 2016 September 19
+- Added `nodeico` badge
+  - Thanks to [Richard Walker](https://github.com/digitalsadhu) for [pull request #5](https://github.com/bevry/badges/pull/5) which closes [issue #2](https://github.com/bevry/badges/issues/2)
+
 ## v1.2.0 2016 May 27
 - Updated internal conventions
   - Moved from [ESNextGuardian](https://github.com/bevry/esnextguardian) to [Editions](https://github.com/bevry/editions)

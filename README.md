@@ -163,6 +163,8 @@ const result = require('badges').renderBadges(list, config, options)
 console.log(result)
 ```
 
+If you want to render badges inside your own project's readme files, check out the meta builder [projectz](https://github.com/bevry/projectz) which uses this package for badge rendering.
+
 
 <!-- HISTORY/ -->
 

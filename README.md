@@ -14,7 +14,8 @@
 <span class="badge-daviddmdev"><a href="https://david-dm.org/bevry/badges#info=devDependencies" title="View the status of this project's development dependencies on DavidDM"><img src="https://img.shields.io/david/dev/bevry/badges.svg" alt="Dev Dependency Status" /></a></span>
 <br class="badge-separator" />
 <span class="badge-slackin"><a href="https://slack.bevry.me" title="Join this project's slack community"><img src="https://slack.bevry.me/badge.svg" alt="Slack community badge" /></a></span>
-<span class="badge-patreon"><a href="http://patreon.com/bevry" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" /></a></span>
+<span class="badge-patreon"><a href="https://patreon.com/bevry" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" /></a></span>
+<span class="badge-opencollective"><a href="https://opencollective.com/bevry" title="Donate to this project using Open Collective"><img src="https://img.shields.io/badge/open%20collective-donate-yellow.svg" alt="Open Collective donate button" /></a></span>
 <span class="badge-gratipay"><a href="https://www.gratipay.com/bevry" title="Donate weekly to this project using Gratipay"><img src="https://img.shields.io/badge/gratipay-donate-yellow.svg" alt="Gratipay donate button" /></a></span>
 <span class="badge-flattr"><a href="https://flattr.com/profile/balupton" title="Donate to this project using Flattr"><img src="https://img.shields.io/badge/flattr-donate-yellow.svg" alt="Flattr donate button" /></a></span>
 <span class="badge-paypal"><a href="https://bevry.me/paypal" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a></span>
@@ -42,7 +43,7 @@ The definitive collection of badges for rendering
 <a href="http://browserify.org" title="Browserify lets you require('modules') in the browser by bundling up all of your dependencies"><h3>Browserify</h3></a><ul>
 <li>Install: <code>npm install --save badges</code></li>
 <li>Module: <code>require('badges')</code></li>
-<li>CDN URL: <code>//wzrd.in/bundle/badges@1.2.1</code></li></ul>
+<li>CDN URL: <code>//wzrd.in/bundle/badges@1.2.2</code></li></ul>
 
 <a href="http://enderjs.com" title="Ender is a full featured package manager for your browser"><h3>Ender</h3></a><ul>
 <li>Install: <code>ender add badges</code></li>
@@ -66,81 +67,86 @@ The definitive collection of badges for rendering
 ``` javascript
 // Listing of the badges to output
 const list = [
-	// Custom image badge, `url` and `title` are optional
-	['badge', {image: 'image url', alt: 'image alt text', url: 'target url', title: 'title for mouseover'}],
-	// Custom shields.io badge, for options see the "Your Badge" section at the bottom of: http://shields.io
-	['shields', {left: 'subject', right: 'status', color: 'red', alt: 'badge alt text', url: 'target url', title: 'title for mouseover'}],
-	'---',
-	// Development Badges
-	'npmversion',
-	'npmdownloads',
-	'daviddm',
-	'daviddmdev',
-	'---',
-	// Testing Badges
-	'saucelabsbm',
-	'saucelabs',
-	'travisci',
-	'codeship',
-	'coveralls',
-	'waffle',
-	'---',
-	// Funding Badges
-	'sixtydevstips',
-	'patreon',
-	'gratipay',
-	'flattr',
-	'paypal',
-	'bitcoin',
-	'wishlist',
-	'---',
-	// Social Badges
-	'slackinscript',
-	'slackin',
-	'gabeacon',
-	'googleplusone',
-	'redditsubmit',
-	'hackernewssubmit',
-	'facebooklike',
-	'facebookfollow',
-	'twittertweet',
-	'twitterfollow',
-	'githubfollow',
-	'githubstar',
-	'quorafollow'
+  // Custom Badges
+  ['badge', {image: 'image', alt: 'alt'}],
+  ['badge', {image: 'image', alt: 'alt', url: 'url', title: 'title'}],
+  ['shields', {left: 'left', right: 'right', alt: 'alt', url: 'url', title: 'title'}],
+  ['shields', {left: 'left', right: 'right', color: 'red', alt: 'alt', url: 'url', title: 'title'}],
+  '---',
+  // Development Badges
+  'npmversion',
+  'npmdownloads',
+  'daviddm',
+  'daviddmdev',
+  'nodeico',
+  '---',
+  // Testing Badges
+  'saucelabsbm',
+  'saucelabs',
+  'travisci',
+  'codeship',
+  'coveralls',
+  'codeclimate',
+  'bithound',
+  'waffle',
+  '---',
+  // Funding Badges
+  'sixtydevstips',
+  'patreon',
+  'opencollective',
+  'gratipay',
+  'flattr',
+  'paypal',
+  'bitcoin',
+  'wishlist',
+  '---',
+  // Social Badges
+  'slackinscript',
+  'slackin',
+  'gabeacon',
+  'googleplusone',
+  'redditsubmit',
+  'hackernewssubmit',
+  'facebooklike',
+  'facebookfollow',
+  'twittertweet',
+  'twitterfollow',
+  'githubfollow',
+  'githubstar',
+  'quorafollow'
 ]
 
 // Configuration for the badges
 const config = {
-	npmPackageName: 'getbadges',
+  npmPackageName: 'badges',
 
-	saucelabsUsername: 'bevry',
-	saucelabsAuthToken: '123',
-	codeshipProjectUUID: '123',
-	codeshipProjectID: '123',
-	githubSlug: 'bevry/getbadges',
+  saucelabsUsername: 'bevry',
+  saucelabsAuthToken: '123',
+  codeshipProjectUUID: '123',
+  codeshipProjectID: '123',
+  githubSlug: 'bevry/badges',
+  nodeicoQueryString: {downloads: true, compact: true, height: 2},
 
-	sixtydevstipsID: 'd2dcf439c9759e88f3ccec1cef394c10',
-	patreonUsername: 'bevry',
-	gratipayUsername: 'bevry',
-	flattrCode: '344188/balupton-on-Flattr',
-	flattrUsername: 'balupton',
-	flattrURL: 'https://flattr.com/profile/balupton',
-	paypalURL: 'https://paypal.me/bevry',
-	paypalButtonID: 'QB8GQPZAH84N6',  // another option instead of paypalURL
-	paypalUsername: 'bevry',  // another option instead of paypalURL
-	bitcoinURL: 'https://bevry.me/bitcoin',
-	wishlistURL: 'https://bevry.me/wishlist',
+  sixtydevstipsID: 'd2dcf439c9759e88f3ccec1cef394c10',
+  patreonUsername: 'bevry',
+  opencollectiveUsername: 'bevry',
+  gratipayUsername: 'bevry',
+  flattrUsername: 'balupton',
+  paypalURL: 'https://paypal.me/bevry',
+  paypalButtonID: 'QB8GQPZAH84N6',  // another option instead of paypalURL
+  paypalUsername: 'bevry',  // another option instead of paypalURL
+  bitcoinURL: 'https://bevry.me/bitcoin',
+  wishlistURL: 'https://bevry.me/wishlist',
 
-	slackinURL: 'https://slack.bevry.me',
-	gaTrackingID: 'UA-XXXXX-XX',
-	homepage: 'http://bevry.me',
-	facebookApplicationID: '123123',
-	facebookUsername: 'balupton',
-	twitterUsername: 'bevryme',
-	githubUsername: 'balupton',
-	quoraUsername: 'Benjamin-Lupton',
-	quoraRealname: 'Benjamin Arthur Lupton', // optional, will extract from username
+  slackinURL: 'https://slack.bevry.me',
+  gaTrackingID: 'UA-XXXXX-XX',
+  homepage: 'http://bevry.me',
+  facebookApplicationID: '123123',
+  facebookUsername: 'balupton',
+  twitterUsername: 'bevryme',
+  githubUsername: 'balupton',
+  quoraUsername: 'Benjamin-Lupton',
+  quoraRealname: 'Benjamin Arthur Lupton' // optional, will extract from username
 }
 
 // Options for rendering the badges
@@ -164,6 +170,8 @@ console.log(result)
 ```
 
 If you want to render badges inside your own project's readme files, check out the meta builder [projectz](https://github.com/bevry/projectz) which uses this package for badge rendering.
+
+[Complete badge configuration available to you can be found here.](http://rawgit.com/bevry/bdages/master/docs/)
 
 
 <!-- HISTORY/ -->
@@ -212,7 +220,8 @@ These amazing people are maintaining this project:
 
 No sponsors yet! Will you be the first?
 
-<span class="badge-patreon"><a href="http://patreon.com/bevry" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" /></a></span>
+<span class="badge-patreon"><a href="https://patreon.com/bevry" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" /></a></span>
+<span class="badge-opencollective"><a href="https://opencollective.com/bevry" title="Donate to this project using Open Collective"><img src="https://img.shields.io/badge/open%20collective-donate-yellow.svg" alt="Open Collective donate button" /></a></span>
 <span class="badge-gratipay"><a href="https://www.gratipay.com/bevry" title="Donate weekly to this project using Gratipay"><img src="https://img.shields.io/badge/gratipay-donate-yellow.svg" alt="Gratipay donate button" /></a></span>
 <span class="badge-flattr"><a href="https://flattr.com/profile/balupton" title="Donate to this project using Flattr"><img src="https://img.shields.io/badge/flattr-donate-yellow.svg" alt="Flattr donate button" /></a></span>
 <span class="badge-paypal"><a href="https://bevry.me/paypal" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a></span>
@@ -223,7 +232,8 @@ No sponsors yet! Will you be the first?
 
 These amazing people have contributed code to this project:
 
-<ul><li><a href="http://balupton.com">Benjamin Lupton</a> — <a href="https://github.com/bevry/badges/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/badges">view contributions</a></li></ul>
+<ul><li><a href="http://balupton.com">Benjamin Lupton</a> — <a href="https://github.com/bevry/badges/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/badges">view contributions</a></li>
+<li><a href="http://lovebeer.nz/">Richard Walker</a> — <a href="https://github.com/bevry/badges/commits?author=digitalsadhu" title="View the GitHub contributions of Richard Walker on repository bevry/badges">view contributions</a></li></ul>
 
 <a href="https://github.com/bevry/badges/blob/master/CONTRIBUTING.md#files">Discover how you can contribute by heading on over to the <code>CONTRIBUTING.md</code> file.</a>
 

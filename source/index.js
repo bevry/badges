@@ -1,3 +1,5 @@
+'use strict'
+
 // Import
 const badges = require('./badges')
 
@@ -50,11 +52,23 @@ function renderBadges (list, config = {}, options = {filterCategory: false, filt
 			badgeName = badgeName[0]
 		}
 
-		// Category?
-		if ( options.filterCategory && (badgeName === '---' || options.filterCategory !== badges[badgeName].badgeCategory) )  return
+		// Seperator?
+		if ( badgeName === '---' ) {
+			// Do not render seperators if we only wanted a single category
+			if ( options.filterCategory )  return
+		}
+		// Exists?
+		else if ( badges[badgeName] ) {
+			// Category?
+			if ( options.filterCategory && options.filterCategory !== badges[badgeName].badgeCategory )  return
 
-		// Script?
-		if ( options.filterScripts === true && badgeName !== '---' && badges[badgeName].badgeScript )  return
+			// Script?
+			if ( options.filterScripts && badges[badgeName].badgeScript )  return
+		}
+		// Doesn't exist
+		else {
+			throw new Error(`the badge ${badgeName} does not exist`)
+		}
 
 		// Render
 		const badgeResult = renderBadge(badgeName, badgeConfig).trim()

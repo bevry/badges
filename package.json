@@ -1,6 +1,6 @@
 {
   "name": "badges",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "The definitive collection of badges for rendering",
   "homepage": "https://github.com/bevry/badges",
   "license": "MIT",
@@ -57,7 +57,9 @@
     "donation",
     "tip",
     "tips",
-    "star"
+    "star",
+    "opencollective",
+    "open collective"
   ],
   "badges": {
     "list": [
@@ -69,6 +71,7 @@
       "---",
       "slackin",
       "patreon",
+      "opencollective",
       "gratipay",
       "flattr",
       "paypal",
@@ -77,6 +80,7 @@
     ],
     "config": {
       "patreonUsername": "bevry",
+      "opencollectiveUsername": "bevry",
       "gratipayUsername": "bevry",
       "flattrUsername": "balupton",
       "paypalURL": "https://bevry.me/paypal",
@@ -90,7 +94,8 @@
     "Benjamin Lupton <b@lupton.cc> (http://balupton.com)"
   ],
   "contributors": [
-    "Benjamin Lupton <b@lupton.cc> (http://balupton.com)"
+    "Benjamin Lupton <b@lupton.cc> (http://balupton.com)",
+    "Richard Walker <digitalsadhu@gmail.com> (http://lovebeer.nz/)"
   ],
   "bugs": {
     "url": "https://github.com/bevry/badges/issues"
@@ -100,12 +105,12 @@
     "url": "http://github.com/bevry/badges.git"
   },
   "engines": {
-    "node": ">=0.12"
+    "node": ">=0.8"
   },
   "editions": [
     {
       "description": "Source + ESNext + Require",
-      "entry": "source/index.js",
+      "entry": "index.js",
       "directory": "source",
       "syntaxes": [
         "javascript",
@@ -120,7 +125,7 @@
     },
     {
       "description": "Babel Compiled + ES2015 + Require",
-      "entry": "es2015/index.js",
+      "entry": "index.js",
       "directory": "es2015",
       "syntaxes": [
         "javascript",
@@ -132,32 +137,34 @@
   "main": "index.js",
   "browser": "es2015/index.js",
   "dependencies": {
-    "editions": "^1.1.1"
+    "editions": "^1.3.3"
   },
   "devDependencies": {
-    "assert-helpers": "^4.2.0",
-    "babel-cli": "^6.9.0",
-    "babel-preset-es2015": "^6.9.0",
-    "eslint": "^2.10.2",
-    "eslint-plugin-babel": "^3.2.0",
-    "joe": "^1.6.0",
-    "joe-reporter-console": "^1.2.1",
-    "projectz": "^1.1.5"
+    "assert-helpers": "^4.4.0",
+    "babel-cli": "^6.22.2",
+    "babel-preset-es2015": "^6.22.0",
+    "documentation": "^4.0.0-beta.18",
+    "eslint": "^3.14.1",
+    "joe": "^2.0.2",
+    "joe-reporter-console": "^2.0.1",
+    "projectz": "^1.3.2"
   },
   "scripts": {
-    "setup": "npm install",
-    "clean": "rm -Rf ./docs ./es2015",
-    "compile": "npm run compile:es2015",
-    "compile:es2015": "babel ./source --out-dir ./es2015 --presets es2015",
-    "meta": "npm run meta:projectz",
-    "meta:projectz": "projectz compile",
-    "prepare": "npm run compile && npm run test && npm run meta",
-    "release": "npm run prepare && npm run release:publish && npm run release:tag && npm run release:push",
-    "release:publish": "npm publish",
-    "release:tag": "git tag v$npm_package_version -a",
-    "release:push": "git push origin master && git push origin --tags",
-    "pretest": "npm run test:eslint",
-    "test:eslint": "eslint ./source",
-    "test": "node --harmony -e \"require('editions').requirePackage(process.cwd(), require, 'test.js')\""
+    "our:setup": "npm install",
+    "our:clean": "rm -Rf ./docs ./es2015",
+    "our:compile": "npm run our:compile:es2015",
+    "our:compile:es2015": "babel ./source --out-dir ./es2015 --presets es2015",
+    "our:meta": "npm run our:meta:docs && npm run our:meta:projectz",
+    "our:meta:docs": "documentation build -f html -o ./docs -g --shallow ./source/**.js",
+    "our:meta:projectz": "projectz compile",
+    "our:verify": "npm run our:verify:eslint",
+    "our:verify:eslint": "eslint --fix ./source",
+    "our:test": "npm run our:verify && npm test",
+    "our:release": "npm run our:release:prepare && npm run our:release:publish && npm run our:release:tag && npm run our:release:push",
+    "our:release:prepare": "npm run our:clean && npm run our:compile && npm run our:test && npm run our:meta",
+    "our:release:publish": "npm publish",
+    "our:release:tag": "git tag v$npm_package_version -a",
+    "our:release:push": "git push origin master && git push origin --tags",
+    "test": "node --harmony ./test.js --joe-reporter=console"
   }
 }

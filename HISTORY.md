@@ -1,5 +1,11 @@
 # History
 
+## v1.2.2 2017 January 26
+- Added [Open Collective](https://opencollective.com) badge
+- Added [Code Climate](https://codeclimate.com) Rating badge
+- Added [BitHound](https://bithound.io) Score badge
+- Fix the error `TypeError: Cannot read property 'badgeScript' of undefined` which appeared under certain circumstances
+
 ## v1.2.1 2016 September 19
 - Added `nodeico` badge
   - Thanks to [Richard Walker](https://github.com/digitalsadhu) for [pull request #5](https://github.com/bevry/badges/pull/5) which closes [issue #2](https://github.com/bevry/badges/issues/2)

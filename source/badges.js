@@ -1,3 +1,6 @@
+'use strict'
+
+// Import
 const querystring = require('querystring')
 
 // ====================================
@@ -254,11 +257,49 @@ function coveralls ({githubSlug}) {
 	// Create
 	const image = `https://img.shields.io/coveralls/${githubSlug}.svg`
 	const url = `https://coveralls.io/r/${githubSlug}`
-	const alt = 'Coverage Status'
+	const alt = 'Coveralls Coverage Status'
 	const title = "View this project's coverage on Coveralls"
 	return badge({image, alt, url, title})
 }
 coveralls.badgeCategory = 'testing'
+
+/**
+Code Climate Rating Badge
+@method codeclimate
+@param {String} config.githubSlug The github slug that the project lives at (e.g. bevry/badges)
+@return {String} the result badge
+*/
+function codeclimate ({githubSlug}) {
+	// Check
+	if ( !githubSlug )  throw new Error('githubSlug is missing')
+
+	// Create
+	const image = `https://img.shields.io/codeclimate/github/${githubSlug}.svg`
+	const url = `https://codeclimate.com/github/${githubSlug}`
+	const alt = 'Code Climate Rating'
+	const title = "View this project's rating on Code Climate"
+	return badge({image, alt, url, title})
+}
+codeclimate.badgeCategory = 'testing'
+
+/**
+BitHound Score Badge
+@method bithound
+@param {String} config.githubSlug The github slug that the project lives at (e.g. bevry/badges)
+@return {String} the result badge
+*/
+function bithound ({githubSlug}) {
+	// Check
+	if ( !githubSlug )  throw new Error('githubSlug is missing')
+
+	// Create
+	const image = `https://bithound.io/github/${githubSlug}/badges/score.svg`
+	const url = `https://bithound.io/github/${githubSlug}`
+	const alt = 'BitHound Score'
+	const title = "View this project's score on BitHound"
+	return badge({image, alt, url, title})
+}
+bithound.badgeCategory = 'testing'
 
 /**
 Waffle Badge
@@ -310,15 +351,15 @@ sixtydevstips.badgeCategory = 'funding'
 /**
 Patreon Badge
 @method patreon
-@param {String} config.patreonUsername The patreon username to donate to
-@param {String} config.patreonURL The url to the patreon donate page
+@param {String} config.patreonUsername The Patreon username to donate to
+@param {String} config.patreonURL The url to the Patreon donate page
 @return {String} the result badge
 */
 function patreon ({patreonUsername, patreonURL}) {
 	// Check
 	if ( !patreonURL ) {
 		if ( !patreonUsername )  throw new Error('patreonUsername is missing')
-		patreonURL = `http://patreon.com/${patreonUsername}`
+		patreonURL = `https://patreon.com/${patreonUsername}`
 	}
 
 	// Create
@@ -331,10 +372,33 @@ function patreon ({patreonUsername, patreonURL}) {
 patreon.badgeCategory = 'funding'
 
 /**
+Open Collective Badge
+@method patreon
+@param {String} config.opencollectiveUsername The Open Collective username to donate to
+@param {String} config.opencollectiveURL The url to the Open Collective donate page
+@return {String} the result badge
+*/
+function opencollective ({opencollectiveUsername, opencollectiveURL}) {
+	// Check
+	if ( !opencollectiveURL ) {
+		if ( !opencollectiveUsername )  throw new Error('opencollectiveUsername is missing')
+		opencollectiveURL = `https://opencollective.com/${opencollectiveUsername}`
+	}
+
+	// Create
+	const image = 'https://img.shields.io/badge/open%20collective-donate-yellow.svg'
+	const url = opencollectiveURL
+	const alt = 'Open Collective donate button'
+	const title = 'Donate to this project using Open Collective'
+	return badge({image, alt, url, title})
+}
+opencollective.badgeCategory = 'funding'
+
+/**
 Gratipay Badge
 @method gratipay
-@param {String} config.gratipayUsername The gratipay username to donate to
-@param {String} config.gratipayURL The url to the gratipay donate page
+@param {String} config.gratipayUsername The Gratipay username to donate to
+@param {String} config.gratipayURL The url to the Gratipay donate page
 @return {String} the result badge
 */
 function gratipay ({gratipayUsername, gratipayURL}) {
@@ -356,8 +420,8 @@ gratipay.badgeCategory = 'funding'
 /**
 Flattr Badge
 @method flattr
-@param {String} config.flattrCode The flattr code to donate to (e.g. 344188/balupton-on-Flattr)
-@param {String} config.flattrUsername The flattr username to donate to (e.g. balupton)
+@param {String} config.flattrCode The Flattr code to donate to (e.g. 344188/balupton-on-Flattr)
+@param {String} config.flattrUsername The Flattr username to donate to (e.g. balupton)
 @param {String} config.flattrURL The url to the flattr donate page
 @return {String} the result badge
 */
@@ -388,8 +452,8 @@ flattr.badgeCategory = 'funding'
 Paypal Badge
 @method paypal
 @param {String} config.paypalURL The url to the paypal donate page
-@param {String} config.paypalButtonID The paypal button id
-@param {String} config.paypalUsername The paypal.me username
+@param {String} config.paypalButtonID The Paypal button id
+@param {String} config.paypalUsername The Paypal.me username
 @return {String} the result badge
 */
 function paypal ({paypalURL, paypalButtonID, paypalUsername}) {
@@ -705,9 +769,12 @@ module.exports = {
 	travisci,
 	codeship,
 	coveralls,
+	codeclimate,
+	bithound,
 	waffle,
 	sixtydevstips,
 	patreon,
+	opencollective,
 	gratipay,
 	flattr,
 	paypal,

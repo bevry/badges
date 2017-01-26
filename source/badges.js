@@ -184,7 +184,7 @@ saucelabsbm.badgeInline = false
 
 /**
 Sauce Labs Badge
-@method saucelabsbm
+@method saucelabs
 @param {String} config.saucelabsUsername The saucelabs username
 @param {String} config.saucelabsAuthToken The saucelabs authorisation token
 @return {String} the result badge

@@ -327,7 +327,7 @@ waffle.badgeCategory = 'testing'
 
 /**
 60devs Tips Badge
-@method patreon
+@method sixtydevstips
 @param {String} config.sixtydevsUsername The 60devs username to donate to
 @param {String} config.sixtydevstipsURL The url to the 60devs donate page
 @return {String} the result badge
@@ -373,7 +373,7 @@ patreon.badgeCategory = 'funding'
 
 /**
 Open Collective Badge
-@method patreon
+@method opencollective
 @param {String} config.opencollectiveUsername The Open Collective username to donate to
 @param {String} config.opencollectiveURL The url to the Open Collective donate page
 @return {String} the result badge

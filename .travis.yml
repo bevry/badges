@@ -41,14 +41,16 @@ install: |
   export CURRENT_NODE_VERSION="$(node --version)"
   export NODE_LTS_VERSIONS="$(nvm ls-remote --lts)"
   if echo "$NODE_LTS_VERSIONS" | grep "$CURRENT_NODE_VERSION"; then
-    echo "running on a LTS node version, completing setup"
+    echo "running on a LTS node version, completing setup..."
     npm run our:setup
+    echo "...setup complete with current LTS version"
   else
-    echo "running on a non-LTS node version, completing setup on a LTS node version"
+    echo "running on a non-LTS node version, completing setup on a LTS node version..."
     nvm install --lts
     export NODE_LTS_INSTALLED_VERSION="$(node --version)"
     npm run our:setup
     nvm use "$TRAVIS_NODE_VERSION"
+    echo "...setup complete with LTS"
   fi
 
 
@@ -56,13 +58,15 @@ before_script: |
   # Ensure compilation and linting occur on a LTS node version
   # https://github.com/balupton/awesome-travis#use-lts-node-version-for-preparation
   if test "$NODE_LTS_INSTALLED_VERSION"; then
-    echo "running on a non-LTS node version, compiling with LTS, skipping linting"
+    echo "running on a non-LTS node version, compiling with LTS, skipping linting..."
     nvm use "$NODE_LTS_INSTALLED_VERSION"
     npm run our:compile
     nvm use "$TRAVIS_NODE_VERSION"
+    echo "...compiled"
   else
-    echo "running on a LTS node version, compiling and linting"
+    echo "running on a LTS node version, compiling and linting..."
     npm run our:compile && npm run our:verify
+    echo "...compiled and linted"
   fi
 
 
@@ -78,7 +82,7 @@ after_success: |
     echo "installing surge"
     npm install surge
     echo "performing deploy"
-    export SURGE_SLUG="$(node -e \"process.stdout.write('a/b'.toString().split('/').reverse().join('.'))\")"
+    export SURGE_SLUG="$(echo $TRAVIS_REPO_SLUG | sed 's/^\(.*\)\/\(.*\)/\2.\1/')"
     surge --project . --domain "$TRAVIS_BRANCH.$SURGE_SLUG.surge.sh"
     echo "...release deployed"
   else

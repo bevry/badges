@@ -40,6 +40,7 @@ install: |
   # https://github.com/balupton/awesome-travis#use-lts-node-version-for-preparation
   export CURRENT_NODE_VERSION="$(node --version)"
   export NODE_LTS_VERSIONS="$(nvm ls-remote --lts)"
+  echo "node travis:$TRAVIS_NODE_VERSION current:$CURRENT_NODE_VERSION"
   if echo "$NODE_LTS_VERSIONS" | grep "$CURRENT_NODE_VERSION"; then
     echo "running on a LTS node version, completing setup..."
     npm run our:setup
@@ -71,19 +72,30 @@ before_script: |
 
 
 after_success: |
-  # Deploy Release to Surge
+  # Release to Surge
   # travis encrypt "SURGE_LOGIN=$SURGE_LOGIN" --add env.global
   # travis encrypt "SURGE_TOKEN=$SURGE_TOKEN" --add env.global
   export NODE_LTS_LATEST_VERSION="$(nvm version-remote --lts)"
   if test "$CURRENT_NODE_VERSION" = "$NODE_LTS_LATEST_VERSION"; then
     echo "running on latest LTS node version, performing release deployment..."
     echo "preparing release"
-    npm run our:release:prepare
+    npm run our:meta
     echo "installing surge"
     npm install surge
     echo "performing deploy"
     export SURGE_SLUG="$(echo $TRAVIS_REPO_SLUG | sed 's/^\(.*\)\/\(.*\)/\2.\1/')"
-    surge --project . --domain "$TRAVIS_BRANCH.$SURGE_SLUG.surge.sh"
+    if test "$TRAVIS_BRANCH"; then
+      echo "deploying branch..."
+      surge --project . --domain "$TRAVIS_BRANCH.$SURGE_SLUG.surge.sh"
+    fi
+    if test "$TRAVIS_TAG"; then
+      echo "deploying tag..."
+      surge --project . --domain "$TRAVIS_TAG.$SURGE_SLUG.surge.sh"
+    fi
+    if test "$TRAVIS_COMMIT"; then
+      echo "deploying commit..."
+      surge --project . --domain "$TRAVIS_COMMIT.$SURGE_SLUG.surge.sh"
+    fi
     echo "...release deployed"
   else
     echo "running on non-latest LTS node version, skipping release deployment"

@@ -94,7 +94,7 @@ after_success: |
       echo "deploying commit..."
       surge --project . --domain "$TRAVIS_COMMIT.$SURGE_SLUG.surge.sh"
     fi
-    echo "...release deployed"
+    echo "...released to surge"
   else
     echo "running on non-latest LTS node version, skipping release to surge"
   fi
@@ -111,7 +111,7 @@ after_success: |
       echo -e "$NPM_USERNAME\n$NPM_PASSWORD\n$NPM_EMAIL" | npm login
       echo "publishing..."
       npm publish
-      echo "...published to npm
+      echo "...released to npm"
     else
       echo "non-tag, no need for release"
     fi

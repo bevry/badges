@@ -40,7 +40,6 @@ install: |
   # https://github.com/balupton/awesome-travis#use-lts-node-version-for-preparation
   export CURRENT_NODE_VERSION="$(node --version)"
   export NODE_LTS_VERSIONS="$(nvm ls-remote --lts)"
-  echo "node travis:$TRAVIS_NODE_VERSION current:$CURRENT_NODE_VERSION"
   if echo "$NODE_LTS_VERSIONS" | grep "$CURRENT_NODE_VERSION"; then
     echo "running on a LTS node version, completing setup..."
     npm run our:setup
@@ -73,11 +72,10 @@ before_script: |
 
 after_success: |
   # Release to Surge
-  # travis encrypt "SURGE_LOGIN=$SURGE_LOGIN" --add env.global
-  # travis encrypt "SURGE_TOKEN=$SURGE_TOKEN" --add env.global
+  export CURRENT_NODE_VERSION="$(node --version)"
   export NODE_LTS_LATEST_VERSION="$(nvm version-remote --lts)"
   if test "$CURRENT_NODE_VERSION" = "$NODE_LTS_LATEST_VERSION"; then
-    echo "running on latest LTS node version, performing release deployment..."
+    echo "running on latest LTS node version, performing release to surge..."
     echo "preparing release"
     npm run our:meta
     echo "installing surge"
@@ -98,20 +96,44 @@ after_success: |
     fi
     echo "...release deployed"
   else
-    echo "running on non-latest LTS node version, skipping release deployment"
+    echo "running on non-latest LTS node version, skipping release to surge"
   fi
 
+  # Release to NPM
+  # travis encrypt "NPM_USERNAME=$NPM_USERNAME" --add env.global
+  # travis encrypt "NPM_PASSWORD=$NPM_PASSWORD" --add env.global
+  # travis encrypt "NPM_EMAIL=$NPM_EMAIL" --add env.global
+  export CURRENT_NODE_VERSION="$(node --version)"
+  export NODE_LTS_LATEST_VERSION="$(nvm version-remote --lts)"
+  if test "$CURRENT_NODE_VERSION" = "$NODE_LTS_LATEST_VERSION"; then
+    if test "$TRAVIS_TAG"; then
+      echo "logging in..."
+      echo -e "$NPM_USERNAME\n$NPM_PASSWORD\n$NPM_EMAIL" | npm login
+      echo "publishing..."
+      npm publish
+      echo "...published to npm
+    else
+      echo "non-tag, no need for release"
+    fi
+  else
+    echo "running on non-latest LTS node version, skipping release to npm"
+  fi
 
 # Custom Configuration
 env:
   global:
-  # Deploy Release to Surge
+  # Release to Surge
   - secure: AYNghdBdVYTYSpAeIdG5g7isa3K4axsIqJ78FF9rQB0BTslp+aPk+6zbtCrj8YmTsQ31Zc+ybf5rwcGZILPoHHzeOfJZJ7Ezzpz/pFIPAce1Xu/hKNUWHfC8tRxOpsfCwZVipwdNt1CMt+8AuRkDXj8rGnMslN2SVub3jmokmsE=
   - secure: YB7QC4qeZoBdCLQIToYJaBYi0GYX37XYH6Q8U15MUYuu+txxoTT5YYk5ubGCNgvbXl0Hk/vnx+yrjk5VQ3LSfRyG3H4BvrsyxUkbWuWtv8efXIh+3Tiw2XR7mmkQKG8imRwOD0tclduTJ4t4evlXXFwGWxnUybOKXtqwnfObaLQ=
-
+  # Release to NPM
+  - secure: I9QVPSN0+JeQmyZjetpRHLhrSf7RNUwL3IucWO9utTWq5V1NhPvkL6UMUxZ6ddevdub4IXk9cjEeyk38Q23VTek6/lz6vTzyGJq/7qTEzh+1ozoDdFuKHBUljaB5zdWZ2m3h53qwdD6rXGR8/ItSY1b8SCPzATmcbZ57wEglrxg=
+  - secure: OaLP7PvO1jVjM/JqANZUStAfjVYBFeLm2WGzbtF0jyCc3uxnWILmF1ZSpWuMorVsjOLLJMid5rw3jSzqk3Pr60eV+WiQ5LKEDvQA/NytXBBdE2VsKgW4k6YnhYCJs/k9xLA0vWCjvb8MYenUzT7ilA9FGTexlt7JAwNQwTYVT38=
+  - secure: gsw4GZz6ZQtqPsau2Yt+AVNm0u/RPaNwilmQQKjnhwTWWTruSxfCbwT5ya7zWxsidfInpI4ih+ycnw+8keVA/rzampYKpyS2QsSAnjoU1CHh2J6lFJyw5frMfTfHb4YXK6R8LNp5uES0gis9MkSqJWlYrIZ+/MNhMvw1wgzDnTM=
 
 # https://github.com/balupton/awesome-travis#slack
 # https://github.com/balupton/awesome-travis#email
+# travis encrypt --org "$SLACK_SUBDOMAIN:$SLACK_TRAVIS_TOKEN#updates" --add notifications.slack
+# travis encrypt --org "$TRAVIS_NOTIFICATION_EMAIL" --add notifications.email.recipients
 notifications:
   slack:
     secure: OBP0j0sAz/ELAsVlgWmoVREOvNsnrc2+K7twXUgPJqBWwtvLfi7p9VbD1w7GPt2h+ecugrIQQZZW+RJ3xFIvmrUJ09et5hyGdhC8r+j/lBHNFF6kQzSoPt3lB/ka1CpEdJMG90aSdv9wLH0bwFVBUzo4o4l06nQTjh8+hW/BRsk=

@@ -39,14 +39,14 @@ install: |
   # Ensure dependencies install with a LTS node version
   # https://github.com/balupton/awesome-travis#use-lts-node-version-for-preparation
   export CURRENT_NODE_VERSION="$(node --version)"
-  export LTS_NODE_VERSIONS="$(nvm ls-remote --lts)"
-  if echo "$LTS_NODE_VERSIONS" | grep "$CURRENT_NODE_VERSION"; then
+  export NODE_LTS_VERSIONS="$(nvm ls-remote --lts)"
+  if echo "$NODE_LTS_VERSIONS" | grep "$CURRENT_NODE_VERSION"; then
     echo "running on a LTS node version, completing setup"
     npm run our:setup
   else
     echo "running on a non-LTS node version, completing setup on a LTS node version"
     nvm install --lts
-    export LTS_NODE_VERSION="$(node --version)"
+    export NODE_LTS_INSTALLED_VERSION="$(node --version)"
     npm run our:setup
     nvm use "$TRAVIS_NODE_VERSION"
   fi
@@ -55,9 +55,9 @@ install: |
 before_script: |
   # Ensure compilation and linting occur on a LTS node version
   # https://github.com/balupton/awesome-travis#use-lts-node-version-for-preparation
-  if test "$LTS_NODE_VERSION"; then
+  if test "$NODE_LTS_INSTALLED_VERSION"; then
     echo "running on a non-LTS node version, compiling with LTS, skipping linting"
-    nvm use "$LTS_NODE_VERSION"
+    nvm use "$NODE_LTS_INSTALLED_VERSION"
     npm run our:compile
     nvm use "$TRAVIS_NODE_VERSION"
   else
@@ -70,14 +70,19 @@ after_success: |
   # Deploy Release to Surge
   # travis encrypt "SURGE_LOGIN=$SURGE_LOGIN" --add env.global
   # travis encrypt "SURGE_TOKEN=$SURGE_TOKEN" --add env.global
-  if test "$LTS_NODE_VERSION"; then
-    echo "running on a non-LTS node version, skipping release deployment"
-  else
-    echo "running on a LTS node version, performing release deployment"
+  export NODE_LTS_LATEST_VERSION="$(nvm version-remote --lts)"
+  if test "$CURRENT_NODE_VERSION" = "$NODE_LTS_LATEST_VERSION"; then
+    echo "running on latest LTS node version, performing release deployment..."
+    echo "preparing release"
     npm run our:release:prepare
+    echo "installing surge"
     npm install surge
+    echo "performing deploy"
     export SURGE_SLUG="$(node -e \"process.stdout.write('a/b'.toString().split('/').reverse().join('.'))\")"
     surge --project . --domain "$TRAVIS_BRANCH.$SURGE_SLUG.surge.sh"
+    echo "...release deployed"
+  else
+    echo "running on non-latest LTS node version, skipping release deployment"
   fi
 
 

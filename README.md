@@ -44,7 +44,7 @@ The definitive collection of badges for rendering
 <a href="http://browserify.org" title="Browserify lets you require('modules') in the browser by bundling up all of your dependencies"><h3>Browserify</h3></a><ul>
 <li>Install: <code>npm install --save badges</code></li>
 <li>Module: <code>require('badges')</code></li>
-<li>CDN URL: <code>//wzrd.in/bundle/badges@1.2.3</code></li></ul>
+<li>CDN URL: <code>//wzrd.in/bundle/badges@1.2.4</code></li></ul>
 
 <a href="http://enderjs.com" title="Ender is a full featured package manager for your browser"><h3>Ender</h3></a><ul>
 <li>Install: <code>ender add badges</code></li>
@@ -172,7 +172,7 @@ console.log(result)
 
 If you want to render badges inside your own project's readme files, check out the meta builder [projectz](https://github.com/bevry/projectz) which uses this package for badge rendering.
 
-[Complete badge configuration available to you can be found here.](https://master.badges.bevry.surge.sh/docs/)
+[Complete badge configuration available to you can be found here.](http://master.badges.bevry.surge.sh/docs/)
 
 
 <!-- HISTORY/ -->

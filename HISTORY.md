@@ -1,7 +1,10 @@
 # History
 
+## v1.2.4 2017 January 27
+- meta: update docs URL to not use https
+
 ## v1.2.3 2017 January 27
-- Updated meta files
+- meta: recompile
 
 ## v1.2.2 2017 January 26
 - Added [Open Collective](https://opencollective.com) badge

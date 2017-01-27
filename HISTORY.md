@@ -1,5 +1,8 @@
 # History
 
+## v1.2.3 2017 January 27
+- Updated meta files
+
 ## v1.2.2 2017 January 26
 - Added [Open Collective](https://opencollective.com) badge
 - Added [Code Climate](https://codeclimate.com) Rating badge

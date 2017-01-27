@@ -172,7 +172,7 @@ console.log(result)
 
 If you want to render badges inside your own project's readme files, check out the meta builder [projectz](https://github.com/bevry/projectz) which uses this package for badge rendering.
 
-[Complete badge configuration available to you can be found here.](http://rawgit.com/bevry/badges/master/docs/)
+[Complete badge configuration available to you can be found here.](https://master.badges.bevry.surge.sh/docs/)
 
 
 <!-- HISTORY/ -->

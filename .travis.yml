@@ -1,10 +1,13 @@
-# 2016 November 5
+# 2017 January 27
 # https://github.com/bevry/base
+
 
 # Use the latest travis infrastructure
 sudo: false
 
-# https://github.com/nodejs/LTS
+
+# Complete Node.js Version Matrix
+# https://github.com/balupton/awesome-travis#complete-nodejs-version-matrix
 language: node_js
 node_js:
   - "0.8"   # end of life
@@ -22,9 +25,10 @@ cache:
   directories:
     - node_modules
 
-# Ensure npm is up to date
-# Ensure dependencies install with a LTS node version
+
 install: |
+  # Ensure NPM is latest
+  # https://github.com/balupton/awesome-travis#ensure-npm-is-latest
   export CURRENT_NPM_VERSION="$(npm --version)"
   export LATEST_NPM_VERSION="$(npm view npm version)"
   if test "$CURRENT_NPM_VERSION" != "$LATEST_NPM_VERSION"; then
@@ -32,6 +36,8 @@ install: |
     npm instal npm --global --cache-min=Infinity
   fi
 
+  # Ensure dependencies install with a LTS node version
+  # https://github.com/balupton/awesome-travis#use-lts-node-version-for-preparation
   export CURRENT_NODE_VERSION="$(node --version)"
   export LTS_NODE_VERSIONS="$(nvm ls-remote --lts)"
   if echo "$LTS_NODE_VERSIONS" | grep "$CURRENT_NODE_VERSION"; then
@@ -45,8 +51,10 @@ install: |
     nvm use "$TRAVIS_NODE_VERSION"
   fi
 
-# Ensure compilation and linting occur on an LTS node version
+
 before_script: |
+  # Ensure compilation and linting occur on a LTS node version
+  # https://github.com/balupton/awesome-travis#use-lts-node-version-for-preparation
   if test "$LTS_NODE_VERSION"; then
     echo "running on a non-LTS node version, compiling with LTS, skipping linting"
     nvm use "$LTS_NODE_VERSION"
@@ -57,7 +65,32 @@ before_script: |
     npm run our:compile && npm run our:verify
   fi
 
-# Custom notifications
+
+after_success: |
+  # Deploy Release to Surge
+  # travis encrypt "SURGE_LOGIN=$SURGE_LOGIN" --add env.global
+  # travis encrypt "SURGE_TOKEN=$SURGE_TOKEN" --add env.global
+  if test "$LTS_NODE_VERSION"; then
+    echo "running on a non-LTS node version, skipping release deployment"
+  else
+    echo "running on a LTS node version, performing release deployment"
+    npm run our:release:prepare
+    npm install surge
+    export SURGE_SLUG="$(node -e \"process.stdout.write('a/b'.toString().split('/').reverse().join('.'))\")"
+    surge --project . --domain "$TRAVIS_BRANCH.$SURGE_SLUG.surge.sh"
+  fi
+
+
+# Custom Configuration
+env:
+  global:
+  # Deploy Release to Surge
+  - secure: AYNghdBdVYTYSpAeIdG5g7isa3K4axsIqJ78FF9rQB0BTslp+aPk+6zbtCrj8YmTsQ31Zc+ybf5rwcGZILPoHHzeOfJZJ7Ezzpz/pFIPAce1Xu/hKNUWHfC8tRxOpsfCwZVipwdNt1CMt+8AuRkDXj8rGnMslN2SVub3jmokmsE=
+  - secure: YB7QC4qeZoBdCLQIToYJaBYi0GYX37XYH6Q8U15MUYuu+txxoTT5YYk5ubGCNgvbXl0Hk/vnx+yrjk5VQ3LSfRyG3H4BvrsyxUkbWuWtv8efXIh+3Tiw2XR7mmkQKG8imRwOD0tclduTJ4t4evlXXFwGWxnUybOKXtqwnfObaLQ=
+
+
+# https://github.com/balupton/awesome-travis#slack
+# https://github.com/balupton/awesome-travis#email
 notifications:
   slack:
     secure: OBP0j0sAz/ELAsVlgWmoVREOvNsnrc2+K7twXUgPJqBWwtvLfi7p9VbD1w7GPt2h+ecugrIQQZZW+RJ3xFIvmrUJ09et5hyGdhC8r+j/lBHNFF6kQzSoPt3lB/ka1CpEdJMG90aSdv9wLH0bwFVBUzo4o4l06nQTjh8+hW/BRsk=

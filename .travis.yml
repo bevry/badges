@@ -33,7 +33,7 @@ install: |
   export LATEST_NPM_VERSION="$(npm view npm version)"
   if test "$CURRENT_NPM_VERSION" != "$LATEST_NPM_VERSION"; then
     echo "running an old npm version, upgrading npm..."
-    npm instal npm --global --cache-min=Infinity
+    npm install npm --global --cache-min=Infinity
     echo "...npm upgrade complete"
   fi
 

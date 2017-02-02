@@ -34,7 +34,7 @@ Shields Custom Badge
 @method shields
 @param {String} config.left The text for the left side of the badge
 @param {String} config.right The text for the right side of the badge
-@param {String} [config.color='yellow] The color for the badge
+@param {String} [config.color='yellow'] The color for the badge
 @param {String} [config.alt] The alt attribute for the image
 @param {String} [config.url] The URL for the link
 @param {String} [config.title] The title attribute for the link

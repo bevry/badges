@@ -405,7 +405,7 @@ function gratipay ({gratipayUsername, gratipayURL}) {
 	// Check
 	if ( !gratipayURL ) {
 		if ( !gratipayUsername )  throw new Error('gratipayUsername is missing')
-		gratipayURL = `https://www.gratipay.com/${gratipayUsername}`
+		gratipayURL = `https://gratipay.com/${gratipayUsername}`
 	}
 
 	// Create

@@ -38,6 +38,7 @@ joe.suite('badges', function (suite, test) {
 		'gratipay',
 		'flattr',
 		'paypal',
+		'crypto',
 		'bitcoin',
 		'wishlist',
 		'buymeacoffee',
@@ -79,7 +80,7 @@ joe.suite('badges', function (suite, test) {
 		paypalURL: 'https://paypal.me/bevry',
 		paypalButtonID: 'QB8GQPZAH84N6',  // another option instead of paypalURL
 		paypalUsername: 'bevry',  // another option instead of paypalURL
-		bitcoinURL: 'https://bevry.me/bitcoin',
+		bitcoinURL: 'https://bevry.me/crypto',
 		wishlistURL: 'https://bevry.me/wishlist',
 		buymeacoffeeUsername: 'balupton',
 		liberapayUsername: 'balupton',
@@ -127,7 +128,8 @@ joe.suite('badges', function (suite, test) {
 		`<span class="badge-gratipay"><a href="https://gratipay.com/bevry" title="Donate weekly to this project using Gratipay"><img src="https://img.shields.io/badge/gratipay-donate-yellow.svg" alt="Gratipay donate button" /></a></span>`,
 		`<span class="badge-flattr"><a href="https://flattr.com/profile/balupton" title="Donate to this project using Flattr"><img src="https://img.shields.io/badge/flattr-donate-yellow.svg" alt="Flattr donate button" /></a></span>`,
 		`<span class="badge-paypal"><a href="https://paypal.me/bevry" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a></span>`,
-		`<span class="badge-bitcoin"><a href="https://bevry.me/bitcoin" title="Donate once-off to this project using Bitcoin"><img src="https://img.shields.io/badge/bitcoin-donate-yellow.svg" alt="Bitcoin donate button" /></a></span>`,
+		`<span class="badge-crypto"><a href="https://bevry.me/crypto" title="Donate to this project using Cryptocurrency"><img src="https://img.shields.io/badge/crypto-donate-yellow.svg" alt="crypto donate button" /></a></span>`,
+		`<span class="badge-bitcoin"><a href="https://bevry.me/crypto" title="Donate to this project using Cryptocurrency"><img src="https://img.shields.io/badge/crypto-donate-yellow.svg" alt="crypto donate button" /></a></span>`,
 		`<span class="badge-wishlist"><a href="https://bevry.me/wishlist" title="Buy an item on our wishlist for us"><img src="https://img.shields.io/badge/wishlist-donate-yellow.svg" alt="Wishlist browse button" /></a></span>`,
 		`<span class="badge-buymeacoffee"><a href="https://buymeacoffee.com/balupton" title="Donate to this project using Buy Me A Coffee"><img src="https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg" alt="Buy Me A Coffee donate button" /></a></span>`,
 		`<span class="badge-liberapay"><a href="https://liberapay.com/balupton" title="Donate to this project using Liberapay"><img src="https://img.shields.io/badge/liberapay-donate-yellow.svg" alt="Liberapay donate button" /></a></span>`,

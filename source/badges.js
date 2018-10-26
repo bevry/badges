@@ -502,22 +502,33 @@ function paypal ({ paypalURL, paypalButtonID, paypalUsername }) {
 paypal.badgeCategory = 'funding'
 
 /**
- * Bitcoin Badge
- * @method bitcoin
+ * Crypto Badge
+ * @method crypto
  * @param {Object} opts
- * @param {string} opts.bitcoinURL The url to the bitcoin donation page
+ * @param {string} opts.cryptoURL The url to the crypto donation page
  * @return {string} the result badge
  */
-function bitcoin ({ bitcoinURL }) {
+function crypto ({ cryptoURL, bitcoinURL }) {
 	// Check
-	if (!bitcoinURL) throw new Error('bitcoinURL is missing')
+	const url = cryptoURL || bitcoinURL
+	if (!url) throw new Error('cryptoURL is missing')
 
 	// Create
-	const image = 'https://img.shields.io/badge/bitcoin-donate-yellow.svg'
-	const url = bitcoinURL
-	const alt = 'Bitcoin donate button'
-	const title = 'Donate once-off to this project using Bitcoin'
+	const image = 'https://img.shields.io/badge/crypto-donate-yellow.svg'
+	const alt = 'crypto donate button'
+	const title = 'Donate to this project using Cryptocurrency'
 	return badge({ image, alt, url, title })
+}
+crypto.badgeCategory = 'funding'
+
+/**
+ * Crypto Badge
+ * @method bitcoin
+ * @param {Object} opts - forwarded to {@link crypto}
+ * @return {string} the result badge
+ */
+function bitcoin (opts) {
+	return crypto(opts)
 }
 bitcoin.badgeCategory = 'funding'
 
@@ -905,6 +916,7 @@ module.exports = {
 	gratipay,
 	flattr,
 	paypal,
+	crypto,
 	bitcoin,
 	wishlist,
 	buymeacoffee,

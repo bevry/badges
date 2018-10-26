@@ -1,5 +1,8 @@
 # History
 
+## v1.2.7 2018 October 26
+- Added the crypto badge as a replacement for the bitcoin badge
+
 ## v1.2.6 2018 October 26
 - Fixed the documentation params for the badges
 - Added the new funding badges from v1.2.5 to the readme

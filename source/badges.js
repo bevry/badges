@@ -604,18 +604,32 @@ liberapay.badgeCategory = 'funding'
  * Thanks App Badge
  * @method thanksapp
  * @param {Object} opts
- * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
  * @param {string} opts.npmPackageName The repository slug (username/reponame)
+ * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
+ * @param {string} opts.thanksappUsername The username for the Thanks App donate page
+ * @param {string} opts.thanksappURL The url to the Thanks App donate page
  * @return {string} the result badge
  */
-function thanksapp ({ githubSlug, npmPackageName }) {
+function thanksapp ({ npmPackageName, githubSlug, thanksappUsername, thanksappURL }) {
 	// Check
-	if (!githubSlug && !npmPackageName) throw new Error('githubSlug and npmPackageName are missing, at least one is required')
-	const slug = npmPackageName ? `npm/${npmPackageName}` : `github/${githubSlug}`
+	if (!thanksappURL) {
+		if (thanksappUsername) {
+			thanksappURL = `https://givethanks.app/u/${githubSlug}`
+		}
+		else if (npmPackageName) {
+			thanksappURL = `https://givethanks.app/donate/npm/${npmPackageName}`
+		}
+		else if (githubSlug) {
+			thanksappURL = `https://givethanks.app/donate/github/${githubSlug}`
+		}
+		else {
+			throw new Error('at least one of these is required: thanksappUsername, npmPackageName, githubSlug')
+		}
+	}
 
 	// Create
 	const image = 'https://img.shields.io/badge/thanksapp-donate-yellow.svg'
-	const url = `https://givethanks.app/donate/${slug}`
+	const url = thanksappURL
 	const alt = 'Thanks App donate button'
 	const title = 'Donate to this project using Thanks App'
 	return badge({ image, alt, url, title })

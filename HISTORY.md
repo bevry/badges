@@ -1,5 +1,8 @@
 # History
 
+## v1.2.8 2018 October 26
+- Added support for `thanksappURL` and `thanksappUsername` for the `thanksapp` badge
+
 ## v1.2.7 2018 October 26
 - Added the crypto badge as a replacement for the bitcoin badge
 

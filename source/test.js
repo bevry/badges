@@ -1,7 +1,7 @@
 'use strict'
 
 // Import
-const {equal} = require('assert-helpers')
+const { equal } = require('assert-helpers')
 const joe = require('joe')
 const badges = require('../')
 
@@ -9,10 +9,10 @@ const badges = require('../')
 joe.suite('badges', function (suite, test) {
 	const list = [
 		// Custom Badges
-		['badge', {image: 'image', alt: 'alt'}],
-		['badge', {image: 'image', alt: 'alt', url: 'url', title: 'title'}],
-		['shields', {left: 'left', right: 'right', alt: 'alt', url: 'url', title: 'title'}],
-		['shields', {left: 'left', right: 'right', color: 'red', alt: 'alt', url: 'url', title: 'title'}],
+		['badge', { image: 'image', alt: 'alt' }],
+		['badge', { image: 'image', alt: 'alt', url: 'url', title: 'title' }],
+		['shields', { left: 'left', right: 'right', alt: 'alt', url: 'url', title: 'title' }],
+		['shields', { left: 'left', right: 'right', color: 'red', alt: 'alt', url: 'url', title: 'title' }],
 		'---',
 		// Development Badges
 		'npmversion',
@@ -40,6 +40,10 @@ joe.suite('badges', function (suite, test) {
 		'paypal',
 		'bitcoin',
 		'wishlist',
+		'buymeacoffee',
+		'liberapay',
+		'thanksapp',
+		'boostlab',
 		'---',
 		// Social Badges
 		'slackinscript',
@@ -64,7 +68,7 @@ joe.suite('badges', function (suite, test) {
 		codeshipProjectUUID: '123',
 		codeshipProjectID: '123',
 		githubSlug: 'bevry/badges',
-		nodeicoQueryString: {downloads: true, compact: true, height: 2},
+		nodeicoQueryString: { downloads: true, compact: true, height: 2 },
 
 		sixtydevstipsID: 'd2dcf439c9759e88f3ccec1cef394c10',
 		patreonUsername: 'bevry',
@@ -77,6 +81,8 @@ joe.suite('badges', function (suite, test) {
 		paypalUsername: 'bevry',  // another option instead of paypalURL
 		bitcoinURL: 'https://bevry.me/bitcoin',
 		wishlistURL: 'https://bevry.me/wishlist',
+		buymeacoffeeUsername: 'balupton',
+		liberapayUsername: 'balupton',
 
 		slackinURL: 'https://slack.bevry.me',
 		gaTrackingID: 'UA-XXXXX-XX',
@@ -123,6 +129,10 @@ joe.suite('badges', function (suite, test) {
 		`<span class="badge-paypal"><a href="https://paypal.me/bevry" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a></span>`,
 		`<span class="badge-bitcoin"><a href="https://bevry.me/bitcoin" title="Donate once-off to this project using Bitcoin"><img src="https://img.shields.io/badge/bitcoin-donate-yellow.svg" alt="Bitcoin donate button" /></a></span>`,
 		`<span class="badge-wishlist"><a href="https://bevry.me/wishlist" title="Buy an item on our wishlist for us"><img src="https://img.shields.io/badge/wishlist-donate-yellow.svg" alt="Wishlist browse button" /></a></span>`,
+		`<span class="badge-buymeacoffee"><a href="https://buymeacoffee.com/balupton" title="Donate to this project using Buy Me A Coffee"><img src="https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg" alt="Buy Me A Coffee donate button" /></a></span>`,
+		`<span class="badge-liberapay"><a href="https://liberapay.com/balupton" title="Donate to this project using Liberapay"><img src="https://img.shields.io/badge/liberapay-donate-yellow.svg" alt="Liberapay donate button" /></a></span>`,
+		`<span class="badge-thanksapp"><a href="https://givethanks.app/donate/npm/badges" title="Donate to this project using Thanks App"><img src="https://img.shields.io/badge/thanksapp-donate-yellow.svg" alt="Thanks App donate button" /></a></span>`,
+		`<span class="badge-boostlab"><a href="https://boost-lab.app/bevry/badges" title="Donate to this project using Boost Lab"><img src="https://img.shields.io/badge/boostlab-donate-yellow.svg" alt="Boost Lab donate button" /></a></span>`,
 		`<br class="badge-separator" />`,
 		`<span class="badge-slackinscript"><script async defer src="https://slack.bevry.me/slackin.js"></script></span>`,
 		`<span class="badge-slackin"><a href="https://slack.bevry.me" title="Join this project's slack community"><img src="https://slack.bevry.me/badge.svg" alt="Slack community badge" /></a></span>`,
@@ -141,7 +151,7 @@ joe.suite('badges', function (suite, test) {
 
 	list.forEach(function (badgeName, index) {
 		let badgeConfig = config
-		if ( Array.isArray(badgeName) ) {
+		if (Array.isArray(badgeName)) {
 			badgeConfig = badgeName[1]
 			badgeName = badgeName[0]
 		}

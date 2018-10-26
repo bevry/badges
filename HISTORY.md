@@ -1,5 +1,12 @@
 # History
 
+## v1.2.5 2018 October 26
+- Added [Buy Me A Coffee](https://buymeacoffee.com) badge
+- Added [Liberapay](https://liberapay.com) badge
+- Added [Thanks App](https://givethanks.app) badge
+- Added [Boost Lab](https://boost-lab.app) badge
+- Updated [base files](https://github.com/bevry/base) using [boundation](https://github.com/bevry/boundation)
+
 ## v1.2.4 2017 January 27
 - meta: update docs URL to not use https
 

@@ -518,6 +518,92 @@ function wishlist ({ wishlistURL }) {
 }
 wishlist.badgeCategory = 'funding'
 
+/**
+Buy Me A Coffee Badge
+@method buymeacoffee
+@param {String} config.buymeacoffeeUsername The Buy Me A Coffee username to donate to
+@param {String} config.buymeacoffeeURL The url to the Buy Me A Coffee donate page
+@return {String} the result badge
+*/
+function buymeacoffee ({ buymeacoffeeUsername, buymeacoffeeURL }) {
+	// Check
+	if (!buymeacoffeeURL) {
+		if (!buymeacoffeeUsername) throw new Error('buymeacoffeeUsername is missing')
+		buymeacoffeeURL = `https://buymeacoffee.com/${buymeacoffeeUsername}`
+	}
+
+	// Create
+	const image = 'https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg'
+	const url = buymeacoffeeURL
+	const alt = 'Buy Me A Coffee donate button'
+	const title = 'Donate to this project using Buy Me A Coffee'
+	return badge({ image, alt, url, title })
+}
+buymeacoffee.badgeCategory = 'funding'
+
+/**
+Liberapay Badge
+@method liberapay
+@param {String} config.liberapayUsername The Liberapay username to donate to
+@param {String} config.liberapayURL The url to the Liberapay donate page
+@return {String} the result badge
+*/
+function liberapay ({ liberapayUsername, liberapayURL }) {
+	// Check
+	if (!liberapayURL) {
+		if (!liberapayUsername) throw new Error('liberapayUsername is missing')
+		liberapayURL = `https://liberapay.com/${liberapayUsername}`
+	}
+
+	// Create
+	const image = 'https://img.shields.io/badge/liberapay-donate-yellow.svg'
+	const url = liberapayURL
+	const alt = 'Liberapay donate button'
+	const title = 'Donate to this project using Liberapay'
+	return badge({ image, alt, url, title })
+}
+liberapay.badgeCategory = 'funding'
+
+/**
+Thanks App Badge
+@method thanksapp
+@param {String} config.githubSlug The github slug that the project lives at (e.g. bevry/badges)
+@param {String} config.npmPackageName The repository slug (username/reponame)
+@return {String} the result badge
+*/
+function thanksapp ({ githubSlug, npmPackageName }) {
+	// Check
+	if (!githubSlug && !npmPackageName) throw new Error('githubSlug and npmPackageName are missing, at least one is required')
+	const slug = npmPackageName ? `npm/${npmPackageName}` : `github/${githubSlug}`
+
+	// Create
+	const image = 'https://img.shields.io/badge/thanksapp-donate-yellow.svg'
+	const url = `https://givethanks.app/donate/${slug}`
+	const alt = 'Thanks App donate button'
+	const title = 'Donate to this project using Thanks App'
+	return badge({ image, alt, url, title })
+}
+thanksapp.badgeCategory = 'funding'
+
+/**
+Boost Lab Badge
+@method boostlab
+@param {String} config.githubSlug The github slug that the project lives at (e.g. bevry/badges)
+@return {String} the result badge
+*/
+function boostlab ({ githubSlug }) {
+	// Check
+	if (!githubSlug) throw new Error('githubSlug is missing')
+
+	// Create
+	const image = 'https://img.shields.io/badge/boostlab-donate-yellow.svg'
+	const url = `https://boost-lab.app/${githubSlug}`
+	const alt = 'Boost Lab donate button'
+	const title = 'Donate to this project using Boost Lab'
+	return badge({ image, alt, url, title })
+}
+boostlab.badgeCategory = 'funding'
+
 
 // ====================================
 // Social Badges
@@ -781,6 +867,10 @@ module.exports = {
 	paypal,
 	bitcoin,
 	wishlist,
+	buymeacoffee,
+	liberapay,
+	thanksapp,
+	boostlab,
 	slackinscript,
 	slackin,
 	gabeacon,

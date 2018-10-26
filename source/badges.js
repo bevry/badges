@@ -7,15 +7,16 @@ const querystring = require('querystring')
 // Custom Badges
 
 /**
-Generate a HTML badge
-@private
-@method badge
-@param {String} config.image The URL to the image
-@param {String} [config.alt] The alt attribute for the image
-@param {String} [config.url] The URL for the link
-@param {String} [config.title] The title attribute for the link
-@return {String} the result badge
-*/
+ * Generate a HTML badge
+ * @private
+ * @method badge
+ * @param {Object} opts
+ * @param {string} opts.image The URL to the image
+ * @param {string} [opts.alt] The alt attribute for the image
+ * @param {string} [opts.url] The URL for the link
+ * @param {string} [opts.title] The title attribute for the link
+ * @return {string} the result badge
+ */
 function badge ({ image, alt, url, title }) {
 	// Check
 	if (!image) throw new Error('image is missing')
@@ -30,16 +31,17 @@ function badge ({ image, alt, url, title }) {
 badge.badgeCategory = 'custom'
 
 /**
-Shields Custom Badge
-@method shields
-@param {String} config.left The text for the left side of the badge
-@param {String} config.right The text for the right side of the badge
-@param {String} [config.color='yellow'] The color for the badge
-@param {String} [config.alt] The alt attribute for the image
-@param {String} [config.url] The URL for the link
-@param {String} [config.title] The title attribute for the link
-@return {String} the result badge
-*/
+ * Shields Custom Badge
+ * @method shields
+ * @param {Object} opts
+ * @param {string} opts.left The text for the left side of the badge
+ * @param {string} opts.right The text for the right side of the badge
+ * @param {string} [opts.color='yellow'] The color for the badge
+ * @param {string} [opts.alt] The alt attribute for the image
+ * @param {string} [opts.url] The URL for the link
+ * @param {string} [opts.title] The title attribute for the link
+ * @return {string} the result badge
+ */
 function shields ({ left, right, color = 'yellow', alt, url, title }) {
 	// Check
 	if (!left) throw new Error('left is missing')
@@ -56,11 +58,12 @@ shields.badgeCategory = 'custom'
 // Development Badges
 
 /**
-NPM Version Badge
-@method npmversion
-@param {String} config.npmPackageName The repository slug (username/reponame)
-@return {String} the result badge
-*/
+ * NPM Version Badge
+ * @method npmversion
+ * @param {Object} opts
+ * @param {string} opts.npmPackageName The repository slug (username/reponame)
+ * @return {string} the result badge
+ */
 function npmversion ({ npmPackageName }) {
 	// Check
 	if (!npmPackageName) throw new Error('npmPackageName is missing')
@@ -75,11 +78,12 @@ function npmversion ({ npmPackageName }) {
 npmversion.badgeCategory = 'development'
 
 /**
-NPM Downloads Badge
-@method npmdownloads
-@param {String} config.npmPackageName The repository slug (username/reponame)
-@return {String} the result badge
-*/
+ * NPM Downloads Badge
+ * @method npmdownloads
+ * @param {Object} opts
+ * @param {string} opts.npmPackageName The repository slug (username/reponame)
+ * @return {string} the result badge
+ */
 function npmdownloads ({ npmPackageName }) {
 	// Check
 	if (!npmPackageName) throw new Error('npmPackageName is missing')
@@ -93,11 +97,12 @@ function npmdownloads ({ npmPackageName }) {
 npmdownloads.badgeCategory = 'development'
 
 /**
-David DM Dependencies Badge
-@method daviddm
-@param {String} config.githubSlug The github slug that the project lives at (e.g. bevry/badges)
-@return {String} the result badge
-*/
+ * David DM Dependencies Badge
+ * @method daviddm
+ * @param {Object} opts
+ * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
+ * @return {string} the result badge
+ */
 function daviddm ({ githubSlug }) {
 	// Check
 	if (!githubSlug) throw new Error('githubSlug is missing')
@@ -112,11 +117,12 @@ function daviddm ({ githubSlug }) {
 daviddm.badgeCategory = 'development'
 
 /**
-David DM Dev Dependencies Badge
-@method daviddmdev
-@param {String} config.githubSlug The github slug that the project lives at (e.g. bevry/badges)
-@return {String} the result badge
-*/
+ * David DM Dev Dependencies Badge
+ * @method daviddmdev
+ * @param {Object} opts
+ * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
+ * @return {string} the result badge
+ */
 function daviddmdev ({ githubSlug }) {
 	// Check
 	if (!githubSlug) throw new Error('githubSlug is missing')
@@ -131,14 +137,15 @@ function daviddmdev ({ githubSlug }) {
 daviddmdev.badgeCategory = 'development'
 
 /**
-Nodei.co Badge
-@method nodeico
-@param {String} config.npmPackageName
-@param {String|Object} [config.nodeicoQueryString] See https://nodei.co for options
+ * Nodei.co Badge
+ * @method nodeico
+ * @param {Object} opts
+ * @param {string} opts.npmPackageName
+ * @param {String|Object} [opts.nodeicoQueryString] See https://nodei.co for options
 	defined as either a string param1=&param2=
 	or an object {param1: '', param2: ''} that will be serialized to param1=&param2= etc.
-@return {String} the result badge
-*/
+ * @return {string} the result badge
+ */
 function nodeico ({ npmPackageName, nodeicoQueryString }) {
 	// Prepare
 	if (!npmPackageName) throw new Error('npmPackageName is missing')
@@ -162,11 +169,12 @@ nodeico.badgeCategory = 'development'
 // Testing Badges
 
 /**
-Sauce Labs Browser Matrix Badge
-@method saucelabsbm
-@param {String} config.githubSlug The github slug that the project lives at (e.g. bevry/badges)
-@return {String} the result badge
-*/
+ * Sauce Labs Browser Matrix Badge
+ * @method saucelabsbm
+ * @param {Object} opts
+ * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
+ * @return {string} the result badge
+ */
 function saucelabsbm ({ saucelabsUsername, saucelabsAuthToken }) {
 	// Check
 	if (!saucelabsUsername) throw new Error('saucelabsUsername is missing')
@@ -184,12 +192,13 @@ saucelabsbm.badgeCategory = 'testing'
 saucelabsbm.badgeInline = false
 
 /**
-Sauce Labs Badge
-@method saucelabs
-@param {String} config.saucelabsUsername The saucelabs username
-@param {String} config.saucelabsAuthToken The saucelabs authorisation token
-@return {String} the result badge
-*/
+ * Sauce Labs Badge
+ * @method saucelabs
+ * @param {Object} opts
+ * @param {string} opts.saucelabsUsername The saucelabs username
+ * @param {string} opts.saucelabsAuthToken The saucelabs authorisation token
+ * @return {string} the result badge
+ */
 function saucelabs ({ saucelabsUsername, saucelabsAuthToken }) {
 	// Check
 	if (!saucelabsUsername) throw new Error('saucelabsUsername is missing')
@@ -206,11 +215,12 @@ function saucelabs ({ saucelabsUsername, saucelabsAuthToken }) {
 saucelabs.badgeCategory = 'testing'
 
 /**
-Travis CI Badge
-@method travisci
-@param {String} config.githubSlug The github slug that the project lives at (e.g. bevry/badges)
-@return {String} the result badge
-*/
+ * Travis CI Badge
+ * @method travisci
+ * @param {Object} opts
+ * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
+ * @return {string} the result badge
+ */
 function travisci ({ githubSlug }) {
 	// Check
 	if (!githubSlug) throw new Error('githubSlug is missing')
@@ -225,12 +235,13 @@ function travisci ({ githubSlug }) {
 travisci.badgeCategory = 'testing'
 
 /**
-Codeship Badge
-@method codeship
-@param {String} config.codeshipProjectUUID The UUID for a specific project, which is available on the General tab in your project settings
-@param {String} config.codeshipProjectID The ID for a specific project, which is available via the URL for the codeship project page
-@return {String} the result badge
-*/
+ * Codeship Badge
+ * @method codeship
+ * @param {Object} opts
+ * @param {string} opts.codeshipProjectUUID The UUID for a specific project, which is available on the General tab in your project settings
+ * @param {string} opts.codeshipProjectID The ID for a specific project, which is available via the URL for the codeship project page
+ * @return {string} the result badge
+ */
 function codeship ({ codeshipProjectUUID, codeshipProjectID }) {
 	// Check
 	if (!codeshipProjectUUID) throw new Error('codeshipProjectUUID is missing')
@@ -246,11 +257,12 @@ function codeship ({ codeshipProjectUUID, codeshipProjectID }) {
 codeship.badgeCategory = 'testing'
 
 /**
-Coveralls Badge
-@method coveralls
-@param {String} config.githubSlug The github slug that the project lives at (e.g. bevry/badges)
-@return {String} the result badge
-*/
+ * Coveralls Badge
+ * @method coveralls
+ * @param {Object} opts
+ * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
+ * @return {string} the result badge
+ */
 function coveralls ({ githubSlug }) {
 	// Check
 	if (!githubSlug) throw new Error('githubSlug is missing')
@@ -265,11 +277,12 @@ function coveralls ({ githubSlug }) {
 coveralls.badgeCategory = 'testing'
 
 /**
-Code Climate Rating Badge
-@method codeclimate
-@param {String} config.githubSlug The github slug that the project lives at (e.g. bevry/badges)
-@return {String} the result badge
-*/
+ * Code Climate Rating Badge
+ * @method codeclimate
+ * @param {Object} opts
+ * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
+ * @return {string} the result badge
+ */
 function codeclimate ({ githubSlug }) {
 	// Check
 	if (!githubSlug) throw new Error('githubSlug is missing')
@@ -284,11 +297,12 @@ function codeclimate ({ githubSlug }) {
 codeclimate.badgeCategory = 'testing'
 
 /**
-BitHound Score Badge
-@method bithound
-@param {String} config.githubSlug The github slug that the project lives at (e.g. bevry/badges)
-@return {String} the result badge
-*/
+ * BitHound Score Badge
+ * @method bithound
+ * @param {Object} opts
+ * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
+ * @return {string} the result badge
+ */
 function bithound ({ githubSlug }) {
 	// Check
 	if (!githubSlug) throw new Error('githubSlug is missing')
@@ -303,11 +317,12 @@ function bithound ({ githubSlug }) {
 bithound.badgeCategory = 'testing'
 
 /**
-Waffle Badge
-@method waffle
-@param {String} config.githubSlug The github slug that the project lives at (e.g. bevry/badges)
-@return {String} the result badge
-*/
+ * Waffle Badge
+ * @method waffle
+ * @param {Object} opts
+ * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
+ * @return {string} the result badge
+ */
 function waffle ({ githubSlug }) {
 	// Check
 	if (!githubSlug) throw new Error('githubSlug is missing')
@@ -327,12 +342,13 @@ waffle.badgeCategory = 'testing'
 // Funding Badges
 
 /**
-60devs Tips Badge
-@method sixtydevstips
-@param {String} config.sixtydevsUsername The 60devs username to donate to
-@param {String} config.sixtydevstipsURL The url to the 60devs donate page
-@return {String} the result badge
-*/
+ * 60devs Tips Badge
+ * @method sixtydevstips
+ * @param {Object} opts
+ * @param {string} opts.sixtydevsUsername The 60devs username to donate to
+ * @param {string} opts.sixtydevstipsURL The url to the 60devs donate page
+ * @return {string} the result badge
+ */
 function sixtydevstips ({ sixtydevstipsID, sixtydevstipsURL }) {
 	// Check
 	if (!sixtydevstipsURL) {
@@ -350,12 +366,13 @@ function sixtydevstips ({ sixtydevstipsID, sixtydevstipsURL }) {
 sixtydevstips.badgeCategory = 'funding'
 
 /**
-Patreon Badge
-@method patreon
-@param {String} config.patreonUsername The Patreon username to donate to
-@param {String} config.patreonURL The url to the Patreon donate page
-@return {String} the result badge
-*/
+ * Patreon Badge
+ * @method patreon
+ * @param {Object} opts
+ * @param {string} opts.patreonUsername The Patreon username to donate to
+ * @param {string} opts.patreonURL The url to the Patreon donate page
+ * @return {string} the result badge
+ */
 function patreon ({ patreonUsername, patreonURL }) {
 	// Check
 	if (!patreonURL) {
@@ -373,12 +390,13 @@ function patreon ({ patreonUsername, patreonURL }) {
 patreon.badgeCategory = 'funding'
 
 /**
-Open Collective Badge
-@method opencollective
-@param {String} config.opencollectiveUsername The Open Collective username to donate to
-@param {String} config.opencollectiveURL The url to the Open Collective donate page
-@return {String} the result badge
-*/
+ * Open Collective Badge
+ * @method opencollective
+ * @param {Object} opts
+ * @param {string} opts.opencollectiveUsername The Open Collective username to donate to
+ * @param {string} opts.opencollectiveURL The url to the Open Collective donate page
+ * @return {string} the result badge
+ */
 function opencollective ({ opencollectiveUsername, opencollectiveURL }) {
 	// Check
 	if (!opencollectiveURL) {
@@ -396,12 +414,13 @@ function opencollective ({ opencollectiveUsername, opencollectiveURL }) {
 opencollective.badgeCategory = 'funding'
 
 /**
-Gratipay Badge
-@method gratipay
-@param {String} config.gratipayUsername The Gratipay username to donate to
-@param {String} config.gratipayURL The url to the Gratipay donate page
-@return {String} the result badge
-*/
+ * Gratipay Badge
+ * @method gratipay
+ * @param {Object} opts
+ * @param {string} opts.gratipayUsername The Gratipay username to donate to
+ * @param {string} opts.gratipayURL The url to the Gratipay donate page
+ * @return {string} the result badge
+ */
 function gratipay ({ gratipayUsername, gratipayURL }) {
 	// Check
 	if (!gratipayURL) {
@@ -419,13 +438,14 @@ function gratipay ({ gratipayUsername, gratipayURL }) {
 gratipay.badgeCategory = 'funding'
 
 /**
-Flattr Badge
-@method flattr
-@param {String} config.flattrCode The Flattr code to donate to (e.g. 344188/balupton-on-Flattr)
-@param {String} config.flattrUsername The Flattr username to donate to (e.g. balupton)
-@param {String} config.flattrURL The url to the flattr donate page
-@return {String} the result badge
-*/
+ * Flattr Badge
+ * @method flattr
+ * @param {Object} opts
+ * @param {string} opts.flattrCode The Flattr code to donate to (e.g. 344188/balupton-on-Flattr)
+ * @param {string} opts.flattrUsername The Flattr username to donate to (e.g. balupton)
+ * @param {string} opts.flattrURL The url to the flattr donate page
+ * @return {string} the result badge
+ */
 function flattr ({ flattrCode, flattrUsername, flattrURL }) {
 	// Check
 	if (!flattrURL) {
@@ -450,13 +470,14 @@ function flattr ({ flattrCode, flattrUsername, flattrURL }) {
 flattr.badgeCategory = 'funding'
 
 /**
-Paypal Badge
-@method paypal
-@param {String} config.paypalURL The url to the paypal donate page
-@param {String} config.paypalButtonID The Paypal button id
-@param {String} config.paypalUsername The Paypal.me username
-@return {String} the result badge
-*/
+ * Paypal Badge
+ * @method paypal
+ * @param {Object} opts
+ * @param {string} opts.paypalURL The url to the paypal donate page
+ * @param {string} opts.paypalButtonID The Paypal button id
+ * @param {string} opts.paypalUsername The Paypal.me username
+ * @return {string} the result badge
+ */
 function paypal ({ paypalURL, paypalButtonID, paypalUsername }) {
 	// Check
 	if (!paypalURL) {
@@ -481,11 +502,12 @@ function paypal ({ paypalURL, paypalButtonID, paypalUsername }) {
 paypal.badgeCategory = 'funding'
 
 /**
-Bitcoin Badge
-@method bitcoin
-@param {String} config.bitcoinURL The url to the bitcoin donation page
-@return {String} the result badge
-*/
+ * Bitcoin Badge
+ * @method bitcoin
+ * @param {Object} opts
+ * @param {string} opts.bitcoinURL The url to the bitcoin donation page
+ * @return {string} the result badge
+ */
 function bitcoin ({ bitcoinURL }) {
 	// Check
 	if (!bitcoinURL) throw new Error('bitcoinURL is missing')
@@ -500,11 +522,12 @@ function bitcoin ({ bitcoinURL }) {
 bitcoin.badgeCategory = 'funding'
 
 /**
-Wishlist Badge
-@method wishlist
-@param {String} config.wishlistURL The url to the wishlist page
-@return {String} the result badge
-*/
+ * Wishlist Badge
+ * @method wishlist
+ * @param {Object} opts
+ * @param {string} opts.wishlistURL The url to the wishlist page
+ * @return {string} the result badge
+ */
 function wishlist ({ wishlistURL }) {
 	// Check
 	if (!wishlistURL) throw new Error('wishlistURL is missing')
@@ -519,12 +542,13 @@ function wishlist ({ wishlistURL }) {
 wishlist.badgeCategory = 'funding'
 
 /**
-Buy Me A Coffee Badge
-@method buymeacoffee
-@param {String} config.buymeacoffeeUsername The Buy Me A Coffee username to donate to
-@param {String} config.buymeacoffeeURL The url to the Buy Me A Coffee donate page
-@return {String} the result badge
-*/
+ * Buy Me A Coffee Badge
+ * @method buymeacoffee
+ * @param {Object} opts
+ * @param {string} opts.buymeacoffeeUsername The Buy Me A Coffee username to donate to
+ * @param {string} opts.buymeacoffeeURL The url to the Buy Me A Coffee donate page
+ * @return {string} the result badge
+ */
 function buymeacoffee ({ buymeacoffeeUsername, buymeacoffeeURL }) {
 	// Check
 	if (!buymeacoffeeURL) {
@@ -542,12 +566,13 @@ function buymeacoffee ({ buymeacoffeeUsername, buymeacoffeeURL }) {
 buymeacoffee.badgeCategory = 'funding'
 
 /**
-Liberapay Badge
-@method liberapay
-@param {String} config.liberapayUsername The Liberapay username to donate to
-@param {String} config.liberapayURL The url to the Liberapay donate page
-@return {String} the result badge
-*/
+ * Liberapay Badge
+ * @method liberapay
+ * @param {Object} opts
+ * @param {string} opts.liberapayUsername The Liberapay username to donate to
+ * @param {string} opts.liberapayURL The url to the Liberapay donate page
+ * @return {string} the result badge
+ */
 function liberapay ({ liberapayUsername, liberapayURL }) {
 	// Check
 	if (!liberapayURL) {
@@ -565,12 +590,13 @@ function liberapay ({ liberapayUsername, liberapayURL }) {
 liberapay.badgeCategory = 'funding'
 
 /**
-Thanks App Badge
-@method thanksapp
-@param {String} config.githubSlug The github slug that the project lives at (e.g. bevry/badges)
-@param {String} config.npmPackageName The repository slug (username/reponame)
-@return {String} the result badge
-*/
+ * Thanks App Badge
+ * @method thanksapp
+ * @param {Object} opts
+ * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
+ * @param {string} opts.npmPackageName The repository slug (username/reponame)
+ * @return {string} the result badge
+ */
 function thanksapp ({ githubSlug, npmPackageName }) {
 	// Check
 	if (!githubSlug && !npmPackageName) throw new Error('githubSlug and npmPackageName are missing, at least one is required')
@@ -586,11 +612,12 @@ function thanksapp ({ githubSlug, npmPackageName }) {
 thanksapp.badgeCategory = 'funding'
 
 /**
-Boost Lab Badge
-@method boostlab
-@param {String} config.githubSlug The github slug that the project lives at (e.g. bevry/badges)
-@return {String} the result badge
-*/
+ * Boost Lab Badge
+ * @method boostlab
+ * @param {Object} opts
+ * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
+ * @return {string} the result badge
+ */
 function boostlab ({ githubSlug }) {
 	// Check
 	if (!githubSlug) throw new Error('githubSlug is missing')
@@ -609,11 +636,12 @@ boostlab.badgeCategory = 'funding'
 // Social Badges
 
 /**
-Slackin Script Badge
-@method slackinscript
-@param {String} config.slackinURL The slackin url (e.g. https://slack.bevry.me)
-@return {String} the result badge
-*/
+ * Slackin Script Badge
+ * @method slackinscript
+ * @param {Object} opts
+ * @param {string} opts.slackinURL The slackin url (e.g. https://slack.bevry.me)
+ * @return {string} the result badge
+ */
 function slackinscript ({ slackinURL }) {
 	// Check
 	if (!slackinURL) throw new Error('slackinURL is missing')
@@ -625,11 +653,12 @@ slackinscript.badgeCategory = 'social'
 slackinscript.badgeScript = true
 
 /**
-Slackin Badge
-@method slackin
-@param {String} config.slackinURL The slackin url (e.g. https://slack.bevry.me)
-@return {String} the result badge
-*/
+ * Slackin Badge
+ * @method slackin
+ * @param {Object} opts
+ * @param {string} opts.slackinURL The slackin url (e.g. https://slack.bevry.me)
+ * @return {string} the result badge
+ */
 function slackin ({ slackinURL }) {
 	// Check
 	if (!slackinURL) throw new Error('slackinURL is missing')
@@ -644,13 +673,14 @@ function slackin ({ slackinURL }) {
 slackin.badgeCategory = 'social'
 
 /**
-Google Analytics Beacon Badge
+ * Google Analytics Beacon Badge
 https://github.com/igrigorik/ga-beacon
-@method gabeacon
-@param {String} config.gaTrackingID The google analytics tracing id (e.g. UA-XXXXX-XX)
-@param {String} config.githubSlug The github slug that the project lives at (e.g. bevry/badges)
-@return {String} the result badge
-*/
+ * @method gabeacon
+ @param {Object} opts
+ * @param {string} opts.gaTrackingID The google analytics tracing id (e.g. UA-XXXXX-XX)
+ * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
+ * @return {string} the result badge
+ */
 function gabeacon ({ gaTrackingID, githubSlug }) {
 	// Check
 	if (!gaTrackingID) throw new Error('gaTrackingID is missing')
@@ -666,11 +696,12 @@ function gabeacon ({ gaTrackingID, githubSlug }) {
 gabeacon.badgeCategory = 'social'
 
 /**
-Google Plus One Button
-@method googleplusone
-@param {String} config.homepage The page url that the badge will be for
-@return {String} the result badge
-*/
+ * Google Plus One Button
+ * @method googleplusone
+ * @param {Object} opts
+ * @param {string} opts.homepage The page url that the badge will be for
+ * @return {string} the result badge
+ */
 function googleplusone ({ homepage }) {
 	// Check
 	if (!homepage) throw new Error('homepage is missing')
@@ -682,11 +713,12 @@ googleplusone.badgeCategory = 'social'
 googleplusone.badgeScript = true
 
 /**
-Reddit Submit Button
-@method redditsubmit
-@param {String} config.homepage The page url that the badge will be for
-@return {String} the result badge
-*/
+ * Reddit Submit Button
+ * @method redditsubmit
+ * @param {Object} opts
+ * @param {string} opts.homepage The page url that the badge will be for
+ * @return {string} the result badge
+ */
 function redditsubmit ({ homepage }) {
 	// Check
 	if (!homepage) throw new Error('homepage is missing')
@@ -698,11 +730,12 @@ redditsubmit.badgeCategory = 'social'
 redditsubmit.badgeScript = true
 
 /**
-Hacker News Submit Button
-@method hackernewssubmit
-@param {String} config.homepage The page url that the badge will be for
-@return {String} the result badge
-*/
+ * Hacker News Submit Button
+ * @method hackernewssubmit
+ * @param {Object} opts
+ * @param {string} opts.homepage The page url that the badge will be for
+ * @return {string} the result badge
+ */
 function hackernewssubmit ({ homepage }) {
 	// Check
 	if (!homepage) throw new Error('homepage is missing')
@@ -714,12 +747,13 @@ hackernewssubmit.badgeCategory = 'social'
 hackernewssubmit.badgeScript = true
 
 /**
-Facebook Like Button
-@method facebooklike
-@param {String} config.homepage The page url that the badge will be for
-@param {String} config.facebookApplicationID The facebook application id that the badge is for
-@return {String} the result badge
-*/
+ * Facebook Like Button
+ * @method facebooklike
+ * @param {Object} opts
+ * @param {string} opts.homepage The page url that the badge will be for
+ * @param {string} opts.facebookApplicationID The facebook application id that the badge is for
+ * @return {string} the result badge
+ */
 function facebooklike ({ homepage, facebookApplicationID }) {
 	// Prepare
 	if (!homepage) throw new Error('homepage is missing')
@@ -733,12 +767,13 @@ facebooklike.badgeCategory = 'social'
 facebooklike.badgeScript = true
 
 /**
-Facebook Follow Button
-@method facebookfollow
-@param {String} config.facebookUsername The facebook username to follow
-@param {String} config.facebookApplicationID The facebook application id that the badge is for
-@return {String} the result badge
-*/
+ * Facebook Follow Button
+ * @method facebookfollow
+ * @param {Object} opts
+ * @param {string} opts.facebookUsername The facebook username to follow
+ * @param {string} opts.facebookApplicationID The facebook application id that the badge is for
+ * @return {string} the result badge
+ */
 function facebookfollow ({ facebookUsername, facebookApplicationID }) {
 	// Prepare
 	if (!facebookUsername) throw new Error('facebookUsername is missing')
@@ -752,11 +787,12 @@ facebookfollow.badgeCategory = 'social'
 facebookfollow.badgeScript = true
 
 /**
-Twitter Tweet Button
-@method twittertweet
-@param {String} config.twitterUsername The twitter username to tweet at
-@return {String} the result badge
-*/
+ * Twitter Tweet Button
+ * @method twittertweet
+ * @param {Object} opts
+ * @param {string} opts.twitterUsername The twitter username to tweet at
+ * @return {string} the result badge
+ */
 function twittertweet ({ twitterUsername }) {
 	// Prepare
 	if (!twitterUsername) throw new Error('twitterUsername is missing')
@@ -768,11 +804,12 @@ twittertweet.badgeCategory = 'social'
 twittertweet.badgeScript = true
 
 /**
-Twitter Follow Button
-@method twitterfollow
-@param {String} config.twitterUsername The twitter username to follow
-@return {String} the result badge
-*/
+ * Twitter Follow Button
+ * @method twitterfollow
+ * @param {Object} opts
+ * @param {string} opts.twitterUsername The twitter username to follow
+ * @return {string} the result badge
+ */
 function twitterfollow ({ twitterUsername }) {
 	// Prepare
 	if (!twitterUsername) throw new Error('twitterUsername is missing')
@@ -784,11 +821,12 @@ twitterfollow.badgeCategory = 'social'
 twitterfollow.badgeScript = true
 
 /**
-Github Follow Button
-@method githubfollow
-@param {String} config.githubUsername The github user to follow
-@return {String} the result badge
-*/
+ * Github Follow Button
+ * @method githubfollow
+ * @param {Object} opts
+ * @param {string} opts.githubUsername The github user to follow
+ * @return {string} the result badge
+ */
 function githubfollow ({ githubUsername }) {
 	// Prepare
 	if (!githubUsername) throw new Error('githubUsername is missing')
@@ -800,11 +838,12 @@ githubfollow.badgeCategory = 'social'
 githubfollow.badgeScript = true
 
 /**
-GitHub Star Button
-@method githubstar
-@param {String} config.githubSlug The github slug that the project lives at (e.g. bevry/badges)
-@return {String} the result badge
-*/
+ * GitHub Star Button
+ * @method githubstar
+ * @param {Object} opts
+ * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
+ * @return {string} the result badge
+ */
 function githubstar ({ githubSlug }) {
 	// Prepare
 	if (!githubSlug) throw new Error('githubSlug is missing')
@@ -820,13 +859,14 @@ githubstar.badgeCategory = 'social'
 githubstar.badgeScript = true
 
 /**
-Quora Follow Button
-@method quorafollow
-@param {String} config.quoraUsername The quora user to follow
-@param {String} [config.quoraRealname] The quora user's name
-@param {String} [config.quoraCode] Some code
-@return {String} the result badge
-*/
+ * Quora Follow Button
+ * @method quorafollow
+ * @param {Object} opts
+ * @param {string} opts.quoraUsername The quora user to follow
+ * @param {string} [opts.quoraRealname] The quora user's name
+ * @param {string} [opts.quoraCode] Some code
+ * @return {string} the result badge
+ */
 function quorafollow ({ quoraUsername, quoraRealname, quoraCode }) {
 	// Prepare
 	if (!quoraUsername) throw new Error('quoraUsername is missing')

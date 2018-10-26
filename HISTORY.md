@@ -1,5 +1,9 @@
 # History
 
+## v1.2.6 2018 October 26
+- Fixed the documentation params for the badges
+- Added the new funding badges from v1.2.5 to the readme
+
 ## v1.2.5 2018 October 26
 - Added [Buy Me A Coffee](https://buymeacoffee.com) badge
 - Added [Liberapay](https://liberapay.com) badge

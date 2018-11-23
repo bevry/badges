@@ -234,15 +234,23 @@ saucelabs.badgeCategory = 'testing'
  * @method travisci
  * @param {Object} opts
  * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
+ * @param {string} [opts.travisTLD=org] The TLD to use for travis, use "com" if you have moved to travis-ci.com instead of travis-ci.org
  * @return {string} the result badge
  */
-function travisci({ githubSlug }) {
+function travisci({ githubSlug, travisTLD = 'org' }) {
 	// Check
 	if (!githubSlug) throw new Error('githubSlug is missing')
 
 	// Create
-	const image = `https://img.shields.io/travis/${githubSlug}/master.svg`
-	const url = `http://travis-ci.org/${githubSlug}`
+	const image = [
+		'https://img.shields.io/travis',
+		travisTLD === 'com' ? 'com' : '',
+		githubSlug,
+		'master.svg'
+	]
+		.filter(i => Boolean(i))
+		.join('/')
+	const url = `http://travis-ci.${travisTLD}/${githubSlug}`
 	const alt = 'Travis CI Build Status'
 	const title = "Check this project's build status on TravisCI"
 	return badge({ image, alt, url, title })

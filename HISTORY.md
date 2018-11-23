@@ -1,5 +1,13 @@
 # History
 
+## v1.2.9 2018 November 23
+
+-   Added support for `travisTLD` configuration option for the `travisci` badge
+    -   You can set it to `com` if you have migrated to travis-ci.com
+    -   Otherwise you can set it to `org` (the current default) if you are still on travis-org.com
+    -   The default will swap over once TravisCI has finished migrating all repositories to travis-ci.com
+-   Updated [base files](https://github.com/bevry/base) using [boundation](https://github.com/bevry/boundation)
+
 ## v1.2.8 2018 October 26
 
 -   Added support for `thanksappURL` and `thanksappUsername` for the `thanksapp` badge

@@ -1,7 +1,7 @@
 'use strict'
 
 // Import
-const badges = require('./badges')
+const badges = require('./badges.js')
 
 /**
 Render a specified badge with the appropriate wrapping (div if block badge, span if inline badge)

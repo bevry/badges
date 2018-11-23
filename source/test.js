@@ -38,6 +38,13 @@ joe.suite('badges', function(suite, test) {
 		'saucelabsbm',
 		'saucelabs',
 		'travisci',
+		[
+			'travisci',
+			{
+				githubSlug: 'bevry/badges',
+				travisTLD: 'com'
+			}
+		],
 		'codeship',
 		'coveralls',
 		'codeclimate',
@@ -129,6 +136,7 @@ joe.suite('badges', function(suite, test) {
 		`<div class="badge-saucelabsbm"><a href="https://saucelabs.com/u/bevry" title="Check this project's browser tests on Sauce Labs"><img src="https://saucelabs.com/browser-matrix/bevry.svg?auth=123" alt="Sauce Labs Browser Matrix" /></a></div>`,
 		`<span class="badge-saucelabs"><a href="https://saucelabs.com/u/bevry" title="Check this project's browser tests on Sauce Labs"><img src="https://saucelabs.com/browser-matrix/bevry.svg?auth=123" alt="Sauce Labs Browser Matrix" /></a></span>`,
 		`<span class="badge-travisci"><a href="http://travis-ci.org/bevry/badges" title="Check this project's build status on TravisCI"><img src="https://img.shields.io/travis/bevry/badges/master.svg" alt="Travis CI Build Status" /></a></span>`,
+		`<span class="badge-travisci"><a href="http://travis-ci.com/bevry/badges" title="Check this project's build status on TravisCI"><img src="https://img.shields.io/travis/com/bevry/badges/master.svg" alt="Travis CI Build Status" /></a></span>`,
 		`<span class="badge-codeship"><a href="https://www.codeship.io/projects/123" title="Check this project's status on Codeship"><img src="https://img.shields.io/codeship/123/master.svg" alt="Codeship Status" /></a></span>`,
 		`<span class="badge-coveralls"><a href="https://coveralls.io/r/bevry/badges" title="View this project's coverage on Coveralls"><img src="https://img.shields.io/coveralls/bevry/badges.svg" alt="Coveralls Coverage Status" /></a></span>`,
 		`<span class="badge-codeclimate"><a href="https://codeclimate.com/github/bevry/badges" title="View this project's rating on Code Climate"><img src="https://img.shields.io/codeclimate/github/bevry/badges.svg" alt="Code Climate Rating" /></a></span>`,

@@ -10,8 +10,8 @@ Render a specified badge with the appropriate wrapping (div if block badge, span
 @param {Object} config The configuration to pass to the badge render method
 @return {String} The rendered badge
 */
-function renderBadge (badgeName, config = {}) {
-	if ( badgeName === '---' ) {
+function renderBadge(badgeName, config = {}) {
+	if (badgeName === '---') {
 		return '<br class="badge-separator" />'
 	}
 
@@ -20,7 +20,7 @@ function renderBadge (badgeName, config = {}) {
 
 	// Send the badge value and options to the render method
 	const badgeResult = badgeMethod(config).trim()
-	if ( !badgeResult )  return ''
+	if (!badgeResult) return ''
 
 	// We have a result, so let's wrap it
 	const elementName = badgeMethod.badgeInline === false ? 'div' : 'span'
@@ -38,32 +38,40 @@ Render specified badges with wrapping
 @param {Object} options An object that defaults to `{filterCategory: false, filterScripts: false}`
 @return {String} The rendered badges
 */
-function renderBadges (list, config = {}, options = {filterCategory: false, filterScripts: true}) {
+function renderBadges(
+	list,
+	config = {},
+	options = { filterCategory: false, filterScripts: true }
+) {
 	// Prepare
 	const results = []
 
 	// Render the badges
-	list.forEach(function (badgeName) {
+	list.forEach(function(badgeName) {
 		let badgeConfig = config
 
 		// Custom Config?
-		if ( Array.isArray(badgeName) ) {
+		if (Array.isArray(badgeName)) {
 			badgeConfig = badgeName[1]
 			badgeName = badgeName[0]
 		}
 
 		// Seperator?
-		if ( badgeName === '---' ) {
+		if (badgeName === '---') {
 			// Do not render seperators if we only wanted a single category
-			if ( options.filterCategory )  return
+			if (options.filterCategory) return
 		}
 		// Exists?
-		else if ( badges[badgeName] ) {
+		else if (badges[badgeName]) {
 			// Category?
-			if ( options.filterCategory && options.filterCategory !== badges[badgeName].badgeCategory )  return
+			if (
+				options.filterCategory &&
+				options.filterCategory !== badges[badgeName].badgeCategory
+			)
+				return
 
 			// Script?
-			if ( options.filterScripts && badges[badgeName].badgeScript )  return
+			if (options.filterScripts && badges[badgeName].badgeScript) return
 		}
 		// Doesn't exist
 		else {
@@ -72,7 +80,7 @@ function renderBadges (list, config = {}, options = {filterCategory: false, filt
 
 		// Render
 		const badgeResult = renderBadge(badgeName, badgeConfig).trim()
-		if ( !badgeResult )  return
+		if (!badgeResult) return
 
 		// Rendered successfully, add the result
 		results.push(badgeResult)

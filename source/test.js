@@ -6,13 +6,26 @@ const joe = require('joe')
 const badges = require('../')
 
 // Tests
-joe.suite('badges', function (suite, test) {
+joe.suite('badges', function(suite, test) {
 	const list = [
 		// Custom Badges
 		['badge', { image: 'image', alt: 'alt' }],
 		['badge', { image: 'image', alt: 'alt', url: 'url', title: 'title' }],
-		['shields', { left: 'left', right: 'right', alt: 'alt', url: 'url', title: 'title' }],
-		['shields', { left: 'left', right: 'right', color: 'red', alt: 'alt', url: 'url', title: 'title' }],
+		[
+			'shields',
+			{ left: 'left', right: 'right', alt: 'alt', url: 'url', title: 'title' }
+		],
+		[
+			'shields',
+			{
+				left: 'left',
+				right: 'right',
+				color: 'red',
+				alt: 'alt',
+				url: 'url',
+				title: 'title'
+			}
+		],
 		'---',
 		// Development Badges
 		'npmversion',
@@ -76,10 +89,10 @@ joe.suite('badges', function (suite, test) {
 		opencollectiveUsername: 'bevry',
 		gratipayUsername: 'bevry',
 		flattrUsername: 'balupton',
-		flattrCode: '344188/balupton-on-Flattr',  // an outdated option for flattrUsername
+		flattrCode: '344188/balupton-on-Flattr', // an outdated option for flattrUsername
 		paypalURL: 'https://paypal.me/bevry',
-		paypalButtonID: 'QB8GQPZAH84N6',  // another option instead of paypalURL
-		paypalUsername: 'bevry',  // another option instead of paypalURL
+		paypalButtonID: 'QB8GQPZAH84N6', // another option instead of paypalURL
+		paypalUsername: 'bevry', // another option instead of paypalURL
 		bitcoinURL: 'https://bevry.me/crypto',
 		wishlistURL: 'https://bevry.me/wishlist',
 		buymeacoffeeUsername: 'balupton',
@@ -151,23 +164,22 @@ joe.suite('badges', function (suite, test) {
 		`<span class="badge-quorafollow"><span data-name="Benjamin-Lupton">Follow <a href="http://www.quora.com/Benjamin-Lupton">Benjamin Arthur Lupton</a> on <a href="http://www.quora.com">Quora</a><script src="https://www.quora.com/widgets/follow?embed_code=7N31XJs"></script></span></span>`
 	]
 
-	list.forEach(function (badgeName, index) {
+	list.forEach(function(badgeName, index) {
 		let badgeConfig = config
 		if (Array.isArray(badgeName)) {
 			badgeConfig = badgeName[1]
 			badgeName = badgeName[0]
 		}
-		test(badgeName, function () {
+		test(badgeName, function() {
 			const expected = expectations[index]
 			const result = badges.renderBadge(badgeName, badgeConfig)
 			equal(result, expected, 'result was as expected')
 		})
 	})
 
-	test('combined', function () {
+	test('combined', function() {
 		const expected = expectations.join('\n')
 		const result = badges.renderBadges(list, config, opts)
 		equal(result, expected, 'result was as expected')
 	})
-
 })

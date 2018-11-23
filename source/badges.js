@@ -17,14 +17,19 @@ const querystring = require('querystring')
  * @param {string} [opts.title] The title attribute for the link
  * @return {string} the result badge
  */
-function badge ({ image, alt, url, title }) {
+function badge({ image, alt, url, title }) {
 	// Check
 	if (!image) throw new Error('image is missing')
 
 	// Create
-	let result = alt ? `<img src="${image}" alt="${alt}" />` : `<img src="${image}" />`
+	let result = alt
+		? `<img src="${image}" alt="${alt}" />`
+		: `<img src="${image}" />`
 	if (url) {
-		result = (title ? `<a href="${url}" title="${title}">` : `<a href="${url}">`) + result + '</a>'
+		result =
+			(title ? `<a href="${url}" title="${title}">` : `<a href="${url}">`) +
+			result +
+			'</a>'
 	}
 	return result
 }
@@ -42,7 +47,7 @@ badge.badgeCategory = 'custom'
  * @param {string} [opts.title] The title attribute for the link
  * @return {string} the result badge
  */
-function shields ({ left, right, color = 'yellow', alt, url, title }) {
+function shields({ left, right, color = 'yellow', alt, url, title }) {
 	// Check
 	if (!left) throw new Error('left is missing')
 	if (!right) throw new Error('right is missing')
@@ -52,7 +57,6 @@ function shields ({ left, right, color = 'yellow', alt, url, title }) {
 	return badge({ image, alt, url, title })
 }
 shields.badgeCategory = 'custom'
-
 
 // ====================================
 // Development Badges
@@ -64,7 +68,7 @@ shields.badgeCategory = 'custom'
  * @param {string} opts.npmPackageName The repository slug (username/reponame)
  * @return {string} the result badge
  */
-function npmversion ({ npmPackageName }) {
+function npmversion({ npmPackageName }) {
 	// Check
 	if (!npmPackageName) throw new Error('npmPackageName is missing')
 
@@ -84,7 +88,7 @@ npmversion.badgeCategory = 'development'
  * @param {string} opts.npmPackageName The repository slug (username/reponame)
  * @return {string} the result badge
  */
-function npmdownloads ({ npmPackageName }) {
+function npmdownloads({ npmPackageName }) {
 	// Check
 	if (!npmPackageName) throw new Error('npmPackageName is missing')
 
@@ -103,7 +107,7 @@ npmdownloads.badgeCategory = 'development'
  * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
  * @return {string} the result badge
  */
-function daviddm ({ githubSlug }) {
+function daviddm({ githubSlug }) {
 	// Check
 	if (!githubSlug) throw new Error('githubSlug is missing')
 
@@ -123,7 +127,7 @@ daviddm.badgeCategory = 'development'
  * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
  * @return {string} the result badge
  */
-function daviddmdev ({ githubSlug }) {
+function daviddmdev({ githubSlug }) {
 	// Check
 	if (!githubSlug) throw new Error('githubSlug is missing')
 
@@ -131,7 +135,8 @@ function daviddmdev ({ githubSlug }) {
 	const image = `https://img.shields.io/david/dev/${githubSlug}.svg`
 	const url = `https://david-dm.org/${githubSlug}#info=devDependencies`
 	const alt = 'Dev Dependency Status'
-	const title = "View the status of this project's development dependencies on DavidDM"
+	const title =
+		"View the status of this project's development dependencies on DavidDM"
 	return badge({ image, alt, url, title })
 }
 daviddmdev.badgeCategory = 'development'
@@ -146,10 +151,14 @@ daviddmdev.badgeCategory = 'development'
 	or an object {param1: '', param2: ''} that will be serialized to param1=&param2= etc.
  * @return {string} the result badge
  */
-function nodeico ({ npmPackageName, nodeicoQueryString }) {
+function nodeico({ npmPackageName, nodeicoQueryString }) {
 	// Prepare
 	if (!npmPackageName) throw new Error('npmPackageName is missing')
-	if (nodeicoQueryString && typeof nodeicoQueryString !== 'string' && typeof nodeicoQueryString !== 'object') {
+	if (
+		nodeicoQueryString &&
+		typeof nodeicoQueryString !== 'string' &&
+		typeof nodeicoQueryString !== 'object'
+	) {
 		throw new Error('nodeicoQueryString must be a string or an object')
 	}
 
@@ -158,12 +167,14 @@ function nodeico ({ npmPackageName, nodeicoQueryString }) {
 	const alt = 'Nodei.co badge'
 	const title = 'Nodei.co badge'
 	let image = `https://nodei.co/npm/${npmPackageName}.png`
-	const query = (typeof nodeicoQueryString === 'object') ? querystring.stringify(nodeicoQueryString) : nodeicoQueryString
+	const query =
+		typeof nodeicoQueryString === 'object'
+			? querystring.stringify(nodeicoQueryString)
+			: nodeicoQueryString
 	if (query) image += `?${query}`
 	return badge({ image, alt, url, title })
 }
 nodeico.badgeCategory = 'development'
-
 
 // ====================================
 // Testing Badges
@@ -175,14 +186,16 @@ nodeico.badgeCategory = 'development'
  * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
  * @return {string} the result badge
  */
-function saucelabsbm ({ saucelabsUsername, saucelabsAuthToken }) {
+function saucelabsbm({ saucelabsUsername, saucelabsAuthToken }) {
 	// Check
 	if (!saucelabsUsername) throw new Error('saucelabsUsername is missing')
 	saucelabsAuthToken = saucelabsAuthToken || process.env.SAUCELABS_AUTH_TOKEN
 	if (!saucelabsAuthToken) throw new Error('saucelabsAuthToken is missing')
 
 	// Create
-	const image = `https://saucelabs.com/browser-matrix/${saucelabsUsername}.svg?auth=${escape(saucelabsAuthToken)}`
+	const image = `https://saucelabs.com/browser-matrix/${saucelabsUsername}.svg?auth=${escape(
+		saucelabsAuthToken
+	)}`
 	const url = `https://saucelabs.com/u/${saucelabsUsername}`
 	const alt = 'Sauce Labs Browser Matrix'
 	const title = "Check this project's browser tests on Sauce Labs"
@@ -199,14 +212,16 @@ saucelabsbm.badgeInline = false
  * @param {string} opts.saucelabsAuthToken The saucelabs authorisation token
  * @return {string} the result badge
  */
-function saucelabs ({ saucelabsUsername, saucelabsAuthToken }) {
+function saucelabs({ saucelabsUsername, saucelabsAuthToken }) {
 	// Check
 	if (!saucelabsUsername) throw new Error('saucelabsUsername is missing')
 	saucelabsAuthToken = saucelabsAuthToken || process.env.SAUCELABS_AUTH_TOKEN
 	if (!saucelabsAuthToken) throw new Error('saucelabsAuthToken is missing')
 
 	// Create
-	const image = `https://saucelabs.com/browser-matrix/${saucelabsUsername}.svg?auth=${escape(saucelabsAuthToken)}`
+	const image = `https://saucelabs.com/browser-matrix/${saucelabsUsername}.svg?auth=${escape(
+		saucelabsAuthToken
+	)}`
 	const url = `https://saucelabs.com/u/${saucelabsUsername}`
 	const alt = 'Sauce Labs Browser Matrix'
 	const title = "Check this project's browser tests on Sauce Labs"
@@ -221,7 +236,7 @@ saucelabs.badgeCategory = 'testing'
  * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
  * @return {string} the result badge
  */
-function travisci ({ githubSlug }) {
+function travisci({ githubSlug }) {
 	// Check
 	if (!githubSlug) throw new Error('githubSlug is missing')
 
@@ -242,7 +257,7 @@ travisci.badgeCategory = 'testing'
  * @param {string} opts.codeshipProjectID The ID for a specific project, which is available via the URL for the codeship project page
  * @return {string} the result badge
  */
-function codeship ({ codeshipProjectUUID, codeshipProjectID }) {
+function codeship({ codeshipProjectUUID, codeshipProjectID }) {
 	// Check
 	if (!codeshipProjectUUID) throw new Error('codeshipProjectUUID is missing')
 	if (!codeshipProjectID) throw new Error('codeshipProjectID is missing')
@@ -263,7 +278,7 @@ codeship.badgeCategory = 'testing'
  * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
  * @return {string} the result badge
  */
-function coveralls ({ githubSlug }) {
+function coveralls({ githubSlug }) {
 	// Check
 	if (!githubSlug) throw new Error('githubSlug is missing')
 
@@ -283,7 +298,7 @@ coveralls.badgeCategory = 'testing'
  * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
  * @return {string} the result badge
  */
-function codeclimate ({ githubSlug }) {
+function codeclimate({ githubSlug }) {
 	// Check
 	if (!githubSlug) throw new Error('githubSlug is missing')
 
@@ -303,7 +318,7 @@ codeclimate.badgeCategory = 'testing'
  * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
  * @return {string} the result badge
  */
-function bithound ({ githubSlug }) {
+function bithound({ githubSlug }) {
 	// Check
 	if (!githubSlug) throw new Error('githubSlug is missing')
 
@@ -323,20 +338,21 @@ bithound.badgeCategory = 'testing'
  * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
  * @return {string} the result badge
  */
-function waffle ({ githubSlug }) {
+function waffle({ githubSlug }) {
 	// Check
 	if (!githubSlug) throw new Error('githubSlug is missing')
 
 	// Create
 	const label = 'ready'
-	const image = `https://badge.waffle.io/${githubSlug}.png?label=${escape(label)}`
+	const image = `https://badge.waffle.io/${githubSlug}.png?label=${escape(
+		label
+	)}`
 	const url = `http://waffle.io/${githubSlug}`
 	const alt = 'Stories in Ready'
 	const title = "View this project's stories on Waffle.io"
 	return badge({ image, alt, url, title })
 }
 waffle.badgeCategory = 'testing'
-
 
 // ====================================
 // Funding Badges
@@ -349,7 +365,7 @@ waffle.badgeCategory = 'testing'
  * @param {string} opts.sixtydevstipsURL The url to the 60devs donate page
  * @return {string} the result badge
  */
-function sixtydevstips ({ sixtydevstipsID, sixtydevstipsURL }) {
+function sixtydevstips({ sixtydevstipsID, sixtydevstipsURL }) {
 	// Check
 	if (!sixtydevstipsURL) {
 		if (!sixtydevstipsID) throw new Error('sixtydevstipsID is missing')
@@ -373,7 +389,7 @@ sixtydevstips.badgeCategory = 'funding'
  * @param {string} opts.patreonURL The url to the Patreon donate page
  * @return {string} the result badge
  */
-function patreon ({ patreonUsername, patreonURL }) {
+function patreon({ patreonUsername, patreonURL }) {
 	// Check
 	if (!patreonURL) {
 		if (!patreonUsername) throw new Error('patreonUsername is missing')
@@ -397,15 +413,17 @@ patreon.badgeCategory = 'funding'
  * @param {string} opts.opencollectiveURL The url to the Open Collective donate page
  * @return {string} the result badge
  */
-function opencollective ({ opencollectiveUsername, opencollectiveURL }) {
+function opencollective({ opencollectiveUsername, opencollectiveURL }) {
 	// Check
 	if (!opencollectiveURL) {
-		if (!opencollectiveUsername) throw new Error('opencollectiveUsername is missing')
+		if (!opencollectiveUsername)
+			throw new Error('opencollectiveUsername is missing')
 		opencollectiveURL = `https://opencollective.com/${opencollectiveUsername}`
 	}
 
 	// Create
-	const image = 'https://img.shields.io/badge/open%20collective-donate-yellow.svg'
+	const image =
+		'https://img.shields.io/badge/open%20collective-donate-yellow.svg'
 	const url = opencollectiveURL
 	const alt = 'Open Collective donate button'
 	const title = 'Donate to this project using Open Collective'
@@ -421,7 +439,7 @@ opencollective.badgeCategory = 'funding'
  * @param {string} opts.gratipayURL The url to the Gratipay donate page
  * @return {string} the result badge
  */
-function gratipay ({ gratipayUsername, gratipayURL }) {
+function gratipay({ gratipayUsername, gratipayURL }) {
 	// Check
 	if (!gratipayURL) {
 		if (!gratipayUsername) throw new Error('gratipayUsername is missing')
@@ -446,16 +464,14 @@ gratipay.badgeCategory = 'funding'
  * @param {string} opts.flattrURL The url to the flattr donate page
  * @return {string} the result badge
  */
-function flattr ({ flattrCode, flattrUsername, flattrURL }) {
+function flattr({ flattrCode, flattrUsername, flattrURL }) {
 	// Check
 	if (!flattrURL) {
 		if (flattrUsername) {
 			flattrURL = `https://flattr.com/profile/${flattrUsername}`
-		}
-		else if (flattrCode) {
+		} else if (flattrCode) {
 			flattrURL = `https://flattr.com/thing/${flattrCode}`
-		}
-		else {
+		} else {
 			throw new Error('flattrUsername/flattrCode is missing')
 		}
 	}
@@ -478,17 +494,19 @@ flattr.badgeCategory = 'funding'
  * @param {string} opts.paypalUsername The Paypal.me username
  * @return {string} the result badge
  */
-function paypal ({ paypalURL, paypalButtonID, paypalUsername }) {
+function paypal({ paypalURL, paypalButtonID, paypalUsername }) {
 	// Check
 	if (!paypalURL) {
 		if (paypalButtonID) {
-			paypalURL = `https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=${escape(paypalButtonID)}`
-		}
-		else if (paypalUsername) {
+			paypalURL = `https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=${escape(
+				paypalButtonID
+			)}`
+		} else if (paypalUsername) {
 			paypalURL = `https://paypal.me/${paypalUsername}`
-		}
-		else {
-			throw new Error('paypalURL, paypalButtonID, or paypalUsername is missing, at least one must exist')
+		} else {
+			throw new Error(
+				'paypalURL, paypalButtonID, or paypalUsername is missing, at least one must exist'
+			)
 		}
 	}
 
@@ -508,7 +526,7 @@ paypal.badgeCategory = 'funding'
  * @param {string} opts.cryptoURL The url to the crypto donation page
  * @return {string} the result badge
  */
-function crypto ({ cryptoURL, bitcoinURL }) {
+function crypto({ cryptoURL, bitcoinURL }) {
 	// Check
 	const url = cryptoURL || bitcoinURL
 	if (!url) throw new Error('cryptoURL is missing')
@@ -527,7 +545,7 @@ crypto.badgeCategory = 'funding'
  * @param {Object} opts - forwarded to {@link crypto}
  * @return {string} the result badge
  */
-function bitcoin (opts) {
+function bitcoin(opts) {
 	return crypto(opts)
 }
 bitcoin.badgeCategory = 'funding'
@@ -539,7 +557,7 @@ bitcoin.badgeCategory = 'funding'
  * @param {string} opts.wishlistURL The url to the wishlist page
  * @return {string} the result badge
  */
-function wishlist ({ wishlistURL }) {
+function wishlist({ wishlistURL }) {
 	// Check
 	if (!wishlistURL) throw new Error('wishlistURL is missing')
 
@@ -560,15 +578,17 @@ wishlist.badgeCategory = 'funding'
  * @param {string} opts.buymeacoffeeURL The url to the Buy Me A Coffee donate page
  * @return {string} the result badge
  */
-function buymeacoffee ({ buymeacoffeeUsername, buymeacoffeeURL }) {
+function buymeacoffee({ buymeacoffeeUsername, buymeacoffeeURL }) {
 	// Check
 	if (!buymeacoffeeURL) {
-		if (!buymeacoffeeUsername) throw new Error('buymeacoffeeUsername is missing')
+		if (!buymeacoffeeUsername)
+			throw new Error('buymeacoffeeUsername is missing')
 		buymeacoffeeURL = `https://buymeacoffee.com/${buymeacoffeeUsername}`
 	}
 
 	// Create
-	const image = 'https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg'
+	const image =
+		'https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg'
 	const url = buymeacoffeeURL
 	const alt = 'Buy Me A Coffee donate button'
 	const title = 'Donate to this project using Buy Me A Coffee'
@@ -584,7 +604,7 @@ buymeacoffee.badgeCategory = 'funding'
  * @param {string} opts.liberapayURL The url to the Liberapay donate page
  * @return {string} the result badge
  */
-function liberapay ({ liberapayUsername, liberapayURL }) {
+function liberapay({ liberapayUsername, liberapayURL }) {
 	// Check
 	if (!liberapayURL) {
 		if (!liberapayUsername) throw new Error('liberapayUsername is missing')
@@ -610,20 +630,24 @@ liberapay.badgeCategory = 'funding'
  * @param {string} opts.thanksappURL The url to the Thanks App donate page
  * @return {string} the result badge
  */
-function thanksapp ({ npmPackageName, githubSlug, thanksappUsername, thanksappURL }) {
+function thanksapp({
+	npmPackageName,
+	githubSlug,
+	thanksappUsername,
+	thanksappURL
+}) {
 	// Check
 	if (!thanksappURL) {
 		if (thanksappUsername) {
 			thanksappURL = `https://givethanks.app/u/${githubSlug}`
-		}
-		else if (npmPackageName) {
+		} else if (npmPackageName) {
 			thanksappURL = `https://givethanks.app/donate/npm/${npmPackageName}`
-		}
-		else if (githubSlug) {
+		} else if (githubSlug) {
 			thanksappURL = `https://givethanks.app/donate/github/${githubSlug}`
-		}
-		else {
-			throw new Error('at least one of these is required: thanksappUsername, npmPackageName, githubSlug')
+		} else {
+			throw new Error(
+				'at least one of these is required: thanksappUsername, npmPackageName, githubSlug'
+			)
 		}
 	}
 
@@ -643,7 +667,7 @@ thanksapp.badgeCategory = 'funding'
  * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
  * @return {string} the result badge
  */
-function boostlab ({ githubSlug }) {
+function boostlab({ githubSlug }) {
 	// Check
 	if (!githubSlug) throw new Error('githubSlug is missing')
 
@@ -656,7 +680,6 @@ function boostlab ({ githubSlug }) {
 }
 boostlab.badgeCategory = 'funding'
 
-
 // ====================================
 // Social Badges
 
@@ -667,7 +690,7 @@ boostlab.badgeCategory = 'funding'
  * @param {string} opts.slackinURL The slackin url (e.g. https://slack.bevry.me)
  * @return {string} the result badge
  */
-function slackinscript ({ slackinURL }) {
+function slackinscript({ slackinURL }) {
 	// Check
 	if (!slackinURL) throw new Error('slackinURL is missing')
 
@@ -684,7 +707,7 @@ slackinscript.badgeScript = true
  * @param {string} opts.slackinURL The slackin url (e.g. https://slack.bevry.me)
  * @return {string} the result badge
  */
-function slackin ({ slackinURL }) {
+function slackin({ slackinURL }) {
 	// Check
 	if (!slackinURL) throw new Error('slackinURL is missing')
 
@@ -692,7 +715,7 @@ function slackin ({ slackinURL }) {
 	const image = `${slackinURL}/badge.svg`
 	const url = slackinURL
 	const alt = 'Slack community badge'
-	const title = 'Join this project\'s slack community'
+	const title = "Join this project's slack community"
 	return badge({ image, alt, url, title })
 }
 slackin.badgeCategory = 'social'
@@ -706,7 +729,7 @@ https://github.com/igrigorik/ga-beacon
  * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
  * @return {string} the result badge
  */
-function gabeacon ({ gaTrackingID, githubSlug }) {
+function gabeacon({ gaTrackingID, githubSlug }) {
 	// Check
 	if (!gaTrackingID) throw new Error('gaTrackingID is missing')
 	if (!githubSlug) throw new Error('githubSlug is missing')
@@ -727,7 +750,7 @@ gabeacon.badgeCategory = 'social'
  * @param {string} opts.homepage The page url that the badge will be for
  * @return {string} the result badge
  */
-function googleplusone ({ homepage }) {
+function googleplusone({ homepage }) {
 	// Check
 	if (!homepage) throw new Error('homepage is missing')
 
@@ -744,7 +767,7 @@ googleplusone.badgeScript = true
  * @param {string} opts.homepage The page url that the badge will be for
  * @return {string} the result badge
  */
-function redditsubmit ({ homepage }) {
+function redditsubmit({ homepage }) {
 	// Check
 	if (!homepage) throw new Error('homepage is missing')
 
@@ -761,7 +784,7 @@ redditsubmit.badgeScript = true
  * @param {string} opts.homepage The page url that the badge will be for
  * @return {string} the result badge
  */
-function hackernewssubmit ({ homepage }) {
+function hackernewssubmit({ homepage }) {
 	// Check
 	if (!homepage) throw new Error('homepage is missing')
 
@@ -779,14 +802,20 @@ hackernewssubmit.badgeScript = true
  * @param {string} opts.facebookApplicationID The facebook application id that the badge is for
  * @return {string} the result badge
  */
-function facebooklike ({ homepage, facebookApplicationID }) {
+function facebooklike({ homepage, facebookApplicationID }) {
 	// Prepare
 	if (!homepage) throw new Error('homepage is missing')
-	facebookApplicationID = facebookApplicationID || process.env.FACEBOOK_APPLICATION_ID
-	if (!facebookApplicationID) throw new Error('facebookApplicationID is missing')
+	facebookApplicationID =
+		facebookApplicationID || process.env.FACEBOOK_APPLICATION_ID
+	if (!facebookApplicationID)
+		throw new Error('facebookApplicationID is missing')
 
 	// Return
-	return `<iframe src="https://www.facebook.com/plugins/like.php?href=${escape(homepage)}&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;font&amp;colorscheme=light&amp;action=like&amp;height=21&amp;appId=${escape(facebookApplicationID)}" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe>`
+	return `<iframe src="https://www.facebook.com/plugins/like.php?href=${escape(
+		homepage
+	)}&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;font&amp;colorscheme=light&amp;action=like&amp;height=21&amp;appId=${escape(
+		facebookApplicationID
+	)}" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe>`
 }
 facebooklike.badgeCategory = 'social'
 facebooklike.badgeScript = true
@@ -799,14 +828,20 @@ facebooklike.badgeScript = true
  * @param {string} opts.facebookApplicationID The facebook application id that the badge is for
  * @return {string} the result badge
  */
-function facebookfollow ({ facebookUsername, facebookApplicationID }) {
+function facebookfollow({ facebookUsername, facebookApplicationID }) {
 	// Prepare
 	if (!facebookUsername) throw new Error('facebookUsername is missing')
-	facebookApplicationID = facebookApplicationID || process.env.FACEBOOK_APPLICATION_ID
-	if (!facebookApplicationID) throw new Error('facebookApplicationID is missing')
+	facebookApplicationID =
+		facebookApplicationID || process.env.FACEBOOK_APPLICATION_ID
+	if (!facebookApplicationID)
+		throw new Error('facebookApplicationID is missing')
 
 	// Return
-	return `<iframe src="https://www.facebook.com/plugins/follow.php?href=https%3A%2F%2Fwww.facebook.com%2F${escape(facebookUsername)}&amp;layout=button_count&amp;show_faces=false&amp;colorscheme=light&amp;font&amp;width=450&amp;appId=${escape(facebookApplicationID)}" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height: 20px;" allowTransparency="true"></iframe>`
+	return `<iframe src="https://www.facebook.com/plugins/follow.php?href=https%3A%2F%2Fwww.facebook.com%2F${escape(
+		facebookUsername
+	)}&amp;layout=button_count&amp;show_faces=false&amp;colorscheme=light&amp;font&amp;width=450&amp;appId=${escape(
+		facebookApplicationID
+	)}" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height: 20px;" allowTransparency="true"></iframe>`
 }
 facebookfollow.badgeCategory = 'social'
 facebookfollow.badgeScript = true
@@ -818,7 +853,7 @@ facebookfollow.badgeScript = true
  * @param {string} opts.twitterUsername The twitter username to tweet at
  * @return {string} the result badge
  */
-function twittertweet ({ twitterUsername }) {
+function twittertweet({ twitterUsername }) {
 	// Prepare
 	if (!twitterUsername) throw new Error('twitterUsername is missing')
 
@@ -835,12 +870,14 @@ twittertweet.badgeScript = true
  * @param {string} opts.twitterUsername The twitter username to follow
  * @return {string} the result badge
  */
-function twitterfollow ({ twitterUsername }) {
+function twitterfollow({ twitterUsername }) {
 	// Prepare
 	if (!twitterUsername) throw new Error('twitterUsername is missing')
 
 	// Return
-	return `<a href="https://twitter.com/${escape(twitterUsername)}" class="twitter-follow-button" data-show-count="false">Follow @${twitterUsername}</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>`
+	return `<a href="https://twitter.com/${escape(
+		twitterUsername
+	)}" class="twitter-follow-button" data-show-count="false">Follow @${twitterUsername}</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>`
 }
 twitterfollow.badgeCategory = 'social'
 twitterfollow.badgeScript = true
@@ -852,12 +889,14 @@ twitterfollow.badgeScript = true
  * @param {string} opts.githubUsername The github user to follow
  * @return {string} the result badge
  */
-function githubfollow ({ githubUsername }) {
+function githubfollow({ githubUsername }) {
 	// Prepare
 	if (!githubUsername) throw new Error('githubUsername is missing')
 
 	// Return
-	return `<iframe src="https://ghbtns.com/github-btn.html?user=${escape(githubUsername)}&amp;type=follow&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="165" height="20"></iframe>`
+	return `<iframe src="https://ghbtns.com/github-btn.html?user=${escape(
+		githubUsername
+	)}&amp;type=follow&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="165" height="20"></iframe>`
 }
 githubfollow.badgeCategory = 'social'
 githubfollow.badgeScript = true
@@ -869,16 +908,21 @@ githubfollow.badgeScript = true
  * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
  * @return {string} the result badge
  */
-function githubstar ({ githubSlug }) {
+function githubstar({ githubSlug }) {
 	// Prepare
 	if (!githubSlug) throw new Error('githubSlug is missing')
 	const split = githubSlug.split('/')
 	const githubUsername = split[0]
 	const githubRepository = split[1]
-	if (!githubUsername || !githubRepository) throw new Error('githubSlug is invalid')
+	if (!githubUsername || !githubRepository)
+		throw new Error('githubSlug is invalid')
 
 	// Return
-	return `<iframe src="https://ghbtns.com/github-btn.html?user=${escape(githubUsername)}&amp;repo=${escape(githubRepository)}&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>`
+	return `<iframe src="https://ghbtns.com/github-btn.html?user=${escape(
+		githubUsername
+	)}&amp;repo=${escape(
+		githubRepository
+	)}&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>`
 }
 githubstar.badgeCategory = 'social'
 githubstar.badgeScript = true
@@ -892,7 +936,7 @@ githubstar.badgeScript = true
  * @param {string} [opts.quoraCode] Some code
  * @return {string} the result badge
  */
-function quorafollow ({ quoraUsername, quoraRealname, quoraCode }) {
+function quorafollow({ quoraUsername, quoraRealname, quoraCode }) {
 	// Prepare
 	if (!quoraUsername) throw new Error('quoraUsername is missing')
 	quoraRealname = quoraRealname || quoraUsername.replace(/-/g, ' ')
@@ -902,7 +946,9 @@ function quorafollow ({ quoraUsername, quoraRealname, quoraCode }) {
 	return `
 		<span data-name="${quoraUsername}">
 			Follow <a href="http://www.quora.com/${quoraUsername}">${quoraRealname}</a> on <a href="http://www.quora.com">Quora</a>
-			<script src="https://www.quora.com/widgets/follow?embed_code=${escape(quoraCode)}"></script>
+			<script src="https://www.quora.com/widgets/follow?embed_code=${escape(
+				quoraCode
+			)}"></script>
 		</span>`.replace(/\n\s*/g, '')
 }
 quorafollow.badgeCategory = 'social'

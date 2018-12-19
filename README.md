@@ -38,27 +38,40 @@ The definitive collection of badges for rendering
 
 <h2>Install</h2>
 
-<a href="https://npmjs.com" title="npm is a package manager for javascript"><h3>NPM</h3></a><ul>
+<a href="https://npmjs.com" title="npm is a package manager for javascript"><h3>npm</h3></a>
+<ul>
 <li>Install: <code>npm install --save badges</code></li>
-<li>Module: <code>require('badges')</code></li></ul>
+<li>Require: <code>require('badges')</code></li>
+</ul>
 
-<a href="http://browserify.org" title="Browserify lets you require('modules') in the browser by bundling up all of your dependencies"><h3>Browserify</h3></a><ul>
-<li>Install: <code>npm install --save badges</code></li>
-<li>Module: <code>require('badges')</code></li>
-<li>CDN URL: <code>//wzrd.in/bundle/badges@1.2.9</code></li></ul>
+<a href="https://jspm.io" title="Native ES Modules CDN"><h3>jspm</h3></a>
 
-<a href="http://enderjs.com" title="Ender is a full featured package manager for your browser"><h3>Ender</h3></a><ul>
-<li>Install: <code>ender add badges</code></li>
-<li>Module: <code>require('badges')</code></li></ul>
+``` html
+<script type=module>
+    import * as pkg from '//dev.jspm.io/badges'
+</script>
+```
 
-<h3><a href="https://github.com/bevry/editions" title="Editions are the best way to produce and consume packages you care about.">Editions</a></h3>
+<h3><a href="https://editions.bevry.me" title="Editions are the best way to produce and consume packages you care about.">Editions</a></h3>
 
 <p>This package is published with the following editions:</p>
 
-<ul><li><code>badges</code> aliases <code>badges/index.js</code> which uses <a href="https://github.com/bevry/editions" title="Editions are the best way to produce and consume packages you care about.">Editions</a> to automatically select the correct edition for the consumers environment</li>
+<ul><li><code>badges</code> aliases <code>badges/index.js</code> which uses <a href="https://editions.bevry.me" title="Editions are the best way to produce and consume packages you care about.">Editions</a> to automatically select the correct edition for the consumers environment</li>
 <li><code>badges/source/index.js</code> is esnext source code with require for modules</li>
 <li><code>badges/edition-browsers/index.js</code> is esnext compiled for browsers with require for modules</li>
 <li><code>badges/edition-node-0.8/index.js</code> is esnext compiled for node.js >=0.8 with require for modules</li></ul>
+
+<h3><a href="https://www.typescriptlang.org/" title="TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. ">TypeScript</a></h3>
+
+This project provides its type information via inline <a href="http://usejsdoc.org" title="JSDoc is an API documentation generator for JavaScript, similar to Javadoc or phpDocumentor">JSDoc Comments</a>. To make use of this in <a href="https://www.typescriptlang.org/" title="TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. ">TypeScript</a>, set your <code>maxNodeModuleJsDepth</code> compiler option to `5` or thereabouts. You can accomlish this via your `tsconfig.json` file like so:
+
+``` json
+{
+  "compilerOptions": {
+    "maxNodeModuleJsDepth": 5
+  }
+}
+```
 
 <!-- /INSTALL -->
 

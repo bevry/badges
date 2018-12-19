@@ -2,11 +2,11 @@
 
 // Import
 const { equal } = require('assert-helpers')
-const joe = require('joe')
+const kava = require('kava')
 const badges = require('../')
 
 // Tests
-joe.suite('badges', function(suite, test) {
+kava.suite('badges', function(suite, test) {
 	const list = [
 		// Custom Badges
 		['badge', { image: 'image', alt: 'alt' }],

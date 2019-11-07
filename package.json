@@ -173,7 +173,7 @@
     "assert-helpers": "^4.9.2",
     "eslint": "^5.10.0",
     "eslint-config-bevry": "^1.0.2",
-    "eslint-config-prettier": "^3.3.0",
+    "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-prettier": "^3.0.0",
     "joe-reporter-console": "^2.0.2",
     "jsdoc": "^3.5.5",

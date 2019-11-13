@@ -3,7 +3,7 @@
 // Import
 const { equal } = require('assert-helpers')
 const kava = require('kava')
-const badges = require('../')
+const badges = require('./')
 
 // Tests
 kava.suite('badges', function(suite, test) {

@@ -1,6 +1,6 @@
 {
   "name": "badges",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "The definitive collection of badges for rendering",
   "homepage": "https://github.com/bevry/badges",
   "license": "MIT",
@@ -99,17 +99,15 @@
       "travisTLD": "com"
     }
   },
-  "funding": {
-    "type": "cooperative",
-    "url": "https://bevry.me/fund"
-  },
+  "funding": "https://bevry.me/fund",
   "author": "2015+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
   "maintainers": [
     "Benjamin Lupton <b@lupton.cc> (http://balupton.com)"
   ],
   "contributors": [
     "Benjamin Lupton <b@lupton.cc> (http://balupton.com)",
-    "Richard Walker <digitalsadhu@gmail.com> (https://github.com/digitalsadhu)"
+    "Richard Walker <digitalsadhu@gmail.com> (https://github.com/digitalsadhu)",
+    "dependabot-preview[bot] (http://github.com/apps/dependabot-preview)"
   ],
   "bugs": {
     "url": "https://github.com/bevry/badges/issues"
@@ -173,16 +171,16 @@
     "@babel/core": "^7.7.2",
     "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
     "@babel/preset-env": "^7.7.1",
-    "assert-helpers": "^4.9.7",
+    "assert-helpers": "4.10.0",
     "eslint": "^6.6.0",
     "eslint-config-bevry": "^1.2.1",
     "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-prettier": "^3.1.1",
     "jsdoc": "^3.6.3",
-    "kava": "^3.1.0",
+    "kava": "^3.2.0",
     "minami": "^1.2.3",
-    "prettier": "^1.19.0",
-    "projectz": "^1.7.5",
+    "prettier": "^1.19.1",
+    "projectz": "^1.10.0",
     "surge": "^0.21.3",
     "valid-directory": "^1.0.0"
   },

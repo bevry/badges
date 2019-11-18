@@ -54,10 +54,9 @@ The definitive collection of badges for rendering
 
 <p>This package is published with the following editions:</p>
 
-<ul><li><code>badges</code> aliases <code>badges/index.js</code> which uses <a href="https://editions.bevry.me" title="Editions are the best way to produce and consume packages you care about.">Editions</a> to automatically select the correct edition for the consumers environment</li>
+<ul><li><code>badges</code> aliases <code>badges/source/index.js</code></li>
 <li><code>badges/source/index.js</code> is esnext source code with require for modules</li>
-<li><code>badges/edition-browsers/index.js</code> is esnext compiled for browsers with require for modules</li>
-<li><code>badges/edition-node-0.8/index.js</code> is esnext compiled for node.js 0.8 with require for modules</li></ul>
+<li><code>badges/edition-browsers/index.js</code> is esnext compiled for browsers with require for modules</li></ul>
 
 <h3><a href="https://www.typescriptlang.org/" title="TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. ">TypeScript</a></h3>
 

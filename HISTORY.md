@@ -1,5 +1,11 @@
 # History
 
+## v3.0.0 2019 December 6
+
+-   Converted to TypeScript
+-   Fixed `thanksapp` badge not respecting `thanksappUsername`
+-   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+
 ## v2.3.0 2019 December 1
 
 -   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)

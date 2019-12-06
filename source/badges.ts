@@ -1,23 +1,47 @@
-'use strict'
-
 // Import
-const querystring = require('querystring')
+import querystring from 'querystring'
 
 // ====================================
 // Custom Badges
 
-/**
- * Generate a HTML badge
- * @private
- * @method badge
- * @param {Object} opts
- * @param {string} opts.image The URL to the image
- * @param {string} [opts.alt] The alt attribute for the image
- * @param {string} [opts.url] The URL for the link
- * @param {string} [opts.title] The title attribute for the link
- * @return {string} the result badge
- */
-function badge({ image, alt, url, title }) {
+interface twitterOptions {
+	/**  The twitter username to tweet at */
+	twitterUsername: string
+}
+
+interface homepageOptions {
+	/** The page url that the badge will be for */
+	homepage: string
+}
+
+interface githubUsernameOptions {
+	/** The github username to use */
+	githubUsername: string
+}
+
+interface githubSlugOptions {
+	/** The github slug of the project (e.g. bevry/badges) */
+	githubSlug: string
+}
+
+interface npmOptions {
+	/** The npm package name */
+	npmPackageName: string
+}
+
+interface badgeOptions {
+	/** The URL to the image **/
+	image?: string
+	/** The alt attribute for the image */
+	alt?: string
+	/** The URL for the link */
+	url?: string
+	/** The title attribute for the link */
+	title?: string
+}
+
+/** Generate a HTML badge */
+export function badge({ image, alt, url, title }: badgeOptions): string {
 	// Check
 	if (!image) throw new Error('image is missing')
 
@@ -35,19 +59,29 @@ function badge({ image, alt, url, title }) {
 }
 badge.badgeCategory = 'custom'
 
-/**
- * Shields Custom Badge
- * @method shields
- * @param {Object} opts
- * @param {string} opts.left The text for the left side of the badge
- * @param {string} opts.right The text for the right side of the badge
- * @param {string} [opts.color='yellow'] The color for the badge
- * @param {string} [opts.alt] The alt attribute for the image
- * @param {string} [opts.url] The URL for the link
- * @param {string} [opts.title] The title attribute for the link
- * @return {string} the result badge
- */
-function shields({ left, right, color = 'yellow', alt, url, title }) {
+interface shieldsOptions {
+	/** The text for the left side of the badge */
+	left: string
+	/** The text for the right side of the badge */
+	right: string
+	/** The color for the badge */
+	color?: string
+	/** The alt attribute for the image */
+	alt?: string
+	/** The URL for the link */
+	url?: string
+	/** The title attribute for the link */
+	title?: string
+}
+/** Shields Custom Badge */
+export function shields({
+	left,
+	right,
+	color = 'yellow',
+	alt,
+	url,
+	title
+}: shieldsOptions): string {
 	// Check
 	if (!left) throw new Error('left is missing')
 	if (!right) throw new Error('right is missing')
@@ -61,14 +95,12 @@ shields.badgeCategory = 'custom'
 // ====================================
 // Development Badges
 
-/**
- * NPM Version Badge
- * @method npmversion
- * @param {Object} opts
- * @param {string} opts.npmPackageName The repository slug (username/reponame)
- * @return {string} the result badge
- */
-function npmversion({ npmPackageName }) {
+interface npmversionOptions {
+	/** The repository slug (username/reponame) */
+	npmPackageName: string
+}
+/** NPM Version Badge */
+export function npmversion({ npmPackageName }: npmversionOptions): string {
 	// Check
 	if (!npmPackageName) throw new Error('npmPackageName is missing')
 
@@ -81,14 +113,8 @@ function npmversion({ npmPackageName }) {
 }
 npmversion.badgeCategory = 'development'
 
-/**
- * NPM Downloads Badge
- * @method npmdownloads
- * @param {Object} opts
- * @param {string} opts.npmPackageName The repository slug (username/reponame)
- * @return {string} the result badge
- */
-function npmdownloads({ npmPackageName }) {
+/** NPM Downloads Badge */
+export function npmdownloads({ npmPackageName }: npmOptions): string {
 	// Check
 	if (!npmPackageName) throw new Error('npmPackageName is missing')
 
@@ -100,14 +126,8 @@ function npmdownloads({ npmPackageName }) {
 }
 npmdownloads.badgeCategory = 'development'
 
-/**
- * David DM Dependencies Badge
- * @method daviddm
- * @param {Object} opts
- * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
- * @return {string} the result badge
- */
-function daviddm({ githubSlug }) {
+/** David DM Dependencies Badge */
+export function daviddm({ githubSlug }: githubSlugOptions): string {
 	// Check
 	if (!githubSlug) throw new Error('githubSlug is missing')
 
@@ -120,14 +140,8 @@ function daviddm({ githubSlug }) {
 }
 daviddm.badgeCategory = 'development'
 
-/**
- * David DM Dev Dependencies Badge
- * @method daviddmdev
- * @param {Object} opts
- * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
- * @return {string} the result badge
- */
-function daviddmdev({ githubSlug }) {
+/** David DM Dev Dependencies Badge */
+export function daviddmdev({ githubSlug }: githubSlugOptions): string {
 	// Check
 	if (!githubSlug) throw new Error('githubSlug is missing')
 
@@ -141,17 +155,17 @@ function daviddmdev({ githubSlug }) {
 }
 daviddmdev.badgeCategory = 'development'
 
-/**
- * Nodei.co Badge
- * @method nodeico
- * @param {Object} opts
- * @param {string} opts.npmPackageName
- * @param {String|Object} [opts.nodeicoQueryString] See https://nodei.co for options
+interface nodeicoOptions extends npmOptions {
+	/** See https://nodei.co for options
 	defined as either a string param1=&param2=
-	or an object {param1: '', param2: ''} that will be serialized to param1=&param2= etc.
- * @return {string} the result badge
- */
-function nodeico({ npmPackageName, nodeicoQueryString }) {
+	or an object {param1: '', param2: ''} that will be serialized to param1=&param2= etc. */
+	nodeicoQueryString?: string | { [index: string]: any }
+}
+/** Nodei.co Badge */
+export function nodeico({
+	npmPackageName,
+	nodeicoQueryString
+}: nodeicoOptions): string {
 	// Prepare
 	if (!npmPackageName) throw new Error('npmPackageName is missing')
 	if (
@@ -179,14 +193,17 @@ nodeico.badgeCategory = 'development'
 // ====================================
 // Testing Badges
 
-/**
- * Sauce Labs Browser Matrix Badge
- * @method saucelabsbm
- * @param {Object} opts
- * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
- * @return {string} the result badge
- */
-function saucelabsbm({ saucelabsUsername, saucelabsAuthToken }) {
+interface saucelabsOptions {
+	/** The username of the sauncelabs account to use */
+	saucelabsUsername: string
+	/** Falls back to the `SAUCELABS_AUTH_TOKEN` environment variable if it is set */
+	saucelabsAuthToken?: string
+}
+/** Sauce Labs Browser Matrix Badge */
+export function saucelabsbm({
+	saucelabsUsername,
+	saucelabsAuthToken
+}: saucelabsOptions): string {
 	// Check
 	if (!saucelabsUsername) throw new Error('saucelabsUsername is missing')
 	saucelabsAuthToken = saucelabsAuthToken || process.env.SAUCELABS_AUTH_TOKEN
@@ -204,15 +221,11 @@ function saucelabsbm({ saucelabsUsername, saucelabsAuthToken }) {
 saucelabsbm.badgeCategory = 'testing'
 saucelabsbm.badgeInline = false
 
-/**
- * Sauce Labs Badge
- * @method saucelabs
- * @param {Object} opts
- * @param {string} opts.saucelabsUsername The saucelabs username
- * @param {string} opts.saucelabsAuthToken The saucelabs authorisation token
- * @return {string} the result badge
- */
-function saucelabs({ saucelabsUsername, saucelabsAuthToken }) {
+/** Sauce Labs Badge */
+export function saucelabs({
+	saucelabsUsername,
+	saucelabsAuthToken
+}: saucelabsOptions): string {
 	// Check
 	if (!saucelabsUsername) throw new Error('saucelabsUsername is missing')
 	saucelabsAuthToken = saucelabsAuthToken || process.env.SAUCELABS_AUTH_TOKEN
@@ -229,15 +242,15 @@ function saucelabs({ saucelabsUsername, saucelabsAuthToken }) {
 }
 saucelabs.badgeCategory = 'testing'
 
-/**
- * Travis CI Badge
- * @method travisci
- * @param {Object} opts
- * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
- * @param {string} [opts.travisTLD=org] The TLD to use for travis, use "com" if you have moved to travis-ci.com instead of travis-ci.org
- * @return {string} the result badge
- */
-function travisci({ githubSlug, travisTLD = 'org' }) {
+interface travisOptions extends githubSlugOptions {
+	/** The TLD to use for travis, use "com" if you have moved to travis-ci.com instead of travis-ci.org */
+	travisTLD?: string
+}
+/** Travis CI Badge */
+export function travisci({
+	githubSlug,
+	travisTLD = 'org'
+}: travisOptions): string {
 	// Check
 	if (!githubSlug) throw new Error('githubSlug is missing')
 
@@ -257,15 +270,17 @@ function travisci({ githubSlug, travisTLD = 'org' }) {
 }
 travisci.badgeCategory = 'testing'
 
-/**
- * Codeship Badge
- * @method codeship
- * @param {Object} opts
- * @param {string} opts.codeshipProjectUUID The UUID for a specific project, which is available on the General tab in your project settings
- * @param {string} opts.codeshipProjectID The ID for a specific project, which is available via the URL for the codeship project page
- * @return {string} the result badge
- */
-function codeship({ codeshipProjectUUID, codeshipProjectID }) {
+interface codeshipOptions {
+	/** The UUID for a specific project, which is available on the General tab in your project settings */
+	codeshipProjectUUID: string
+	/** The ID for a specific project, which is available via the URL for the codeship project page */
+	codeshipProjectID: string
+}
+/** Codeship Badge */
+export function codeship({
+	codeshipProjectUUID,
+	codeshipProjectID
+}: codeshipOptions): string {
 	// Check
 	if (!codeshipProjectUUID) throw new Error('codeshipProjectUUID is missing')
 	if (!codeshipProjectID) throw new Error('codeshipProjectID is missing')
@@ -279,14 +294,8 @@ function codeship({ codeshipProjectUUID, codeshipProjectID }) {
 }
 codeship.badgeCategory = 'testing'
 
-/**
- * Coveralls Badge
- * @method coveralls
- * @param {Object} opts
- * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
- * @return {string} the result badge
- */
-function coveralls({ githubSlug }) {
+/** Coveralls Badge */
+export function coveralls({ githubSlug }: githubSlugOptions): string {
 	// Check
 	if (!githubSlug) throw new Error('githubSlug is missing')
 
@@ -299,14 +308,8 @@ function coveralls({ githubSlug }) {
 }
 coveralls.badgeCategory = 'testing'
 
-/**
- * Code Climate Rating Badge
- * @method codeclimate
- * @param {Object} opts
- * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
- * @return {string} the result badge
- */
-function codeclimate({ githubSlug }) {
+/** Code Climate Rating Badge */
+export function codeclimate({ githubSlug }: githubSlugOptions): string {
 	// Check
 	if (!githubSlug) throw new Error('githubSlug is missing')
 
@@ -319,14 +322,8 @@ function codeclimate({ githubSlug }) {
 }
 codeclimate.badgeCategory = 'testing'
 
-/**
- * BitHound Score Badge
- * @method bithound
- * @param {Object} opts
- * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
- * @return {string} the result badge
- */
-function bithound({ githubSlug }) {
+/** BitHound Score Badge */
+export function bithound({ githubSlug }: githubSlugOptions) {
 	// Check
 	if (!githubSlug) throw new Error('githubSlug is missing')
 
@@ -339,14 +336,8 @@ function bithound({ githubSlug }) {
 }
 bithound.badgeCategory = 'testing'
 
-/**
- * Waffle Badge
- * @method waffle
- * @param {Object} opts
- * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
- * @return {string} the result badge
- */
-function waffle({ githubSlug }) {
+/** Waffle Badge */
+export function waffle({ githubSlug }: githubSlugOptions) {
 	// Check
 	if (!githubSlug) throw new Error('githubSlug is missing')
 
@@ -365,15 +356,19 @@ waffle.badgeCategory = 'testing'
 // ====================================
 // Funding Badges
 
-/**
- * 60devs Tips Badge
- * @method sixtydevstips
- * @param {Object} opts
- * @param {string} opts.sixtydevsUsername The 60devs username to donate to
- * @param {string} opts.sixtydevstipsURL The url to the 60devs donate page
- * @return {string} the result badge
- */
-function sixtydevstips({ sixtydevstipsID, sixtydevstipsURL }) {
+/** At least one of the properties must be provided */
+interface sixtydevOptions {
+	/** The 60devs username to donate to */
+	sixtydevstipsID?: string
+	/** The url to the 60devs donate page */
+	sixtydevstipsURL?: string
+}
+
+/** 60devs Tips Badge */
+export function sixtydevstips({
+	sixtydevstipsID,
+	sixtydevstipsURL
+}: sixtydevOptions): string {
 	// Check
 	if (!sixtydevstipsURL) {
 		if (!sixtydevstipsID) throw new Error('sixtydevstipsID is missing')
@@ -389,15 +384,49 @@ function sixtydevstips({ sixtydevstipsID, sixtydevstipsURL }) {
 }
 sixtydevstips.badgeCategory = 'funding'
 
-/**
- * Patreon Badge
- * @method patreon
- * @param {Object} opts
- * @param {string} opts.patreonUsername The Patreon username to donate to
- * @param {string} opts.patreonURL The url to the Patreon donate page
- * @return {string} the result badge
- */
-function patreon({ patreonUsername, patreonURL }) {
+/** At least one of the properties must be provided */
+interface githubsponsorsOptions {
+	/** The url to the GitHub donate page */
+	githubSponsorsURL?: string
+	/** The GitHub username to donate to */
+	githubSponsorsUsername?: string
+	/** The GitHub username fallback to donate to */
+	githubUsername?: string
+}
+/** Github Sponsors Badge */
+export function githubsponsors({
+	githubSponsorsURL,
+	githubSponsorsUsername,
+	githubUsername
+}: githubsponsorsOptions): string {
+	if (!githubSponsorsURL) {
+		if (!githubSponsorsUsername && !githubUsername)
+			throw new Error('githubSponsorsUsername and githubUsername are missing')
+		githubSponsorsURL = `https://github.com/sponsors/${githubSponsorsUsername ||
+			githubUsername}`
+	}
+
+	// Create
+	const image = 'https://img.shields.io/badge/github-donate-yellow.svg'
+	const url = githubSponsorsURL
+	const alt = 'GitHub Sponsors donate button'
+	const title = 'Donate to this project using GitHub Sponsors'
+	return badge({ image, alt, url, title })
+}
+githubsponsors.badgeCategory = 'funding'
+
+/** At least one of the properties must be provided */
+interface patreonOptions {
+	/** The Patreon username to donate to */
+	patreonUsername?: string
+	/** The url to the Patreon donate page */
+	patreonURL?: string
+}
+/** Patreon Badge */
+export function patreon({
+	patreonUsername,
+	patreonURL
+}: patreonOptions): string {
 	// Check
 	if (!patreonURL) {
 		if (!patreonUsername) throw new Error('patreonUsername is missing')
@@ -413,15 +442,18 @@ function patreon({ patreonUsername, patreonURL }) {
 }
 patreon.badgeCategory = 'funding'
 
-/**
- * Open Collective Badge
- * @method opencollective
- * @param {Object} opts
- * @param {string} opts.opencollectiveUsername The Open Collective username to donate to
- * @param {string} opts.opencollectiveURL The url to the Open Collective donate page
- * @return {string} the result badge
- */
-function opencollective({ opencollectiveUsername, opencollectiveURL }) {
+/** At least one of the properties must be provided */
+interface opencollectiveOptions {
+	/** The Open Collective username to donate to */
+	opencollectiveUsername?: string
+	/** The url to the Open Collective donate page */
+	opencollectiveURL?: string
+}
+/** Open Collective Badge */
+export function opencollective({
+	opencollectiveUsername,
+	opencollectiveURL
+}: opencollectiveOptions): string {
 	// Check
 	if (!opencollectiveURL) {
 		if (!opencollectiveUsername)
@@ -439,15 +471,18 @@ function opencollective({ opencollectiveUsername, opencollectiveURL }) {
 }
 opencollective.badgeCategory = 'funding'
 
-/**
- * Gratipay Badge
- * @method gratipay
- * @param {Object} opts
- * @param {string} opts.gratipayUsername The Gratipay username to donate to
- * @param {string} opts.gratipayURL The url to the Gratipay donate page
- * @return {string} the result badge
- */
-function gratipay({ gratipayUsername, gratipayURL }) {
+/** At least one of the properties must be provided */
+interface gratipayOptions {
+	/** The Gratipay username to donate to */
+	gratipayUsername?: string
+	/** The url to the Gratipay donate page */
+	gratipayURL?: string
+}
+/** Gratipay Badge */
+export function gratipay({
+	gratipayUsername,
+	gratipayURL
+}: gratipayOptions): string {
 	// Check
 	if (!gratipayURL) {
 		if (!gratipayUsername) throw new Error('gratipayUsername is missing')
@@ -463,16 +498,21 @@ function gratipay({ gratipayUsername, gratipayURL }) {
 }
 gratipay.badgeCategory = 'funding'
 
-/**
- * Flattr Badge
- * @method flattr
- * @param {Object} opts
- * @param {string} opts.flattrCode The Flattr code to donate to (e.g. 344188/balupton-on-Flattr)
- * @param {string} opts.flattrUsername The Flattr username to donate to (e.g. balupton)
- * @param {string} opts.flattrURL The url to the flattr donate page
- * @return {string} the result badge
- */
-function flattr({ flattrCode, flattrUsername, flattrURL }) {
+/** At least one of the properties must be provided */
+interface flattrOptions {
+	/** The Flattr code to donate to (e.g. 344188/balupton-on-Flattr) */
+	flattrCode?: string
+	/** The Flattr username to donate to (e.g. balupton) */
+	flattrUsername?: string
+	/** The url to the flattr donate page */
+	flattrURL?: string
+}
+/** Flattr Badge */
+export function flattr({
+	flattrCode,
+	flattrUsername,
+	flattrURL
+}: flattrOptions): string {
 	// Check
 	if (!flattrURL) {
 		if (flattrUsername) {
@@ -493,16 +533,22 @@ function flattr({ flattrCode, flattrUsername, flattrURL }) {
 }
 flattr.badgeCategory = 'funding'
 
-/**
- * Paypal Badge
- * @method paypal
- * @param {Object} opts
- * @param {string} opts.paypalURL The url to the paypal donate page
- * @param {string} opts.paypalButtonID The Paypal button id
- * @param {string} opts.paypalUsername The Paypal.me username
- * @return {string} the result badge
- */
-function paypal({ paypalURL, paypalButtonID, paypalUsername }) {
+/** At least one of the properties must be provided */
+interface paypalOptions {
+	/**  The url to the paypal donate page */
+	paypalURL?: string
+	/**  The Paypal button id */
+	paypalButtonID?: string
+	/**  The Paypal.me username */
+	paypalUsername?: string
+}
+
+/** Paypal Badge */
+export function paypal({
+	paypalURL,
+	paypalButtonID,
+	paypalUsername
+}: paypalOptions): string {
 	// Check
 	if (!paypalURL) {
 		if (paypalButtonID) {
@@ -527,14 +573,15 @@ function paypal({ paypalURL, paypalButtonID, paypalUsername }) {
 }
 paypal.badgeCategory = 'funding'
 
-/**
- * Crypto Badge
- * @method crypto
- * @param {Object} opts
- * @param {string} opts.cryptoURL The url to the crypto donation page
- * @return {string} the result badge
- */
-function crypto({ cryptoURL, bitcoinURL }) {
+interface cryptoOptions {
+	/** The url to the crypto donation page */
+	cryptoURL: string
+	/** @deprecated */
+	bitcoinURL?: string
+}
+
+/** Crypto Badge */
+export function crypto({ cryptoURL, bitcoinURL }: cryptoOptions): string {
 	// Check
 	const url = cryptoURL || bitcoinURL
 	if (!url) throw new Error('cryptoURL is missing')
@@ -547,25 +594,18 @@ function crypto({ cryptoURL, bitcoinURL }) {
 }
 crypto.badgeCategory = 'funding'
 
-/**
- * Crypto Badge
- * @method bitcoin
- * @param {Object} opts - forwarded to {@link crypto}
- * @return {string} the result badge
- */
-function bitcoin(opts) {
+/** @deprecated */
+export function bitcoin(opts: cryptoOptions): string {
 	return crypto(opts)
 }
 bitcoin.badgeCategory = 'funding'
 
-/**
- * Wishlist Badge
- * @method wishlist
- * @param {Object} opts
- * @param {string} opts.wishlistURL The url to the wishlist page
- * @return {string} the result badge
- */
-function wishlist({ wishlistURL }) {
+interface wishlistOptions {
+	/** The url to the wishlist page */
+	wishlistURL: string
+}
+/** Wishlist Badge */
+export function wishlist({ wishlistURL }: wishlistOptions): string {
 	// Check
 	if (!wishlistURL) throw new Error('wishlistURL is missing')
 
@@ -578,15 +618,19 @@ function wishlist({ wishlistURL }) {
 }
 wishlist.badgeCategory = 'funding'
 
-/**
- * Buy Me A Coffee Badge
- * @method buymeacoffee
- * @param {Object} opts
- * @param {string} opts.buymeacoffeeUsername The Buy Me A Coffee username to donate to
- * @param {string} opts.buymeacoffeeURL The url to the Buy Me A Coffee donate page
- * @return {string} the result badge
- */
-function buymeacoffee({ buymeacoffeeUsername, buymeacoffeeURL }) {
+/** At least one of the properties must be provided */
+interface buymeacoffeeOptions {
+	/**  The Buy Me A Coffee username to donate to */
+	buymeacoffeeUsername?: string
+	/**  The url to the Buy Me A Coffee donate page */
+	buymeacoffeeURL?: string
+}
+
+/** Buy Me A Coffee Badge */
+export function buymeacoffee({
+	buymeacoffeeUsername,
+	buymeacoffeeURL
+}: buymeacoffeeOptions): string {
 	// Check
 	if (!buymeacoffeeURL) {
 		if (!buymeacoffeeUsername)
@@ -604,15 +648,19 @@ function buymeacoffee({ buymeacoffeeUsername, buymeacoffeeURL }) {
 }
 buymeacoffee.badgeCategory = 'funding'
 
-/**
- * Liberapay Badge
- * @method liberapay
- * @param {Object} opts
- * @param {string} opts.liberapayUsername The Liberapay username to donate to
- * @param {string} opts.liberapayURL The url to the Liberapay donate page
- * @return {string} the result badge
- */
-function liberapay({ liberapayUsername, liberapayURL }) {
+/** At least one of the properties must be provided */
+interface liberapayOptions {
+	/** The Liberapay username to donate to */
+	liberapayUsername?: string
+	/** The url to the Liberapay donate page */
+	liberapayURL?: string
+}
+
+/** Liberapay Badge */
+export function liberapay({
+	liberapayUsername,
+	liberapayURL
+}: liberapayOptions): string {
 	// Check
 	if (!liberapayURL) {
 		if (!liberapayUsername) throw new Error('liberapayUsername is missing')
@@ -628,26 +676,29 @@ function liberapay({ liberapayUsername, liberapayURL }) {
 }
 liberapay.badgeCategory = 'funding'
 
-/**
- * Thanks App Badge
- * @method thanksapp
- * @param {Object} opts
- * @param {string} opts.npmPackageName The repository slug (username/reponame)
- * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
- * @param {string} opts.thanksappUsername The username for the Thanks App donate page
- * @param {string} opts.thanksappURL The url to the Thanks App donate page
- * @return {string} the result badge
- */
-function thanksapp({
+/** At least one of the properties must be provided */
+interface thanksappOptions {
+	/** The repository slug (username/reponame) */
+	npmPackageName?: string
+	/** The github slug that the project lives at (e.g. bevry/badges) */
+	githubSlug?: string
+	/** The username for the Thanks App donate page */
+	thanksappUsername?: string
+	/** The url to the Thanks App donate page */
+	thanksappURL?: string
+}
+
+/** Thanks App Badge */
+export function thanksapp({
 	npmPackageName,
 	githubSlug,
 	thanksappUsername,
 	thanksappURL
-}) {
+}: thanksappOptions): string {
 	// Check
 	if (!thanksappURL) {
 		if (thanksappUsername) {
-			thanksappURL = `https://givethanks.app/u/${githubSlug}`
+			thanksappURL = `https://givethanks.app/u/${thanksappUsername}`
 		} else if (npmPackageName) {
 			thanksappURL = `https://givethanks.app/donate/npm/${npmPackageName}`
 		} else if (githubSlug) {
@@ -668,14 +719,8 @@ function thanksapp({
 }
 thanksapp.badgeCategory = 'funding'
 
-/**
- * Boost Lab Badge
- * @method boostlab
- * @param {Object} opts
- * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
- * @return {string} the result badge
- */
-function boostlab({ githubSlug }) {
+/** Boost Lab Badge */
+export function boostlab({ githubSlug }: githubSlugOptions): string {
 	// Check
 	if (!githubSlug) throw new Error('githubSlug is missing')
 
@@ -691,14 +736,12 @@ boostlab.badgeCategory = 'funding'
 // ====================================
 // Social Badges
 
-/**
- * Slackin Script Badge
- * @method slackinscript
- * @param {Object} opts
- * @param {string} opts.slackinURL The slackin url (e.g. https://slack.bevry.me)
- * @return {string} the result badge
- */
-function slackinscript({ slackinURL }) {
+interface slackinOptions {
+	/** The slackin url (e.g. https://slack.bevry.me) */
+	slackinURL: string
+}
+/** Slackin Script Badge */
+export function slackinscript({ slackinURL }: slackinOptions): string {
 	// Check
 	if (!slackinURL) throw new Error('slackinURL is missing')
 
@@ -708,14 +751,8 @@ function slackinscript({ slackinURL }) {
 slackinscript.badgeCategory = 'social'
 slackinscript.badgeScript = true
 
-/**
- * Slackin Badge
- * @method slackin
- * @param {Object} opts
- * @param {string} opts.slackinURL The slackin url (e.g. https://slack.bevry.me)
- * @return {string} the result badge
- */
-function slackin({ slackinURL }) {
+/** Slackin Badge */
+export function slackin({ slackinURL }: slackinOptions): string {
 	// Check
 	if (!slackinURL) throw new Error('slackinURL is missing')
 
@@ -728,16 +765,20 @@ function slackin({ slackinURL }) {
 }
 slackin.badgeCategory = 'social'
 
+interface gabeaconOptions {
+	/**  The google analytics tracing id (e.g. UA-XXXXX-XX) */
+	gaTrackingID: string
+	/**  The github slug that the project lives at (e.g. bevry/badges) */
+	githubSlug: string
+}
 /**
  * Google Analytics Beacon Badge
-https://github.com/igrigorik/ga-beacon
- * @method gabeacon
- @param {Object} opts
- * @param {string} opts.gaTrackingID The google analytics tracing id (e.g. UA-XXXXX-XX)
- * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
- * @return {string} the result badge
+ * https://github.com/igrigorik/ga-beacon
  */
-function gabeacon({ gaTrackingID, githubSlug }) {
+export function gabeacon({
+	gaTrackingID,
+	githubSlug
+}: gabeaconOptions): string {
 	// Check
 	if (!gaTrackingID) throw new Error('gaTrackingID is missing')
 	if (!githubSlug) throw new Error('githubSlug is missing')
@@ -751,14 +792,8 @@ function gabeacon({ gaTrackingID, githubSlug }) {
 }
 gabeacon.badgeCategory = 'social'
 
-/**
- * Google Plus One Button
- * @method googleplusone
- * @param {Object} opts
- * @param {string} opts.homepage The page url that the badge will be for
- * @return {string} the result badge
- */
-function googleplusone({ homepage }) {
+/** Google Plus One Button */
+export function googleplusone({ homepage }: homepageOptions): string {
 	// Check
 	if (!homepage) throw new Error('homepage is missing')
 
@@ -768,14 +803,8 @@ function googleplusone({ homepage }) {
 googleplusone.badgeCategory = 'social'
 googleplusone.badgeScript = true
 
-/**
- * Reddit Submit Button
- * @method redditsubmit
- * @param {Object} opts
- * @param {string} opts.homepage The page url that the badge will be for
- * @return {string} the result badge
- */
-function redditsubmit({ homepage }) {
+/** Reddit Submit Button */
+export function redditsubmit({ homepage }: homepageOptions): string {
 	// Check
 	if (!homepage) throw new Error('homepage is missing')
 
@@ -785,14 +814,8 @@ function redditsubmit({ homepage }) {
 redditsubmit.badgeCategory = 'social'
 redditsubmit.badgeScript = true
 
-/**
- * Hacker News Submit Button
- * @method hackernewssubmit
- * @param {Object} opts
- * @param {string} opts.homepage The page url that the badge will be for
- * @return {string} the result badge
- */
-function hackernewssubmit({ homepage }) {
+/** Hacker News Submit Button */
+export function hackernewssubmit({ homepage }: homepageOptions): string {
 	// Check
 	if (!homepage) throw new Error('homepage is missing')
 
@@ -802,15 +825,15 @@ function hackernewssubmit({ homepage }) {
 hackernewssubmit.badgeCategory = 'social'
 hackernewssubmit.badgeScript = true
 
-/**
- * Facebook Like Button
- * @method facebooklike
- * @param {Object} opts
- * @param {string} opts.homepage The page url that the badge will be for
- * @param {string} opts.facebookApplicationID The facebook application id that the badge is for
- * @return {string} the result badge
- */
-function facebooklike({ homepage, facebookApplicationID }) {
+interface facebooklikeOptions extends homepageOptions {
+	/** The facebook application id that the badge is for, defaults to the environment variable `FACEBOOK_APPLICATION_ID` */
+	facebookApplicationID?: string
+}
+/** Facebook Like Button */
+export function facebooklike({
+	homepage,
+	facebookApplicationID
+}: facebooklikeOptions): string {
 	// Prepare
 	if (!homepage) throw new Error('homepage is missing')
 	facebookApplicationID =
@@ -828,15 +851,17 @@ function facebooklike({ homepage, facebookApplicationID }) {
 facebooklike.badgeCategory = 'social'
 facebooklike.badgeScript = true
 
-/**
- * Facebook Follow Button
- * @method facebookfollow
- * @param {Object} opts
- * @param {string} opts.facebookUsername The facebook username to follow
- * @param {string} opts.facebookApplicationID The facebook application id that the badge is for
- * @return {string} the result badge
- */
-function facebookfollow({ facebookUsername, facebookApplicationID }) {
+interface facebookfollowOptions {
+	/** The facebook username to follow */
+	facebookUsername: string
+	/** The facebook application id that the badge is for, defaults to the environment variable `FACEBOOK_APPLICATION_ID` */
+	facebookApplicationID?: string
+}
+/** Facebook Follow Button */
+export function facebookfollow({
+	facebookUsername,
+	facebookApplicationID
+}: facebookfollowOptions): string {
 	// Prepare
 	if (!facebookUsername) throw new Error('facebookUsername is missing')
 	facebookApplicationID =
@@ -854,14 +879,8 @@ function facebookfollow({ facebookUsername, facebookApplicationID }) {
 facebookfollow.badgeCategory = 'social'
 facebookfollow.badgeScript = true
 
-/**
- * Twitter Tweet Button
- * @method twittertweet
- * @param {Object} opts
- * @param {string} opts.twitterUsername The twitter username to tweet at
- * @return {string} the result badge
- */
-function twittertweet({ twitterUsername }) {
+/** Twitter Tweet Button */
+export function twittertweet({ twitterUsername }: twitterOptions): string {
 	// Prepare
 	if (!twitterUsername) throw new Error('twitterUsername is missing')
 
@@ -871,14 +890,8 @@ function twittertweet({ twitterUsername }) {
 twittertweet.badgeCategory = 'social'
 twittertweet.badgeScript = true
 
-/**
- * Twitter Follow Button
- * @method twitterfollow
- * @param {Object} opts
- * @param {string} opts.twitterUsername The twitter username to follow
- * @return {string} the result badge
- */
-function twitterfollow({ twitterUsername }) {
+/** Twitter Follow Button */
+export function twitterfollow({ twitterUsername }: twitterOptions): string {
 	// Prepare
 	if (!twitterUsername) throw new Error('twitterUsername is missing')
 
@@ -890,14 +903,10 @@ function twitterfollow({ twitterUsername }) {
 twitterfollow.badgeCategory = 'social'
 twitterfollow.badgeScript = true
 
-/**
- * Github Follow Button
- * @method githubfollow
- * @param {Object} opts
- * @param {string} opts.githubUsername The github user to follow
- * @return {string} the result badge
- */
-function githubfollow({ githubUsername }) {
+/** Github Follow Button */
+export function githubfollow({
+	githubUsername
+}: githubUsernameOptions): string {
 	// Prepare
 	if (!githubUsername) throw new Error('githubUsername is missing')
 
@@ -909,14 +918,8 @@ function githubfollow({ githubUsername }) {
 githubfollow.badgeCategory = 'social'
 githubfollow.badgeScript = true
 
-/**
- * GitHub Star Button
- * @method githubstar
- * @param {Object} opts
- * @param {string} opts.githubSlug The github slug that the project lives at (e.g. bevry/badges)
- * @return {string} the result badge
- */
-function githubstar({ githubSlug }) {
+/** GitHub Star Button */
+export function githubstar({ githubSlug }: githubSlugOptions): string {
 	// Prepare
 	if (!githubSlug) throw new Error('githubSlug is missing')
 	const split = githubSlug.split('/')
@@ -935,16 +938,20 @@ function githubstar({ githubSlug }) {
 githubstar.badgeCategory = 'social'
 githubstar.badgeScript = true
 
-/**
- * Quora Follow Button
- * @method quorafollow
- * @param {Object} opts
- * @param {string} opts.quoraUsername The quora user to follow
- * @param {string} [opts.quoraRealname] The quora user's name
- * @param {string} [opts.quoraCode] Some code
- * @return {string} the result badge
- */
-function quorafollow({ quoraUsername, quoraRealname, quoraCode }) {
+interface quoraOptions {
+	/**  The quora user to follow */
+	quoraUsername: string
+	/**  The quora user's name */
+	quoraRealname?: string
+	/**  Some code */
+	quoraCode?: string
+}
+/** Quora Follow Button */
+export function quorafollow({
+	quoraUsername,
+	quoraRealname,
+	quoraCode
+}: quoraOptions): string {
 	// Prepare
 	if (!quoraUsername) throw new Error('quoraUsername is missing')
 	quoraRealname = quoraRealname || quoraUsername.replace(/-/g, ' ')
@@ -961,48 +968,3 @@ function quorafollow({ quoraUsername, quoraRealname, quoraCode }) {
 }
 quorafollow.badgeCategory = 'social'
 quorafollow.badgeScript = true
-
-// Export
-module.exports = {
-	badge,
-	shields,
-	npmversion,
-	npmdownloads,
-	daviddm,
-	daviddmdev,
-	saucelabsbm,
-	saucelabs,
-	travisci,
-	codeship,
-	coveralls,
-	codeclimate,
-	bithound,
-	waffle,
-	sixtydevstips,
-	patreon,
-	opencollective,
-	gratipay,
-	flattr,
-	paypal,
-	crypto,
-	bitcoin,
-	wishlist,
-	buymeacoffee,
-	liberapay,
-	thanksapp,
-	boostlab,
-	slackinscript,
-	slackin,
-	gabeacon,
-	googleplusone,
-	redditsubmit,
-	hackernewssubmit,
-	facebooklike,
-	facebookfollow,
-	twittertweet,
-	twitterfollow,
-	githubfollow,
-	githubstar,
-	quorafollow,
-	nodeico
-}

@@ -54,123 +54,125 @@ The definitive collection of badges for rendering
 
 <p>This package is published with the following editions:</p>
 
-<ul><li><code>badges</code> aliases <code>badges/source/index.js</code></li>
-<li><code>badges/source/index.js</code> is esnext source code with require for modules</li>
-<li><code>badges/edition-browsers/index.js</code> is esnext compiled for browsers with require for modules</li></ul>
-
-<h3><a href="https://www.typescriptlang.org/" title="TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. ">TypeScript</a></h3>
-
-This project provides its type information via inline <a href="http://usejsdoc.org" title="JSDoc is an API documentation generator for JavaScript, similar to Javadoc or phpDocumentor">JSDoc Comments</a>. To make use of this in <a href="https://www.typescriptlang.org/" title="TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. ">TypeScript</a>, set your <code>maxNodeModuleJsDepth</code> compiler option to `5` or thereabouts. You can accomlish this via your `tsconfig.json` file like so:
-
-``` json
-{
-  "compilerOptions": {
-    "maxNodeModuleJsDepth": 5
-  }
-}
-```
+<ul><li><code>badges/source/index.ts</code> is typescript source code with import for modules</li>
+<li><code>badges/edition-browsers/index.js</code> is typescript compiled for browsers with import for modules</li>
+<li><code>badges</code> aliases <code>badges/edition-node-12/index.js</code></li>
+<li><code>badges/edition-node-12/index.js</code> is typescript compiled for node.js 12 with require for modules</li></ul>
 
 <!-- /INSTALL -->
 
 
 ## Usage
 
-``` javascript
+```javascript
 // Listing of badges to output
 const list = [
-  // Custom Badges
-  ['badge', {image: 'image', alt: 'alt'}],
-  ['badge', {image: 'image', alt: 'alt', url: 'url', title: 'title'}],
-  ['shields', {left: 'left', right: 'right', alt: 'alt', url: 'url', title: 'title'}],
-  ['shields', {left: 'left', right: 'right', color: 'red', alt: 'alt', url: 'url', title: 'title'}],
-  '---',
-  // Development Badges
-  'npmversion',
-  'npmdownloads',
-  'daviddm',
-  'daviddmdev',
-  'nodeico',
-  '---',
-  // Testing Badges
-  'saucelabsbm',
-  'saucelabs',
-  'travisci',
-  'codeship',
-  'coveralls',
-  'codeclimate',
-  'bithound',
-  'waffle',
-  '---',
-  // Funding Badges
-  'sixtydevstips',
-  'patreon',
-  'opencollective',
-  'gratipay',
-  'flattr',
-  'paypal',
-  'bitcoin',
-  'wishlist',
-  '---',
-  // Social Badges
-  'slackinscript',
-  'slackin',
-  'gabeacon',
-  'googleplusone',
-  'redditsubmit',
-  'hackernewssubmit',
-  'facebooklike',
-  'facebookfollow',
-  'twittertweet',
-  'twitterfollow',
-  'githubfollow',
-  'githubstar',
-  'quorafollow'
+    // Custom Badges
+    ['badge', { image: 'image', alt: 'alt' }],
+    ['badge', { image: 'image', alt: 'alt', url: 'url', title: 'title' }],
+    [
+        'shields',
+        { left: 'left', right: 'right', alt: 'alt', url: 'url', title: 'title' }
+    ],
+    [
+        'shields',
+        {
+            left: 'left',
+            right: 'right',
+            color: 'red',
+            alt: 'alt',
+            url: 'url',
+            title: 'title'
+        }
+    ],
+    '---',
+    // Development Badges
+    'npmversion',
+    'npmdownloads',
+    'daviddm',
+    'daviddmdev',
+    'nodeico',
+    '---',
+    // Testing Badges
+    'saucelabsbm',
+    'saucelabs',
+    'travisci',
+    'codeship',
+    'coveralls',
+    'codeclimate',
+    'bithound',
+    'waffle',
+    '---',
+    // Funding Badges
+    'sixtydevstips',
+    'patreon',
+    'opencollective',
+    'gratipay',
+    'flattr',
+    'paypal',
+    'bitcoin',
+    'wishlist',
+    '---',
+    // Social Badges
+    'slackinscript',
+    'slackin',
+    'gabeacon',
+    'googleplusone',
+    'redditsubmit',
+    'hackernewssubmit',
+    'facebooklike',
+    'facebookfollow',
+    'twittertweet',
+    'twitterfollow',
+    'githubfollow',
+    'githubstar',
+    'quorafollow'
 ]
 
 // Configuration for the badges
 const config = {
-  npmPackageName: 'badges',
+    npmPackageName: 'badges',
 
-  saucelabsUsername: 'bevry',
-  saucelabsAuthToken: '123',
-  codeshipProjectUUID: '123',
-  codeshipProjectID: '123',
-  githubSlug: 'bevry/badges',
-  nodeicoQueryString: {downloads: true, compact: true, height: 2},
+    saucelabsUsername: 'bevry',
+    saucelabsAuthToken: '123',
+    codeshipProjectUUID: '123',
+    codeshipProjectID: '123',
+    githubSlug: 'bevry/badges',
+    nodeicoQueryString: { downloads: true, compact: true, height: 2 },
 
-  sixtydevstipsID: 'd2dcf439c9759e88f3ccec1cef394c10',
-  patreonUsername: 'bevry',
-  opencollectiveUsername: 'bevry',
-  gratipayUsername: 'bevry',
-  flattrUsername: 'balupton',
-  paypalURL: 'https://paypal.me/bevry',
-  paypalButtonID: 'QB8GQPZAH84N6',  // another option instead of paypalURL
-  paypalUsername: 'bevry',  // another option instead of paypalURL
-  bitcoinURL: 'https://bevry.me/bitcoin',
-  wishlistURL: 'https://bevry.me/wishlist',
+    sixtydevstipsID: 'd2dcf439c9759e88f3ccec1cef394c10',
+    patreonUsername: 'bevry',
+    opencollectiveUsername: 'bevry',
+    gratipayUsername: 'bevry',
+    flattrUsername: 'balupton',
+    paypalURL: 'https://paypal.me/bevry',
+    paypalButtonID: 'QB8GQPZAH84N6', // another option instead of paypalURL
+    paypalUsername: 'bevry', // another option instead of paypalURL
+    bitcoinURL: 'https://bevry.me/bitcoin',
+    wishlistURL: 'https://bevry.me/wishlist',
 
-  slackinURL: 'https://slack.bevry.me',
-  gaTrackingID: 'UA-XXXXX-XX',
-  homepage: 'http://bevry.me',
-  facebookApplicationID: '123123',
-  facebookUsername: 'balupton',
-  twitterUsername: 'bevryme',
-  githubUsername: 'balupton',
-  quoraUsername: 'Benjamin-Lupton',
-  quoraRealname: 'Benjamin Arthur Lupton' // optional, will extract from username
+    slackinURL: 'https://slack.bevry.me',
+    gaTrackingID: 'UA-XXXXX-XX',
+    homepage: 'https://bevry.me',
+    facebookApplicationID: '123123',
+    facebookUsername: 'balupton',
+    twitterUsername: 'bevryme',
+    githubUsername: 'balupton',
+    quoraUsername: 'Benjamin-Lupton',
+    quoraRealname: 'Benjamin Arthur Lupton' // optional, will extract from username
 }
 
 // Options for rendering the badges
 const options = {
-	// Filter Category
-	// When set to a string, will only render badges from the list that of the specified category
-	// Values can be 'development', 'testing', 'funding', or 'social'
-	// E.g. to render only funding badges, set to 'funding'
-	filterCategory: false,
+    // Filter Category
+    // When set to a string, will only render badges from the list that of the specified category
+    // Values can be 'development', 'testing', 'funding', or 'social'
+    // E.g. to render only funding badges, set to 'funding'
+    filterCategory: false,
 
-	// Filter Scripts
-	// When true, do not render any badges from the list that are scripts
-	filterScripts: false
+    // Filter Scripts
+    // When true, do not render any badges from the list that are scripts
+    filterScripts: false
 }
 
 // Render the badges to a string
@@ -183,7 +185,6 @@ console.log(result)
 If you want to render badges inside your own project's readme files, check out the meta builder [projectz](https://github.com/bevry/projectz) which uses this package for badge rendering.
 
 [Not all the badges are showcased in the above example. Browse the Complete API Documentation instead.](http://master.badges.bevry.surge.sh/docs/)
-
 
 <!-- HISTORY/ -->
 
@@ -208,14 +209,13 @@ If you want to render badges inside your own project's readme files, check out t
 If you there is a badge that you believe will be common enough for others to benefit from, send in a pull request. Each pull request should:
 
 1. [Add the badge rendering code to the appropriate category section inside `source/badges.js`](https://github.com/bevry/badges/blob/master/source/badges.js)
-  1. If your badge requires a script to run, it should have `badgeScript = true` - see other badges for an example
-  2. [Also remember to export your badge](https://github.com/bevry/badges/blob/0b4aab710fc676f635e49e702960db0d151a12d5/source/badges.js#L667-L668)
-2. [Add the badges test data to the test file `source/test.js`](https://github.com/bevry/badges/blob/master/source/test.js)
-3. [Add the badge configuration information to this readme file `README.md`](https://github.com/bevry/badges/blob/master/README.md)
-4. [Add the badge name to the `keyword` field of `package.json`](https://github.com/bevry/badges/blob/master/package.json)
+1. If your badge requires a script to run, it should have `badgeScript = true` - see other badges for an example
+1. [Also remember to export your badge](https://github.com/bevry/badges/blob/0b4aab710fc676f635e49e702960db0d151a12d5/source/badges.js#L667-L668)
+1. [Add the badges test data to the test file `source/test.js`](https://github.com/bevry/badges/blob/master/source/test.js)
+1. [Add the badge configuration information to this readme file `README.md`](https://github.com/bevry/badges/blob/master/README.md)
+1. [Add the badge name to the `keyword` field of `package.json`](https://github.com/bevry/badges/blob/master/package.json)
 
 These changes can be done in multiple commits or the same, it doesn't matter, as we will squash the commits on merge. We will also the changelog entry, so you don't need to do.
-
 
 <!-- BACKERS/ -->
 

@@ -1,13 +1,16 @@
-'use strict'
-
 // Import
-const { equal } = require('assert-helpers')
-const kava = require('kava')
-const badges = require('./')
+import { equal } from 'assert-helpers'
+import kava from 'kava'
+import {
+	renderBadge,
+	renderBadges,
+	RenderOptions,
+	BadgeEntries
+} from './index.js'
 
 // Tests
 kava.suite('badges', function(suite, test) {
-	const list = [
+	const list: BadgeEntries = [
 		// Custom Badges
 		['badge', { image: 'image', alt: 'alt' }],
 		['badge', { image: 'image', alt: 'alt', url: 'url', title: 'title' }],
@@ -77,6 +80,7 @@ kava.suite('badges', function(suite, test) {
 		'facebookfollow',
 		'twittertweet',
 		'twitterfollow',
+		'githubsponsors',
 		'githubfollow',
 		'githubstar',
 		'quorafollow'
@@ -88,6 +92,7 @@ kava.suite('badges', function(suite, test) {
 		saucelabsAuthToken: '123',
 		codeshipProjectUUID: '123',
 		codeshipProjectID: '123',
+		githubSponsorsUsername: 'balupton',
 		githubSlug: 'bevry/badges',
 		nodeicoQueryString: { downloads: true, compact: true, height: 2 },
 
@@ -115,7 +120,7 @@ kava.suite('badges', function(suite, test) {
 		quoraUsername: 'Benjamin-Lupton',
 		quoraRealname: 'Benjamin Arthur Lupton' // optional, will extract from username
 	}
-	const opts = {
+	const opts: RenderOptions = {
 		filterCategory: false,
 		filterScripts: false
 	}
@@ -167,12 +172,13 @@ kava.suite('badges', function(suite, test) {
 		`<span class="badge-facebookfollow"><iframe src="https://www.facebook.com/plugins/follow.php?href=https%3A%2F%2Fwww.facebook.com%2Fbalupton&amp;layout=button_count&amp;show_faces=false&amp;colorscheme=light&amp;font&amp;width=450&amp;appId=123123" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height: 20px;" allowTransparency="true"></iframe></span>`,
 		`<span class="badge-twittertweet"><a href="https://twitter.com/share" class="twitter-share-button" data-via="bevryme" data-related="bevryme">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></span>`,
 		`<span class="badge-twitterfollow"><a href="https://twitter.com/bevryme" class="twitter-follow-button" data-show-count="false">Follow @bevryme</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></span>`,
+		'<span class="badge-githubsponsors"><a href="https://github.com/sponsors/balupton" title="Donate to this project using GitHub Sponsors"><img src="https://img.shields.io/badge/github-donate-yellow.svg" alt="GitHub Sponsors donate button" /></a></span>',
 		`<span class="badge-githubfollow"><iframe src="https://ghbtns.com/github-btn.html?user=balupton&amp;type=follow&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="165" height="20"></iframe></span>`,
 		`<span class="badge-githubstar"><iframe src="https://ghbtns.com/github-btn.html?user=bevry&amp;repo=badges&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe></span>`,
 		`<span class="badge-quorafollow"><span data-name="Benjamin-Lupton">Follow <a href="http://www.quora.com/Benjamin-Lupton">Benjamin Arthur Lupton</a> on <a href="http://www.quora.com">Quora</a><script src="https://www.quora.com/widgets/follow?embed_code=7N31XJs"></script></span></span>`
 	]
 
-	list.forEach(function(badgeName, index) {
+	list.forEach(function(badgeName: any, index: number) {
 		let badgeConfig = config
 		if (Array.isArray(badgeName)) {
 			badgeConfig = badgeName[1]
@@ -180,14 +186,14 @@ kava.suite('badges', function(suite, test) {
 		}
 		test(badgeName, function() {
 			const expected = expectations[index]
-			const result = badges.renderBadge(badgeName, badgeConfig)
+			const result = renderBadge(badgeName, badgeConfig)
 			equal(result, expected, 'result was as expected')
 		})
 	})
 
 	test('combined', function() {
 		const expected = expectations.join('\n')
-		const result = badges.renderBadges(list, config, opts)
+		const result = renderBadges(list, config, opts)
 		equal(result, expected, 'result was as expected')
 	})
 })

@@ -66,6 +66,8 @@ The definitive collection of badges for rendering
 ## Usage
 
 ```javascript
+import { renderBadges } from 'badges'
+
 // Listing of badges to output
 const list = [
     // Custom Badges
@@ -177,7 +179,7 @@ const options = {
 }
 
 // Render the badges to a string
-const result = require('badges').renderBadges(list, config, options)
+const result = renderBadges(list, config, options)
 
 // Output the result
 console.log(result)

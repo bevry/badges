@@ -1,75 +1,80 @@
 {
   "name": "badges",
-  "version": "3.1.0",
+  "version": "4.0.0",
   "description": "The definitive collection of badges for rendering",
   "homepage": "https://github.com/bevry/badges",
   "license": "MIT",
   "keywords": [
-    "badges",
+    "+1",
+    "60devs",
     "badge",
-    "shields",
-    "shields.io",
-    "saucelabs",
-    "sauce labs",
-    "travis",
-    "travisci",
-    "travis ci",
-    "npm",
-    "npm version",
-    "npm downloads",
-    "nodeico",
-    "waffle",
-    "waffle.io",
+    "badges",
+    "bitcoin",
+    "boost lab",
+    "boostlab",
+    "browser",
+    "buy me a coffee",
+    "buymeacoffee",
     "coveralls",
     "coveralls.io",
+    "crypto",
     "david",
     "david dm",
-    "60devs",
-    "sixtydevs",
-    "patreon",
-    "gratipay",
-    "flattr",
-    "paypal",
-    "bitcoin",
-    "crypto",
-    "liberapay",
-    "buymeacoffee",
-    "buy me a coffee",
-    "boostlab",
-    "boost lab",
-    "thanksapp",
-    "give thanks",
-    "thanks app",
-    "wishlist",
-    "slack",
-    "slackin",
-    "google+",
-    "google plus",
-    "reddit",
-    "hacker news",
-    "facebook",
-    "facebook like",
-    "facebook follow",
-    "twitter",
-    "twitter follow",
-    "github",
-    "github sponsors",
-    "github follow",
-    "github star",
-    "quora",
-    "quora follow",
-    "tweet",
-    "like",
-    "follow",
-    "plus one",
-    "+1",
     "donate",
     "donation",
+    "facebook",
+    "facebook follow",
+    "facebook like",
+    "flattr",
+    "follow",
+    "github",
+    "github follow",
+    "github sponsors",
+    "github star",
+    "give thanks",
+    "google plus",
+    "google+",
+    "gratipay",
+    "hacker news",
+    "liberapay",
+    "like",
+    "module",
+    "nodeico",
+    "npm",
+    "npm downloads",
+    "npm version",
+    "open collective",
+    "opencollective",
+    "patreon",
+    "paypal",
+    "plus one",
+    "quora",
+    "quora follow",
+    "reddit",
+    "sauce labs",
+    "saucelabs",
+    "shields",
+    "shields.io",
+    "sixtydevs",
+    "slack",
+    "slackin",
+    "star",
+    "thanks app",
+    "thanksapp",
     "tip",
     "tips",
-    "star",
-    "opencollective",
-    "open collective"
+    "travis",
+    "travis ci",
+    "travisci",
+    "tweet",
+    "twitter",
+    "twitter follow",
+    "typed",
+    "types",
+    "typescript",
+    "waffle",
+    "waffle.io",
+    "wishlist"
   ],
   "badges": {
     "list": [
@@ -109,8 +114,7 @@
   ],
   "contributors": [
     "Benjamin Lupton <b@lupton.cc> (http://balupton.com)",
-    "Richard Walker <digitalsadhu@gmail.com> (https://github.com/digitalsadhu)",
-    "dependabot-preview[bot] (http://github.com/apps/dependabot-preview)"
+    "Richard Walker <digitalsadhu@gmail.com> (https://github.com/digitalsadhu)"
   ],
   "bugs": {
     "url": "https://github.com/bevry/badges/issues"
@@ -120,11 +124,11 @@
     "url": "https://github.com/bevry/badges.git"
   },
   "engines": {
-    "node": ">=8"
+    "node": ">=10"
   },
   "editions": [
     {
-      "description": "typescript source code with import for modules",
+      "description": "TypeScript source code with Import for modules",
       "directory": "source",
       "entry": "index.ts",
       "tags": [
@@ -134,7 +138,7 @@
       "engines": false
     },
     {
-      "description": "typescript compiled for browsers with import for modules",
+      "description": "TypeScript compiled against ESNext for web browsers with Import for modules",
       "directory": "edition-browsers",
       "entry": "index.js",
       "tags": [
@@ -147,53 +151,47 @@
       }
     },
     {
-      "description": "typescript compiled for node.js 12 with require for modules",
-      "directory": "edition-node-12",
+      "description": "TypeScript compiled against ESNext for Node.js with Require for modules",
+      "directory": "edition-esnext",
       "entry": "index.js",
       "tags": [
         "javascript",
+        "esnext",
         "require"
       ],
       "engines": {
-        "node": "8 || 10 || 12",
+        "node": "10 || 12",
         "browsers": false
       }
     }
   ],
   "types": "source/index.ts",
   "type": "commonjs",
-  "main": "edition-node-12/index.js",
+  "main": "edition-esnext/index.js",
   "browser": "edition-browsers/index.js",
   "module": "edition-browsers/index.js",
   "devDependencies": {
-    "@babel/cli": "^7.7.5",
-    "@babel/core": "^7.7.5",
-    "@babel/plugin-proposal-class-properties": "^7.7.4",
-    "@babel/plugin-proposal-object-rest-spread": "^7.7.4",
-    "@babel/plugin-proposal-optional-chaining": "^7.7.5",
-    "@babel/preset-env": "^7.7.6",
-    "@babel/preset-typescript": "^7.7.4",
-    "@typescript-eslint/eslint-plugin": "^2.10.0",
-    "@typescript-eslint/parser": "^2.10.0",
-    "assert-helpers": "^5.7.0",
-    "babel-plugin-add-module-exports": "^1.0.2",
-    "eslint": "^6.7.2",
-    "eslint-config-bevry": "^2.2.0",
-    "eslint-config-prettier": "^6.7.0",
-    "eslint-plugin-prettier": "^3.1.1",
-    "kava": "^4.3.0",
-    "prettier": "^1.19.1",
-    "projectz": "^1.15.0",
+    "@typescript-eslint/eslint-plugin": "^2.25.0",
+    "@typescript-eslint/parser": "^2.25.0",
+    "assert-helpers": "^5.8.0",
+    "eslint": "^6.8.0",
+    "eslint-config-bevry": "^2.3.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "kava": "^4.4.0",
+    "prettier": "^2.0.2",
+    "projectz": "^1.19.0",
     "surge": "^0.21.3",
-    "typedoc": "^0.15.4",
-    "typescript": "^3.7.3",
-    "valid-directory": "^1.5.0"
+    "typedoc": "^0.17.3",
+    "typescript": "^3.8.3",
+    "valid-directory": "^1.6.0",
+    "valid-module": "^1.0.0"
   },
   "scripts": {
     "our:clean": "rm -Rf ./docs ./edition* ./es2015 ./es5 ./out ./.next",
-    "our:compile": "npm run our:compile:edition-browsers && npm run our:compile:edition-node-12",
-    "our:compile:edition-browsers": "env BABEL_ENV=edition-browsers babel --extensions \".ts,.tsx\" --out-dir ./edition-browsers ./source",
-    "our:compile:edition-node-12": "env BABEL_ENV=edition-node-12 babel --extensions \".ts,.tsx\" --out-dir ./edition-node-12 ./source",
+    "our:compile": "npm run our:compile:edition-browsers && npm run our:compile:edition-esnext",
+    "our:compile:edition-browsers": "tsc --module ESNext --target ESNext --outDir ./edition-browsers --project tsconfig.json && test -d edition-browsers/source && ( mv edition-browsers/source edition-temp && rm -Rf edition-browsers && mv edition-temp edition-browsers ) || true",
+    "our:compile:edition-esnext": "tsc --module commonjs --target ESNext --outDir ./edition-esnext --project tsconfig.json && test -d edition-esnext/source && ( mv edition-esnext/source edition-temp && rm -Rf edition-esnext && mv edition-temp edition-esnext ) || true",
     "our:deploy": "echo no need for this project",
     "our:meta": "npm run our:meta:docs && npm run our:meta:projectz",
     "our:meta:docs": "npm run our:meta:docs:typedoc",
@@ -208,12 +206,13 @@
     "our:setup": "npm run our:setup:install",
     "our:setup:install": "npm install",
     "our:test": "npm run our:verify && npm test",
-    "our:verify": "npm run our:verify:directory && npm run our:verify:eslint && npm run our:verify:prettier && npm run our:verify:typescript",
-    "our:verify:directory": "npx valid-directory",
+    "our:verify": "npm run our:verify:directory && npm run our:verify:eslint && npm run our:verify:module && npm run our:verify:prettier && npm run our:verify:typescript",
+    "our:verify:directory": "valid-directory",
     "our:verify:eslint": "eslint --fix --ignore-pattern '**/*.d.ts' --ignore-pattern '**/vendor/' --ignore-pattern '**/node_modules/' --ext .mjs,.js,.jsx,.ts,.tsx ./source",
-    "our:verify:prettier": "prettier --write ./source/**",
+    "our:verify:module": "valid-module",
+    "our:verify:prettier": "prettier --write .",
     "our:verify:typescript": "tsc --noEmit --project tsconfig.json",
-    "test": "node ./edition-node-12/test.js"
+    "test": "node ./edition-esnext/test.js"
   },
   "eslintConfig": {
     "extends": [
@@ -223,49 +222,5 @@
   "prettier": {
     "semi": false,
     "singleQuote": true
-  },
-  "babel": {
-    "env": {
-      "edition-browsers": {
-        "sourceType": "module",
-        "presets": [
-          [
-            "@babel/preset-env",
-            {
-              "targets": "defaults",
-              "modules": "commonjs"
-            }
-          ],
-          "@babel/preset-typescript"
-        ],
-        "plugins": [
-          "@babel/proposal-object-rest-spread",
-          "@babel/plugin-proposal-optional-chaining",
-          "@babel/proposal-class-properties",
-          "add-module-exports"
-        ]
-      },
-      "edition-node-12": {
-        "sourceType": "module",
-        "presets": [
-          [
-            "@babel/preset-env",
-            {
-              "targets": {
-                "node": "12"
-              },
-              "modules": "commonjs"
-            }
-          ],
-          "@babel/preset-typescript"
-        ],
-        "plugins": [
-          "@babel/proposal-object-rest-spread",
-          "@babel/plugin-proposal-optional-chaining",
-          "@babel/proposal-class-properties",
-          "add-module-exports"
-        ]
-      }
-    }
   }
 }

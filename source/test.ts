@@ -5,18 +5,18 @@ import {
 	renderBadge,
 	renderBadges,
 	RenderOptions,
-	BadgeEntries
+	BadgeEntries,
 } from './index.js'
 
 // Tests
-kava.suite('badges', function(suite, test) {
+kava.suite('badges', function (suite, test) {
 	const list: BadgeEntries = [
 		// Custom Badges
 		['badge', { image: 'image', alt: 'alt' }],
 		['badge', { image: 'image', alt: 'alt', url: 'url', title: 'title' }],
 		[
 			'shields',
-			{ left: 'left', right: 'right', alt: 'alt', url: 'url', title: 'title' }
+			{ left: 'left', right: 'right', alt: 'alt', url: 'url', title: 'title' },
 		],
 		[
 			'shields',
@@ -26,8 +26,8 @@ kava.suite('badges', function(suite, test) {
 				color: 'red',
 				alt: 'alt',
 				url: 'url',
-				title: 'title'
-			}
+				title: 'title',
+			},
 		],
 		'---',
 		// Development Badges
@@ -45,8 +45,8 @@ kava.suite('badges', function(suite, test) {
 			'travisci',
 			{
 				githubSlug: 'bevry/badges',
-				travisTLD: 'com'
-			}
+				travisTLD: 'com',
+			},
 		],
 		'codeship',
 		'coveralls',
@@ -83,7 +83,7 @@ kava.suite('badges', function(suite, test) {
 		'githubsponsors',
 		'githubfollow',
 		'githubstar',
-		'quorafollow'
+		'quorafollow',
 	]
 	const config = {
 		npmPackageName: 'badges',
@@ -118,11 +118,11 @@ kava.suite('badges', function(suite, test) {
 		twitterUsername: 'bevryme',
 		githubUsername: 'balupton',
 		quoraUsername: 'Benjamin-Lupton',
-		quoraRealname: 'Benjamin Arthur Lupton' // optional, will extract from username
+		quoraRealname: 'Benjamin Arthur Lupton', // optional, will extract from username
 	}
 	const opts: RenderOptions = {
 		filterCategory: false,
-		filterScripts: false
+		filterScripts: false,
 	}
 
 	/* eslint quotes:0 */
@@ -175,23 +175,23 @@ kava.suite('badges', function(suite, test) {
 		'<span class="badge-githubsponsors"><a href="https://github.com/sponsors/balupton" title="Donate to this project using GitHub Sponsors"><img src="https://img.shields.io/badge/github-donate-yellow.svg" alt="GitHub Sponsors donate button" /></a></span>',
 		`<span class="badge-githubfollow"><iframe src="https://ghbtns.com/github-btn.html?user=balupton&amp;type=follow&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="165" height="20"></iframe></span>`,
 		`<span class="badge-githubstar"><iframe src="https://ghbtns.com/github-btn.html?user=bevry&amp;repo=badges&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe></span>`,
-		`<span class="badge-quorafollow"><span data-name="Benjamin-Lupton">Follow <a href="http://www.quora.com/Benjamin-Lupton">Benjamin Arthur Lupton</a> on <a href="http://www.quora.com">Quora</a><script src="https://www.quora.com/widgets/follow?embed_code=7N31XJs"></script></span></span>`
+		`<span class="badge-quorafollow"><span data-name="Benjamin-Lupton">Follow <a href="http://www.quora.com/Benjamin-Lupton">Benjamin Arthur Lupton</a> on <a href="http://www.quora.com">Quora</a><script src="https://www.quora.com/widgets/follow?embed_code=7N31XJs"></script></span></span>`,
 	]
 
-	list.forEach(function(badgeName: any, index: number) {
+	list.forEach(function (badgeName: any, index: number) {
 		let badgeConfig = config
 		if (Array.isArray(badgeName)) {
 			badgeConfig = badgeName[1]
 			badgeName = badgeName[0]
 		}
-		test(badgeName, function() {
+		test(badgeName, function () {
 			const expected = expectations[index]
 			const result = renderBadge(badgeName, badgeConfig)
 			equal(result, expected, 'result was as expected')
 		})
 	})
 
-	test('combined', function() {
+	test('combined', function () {
 		const expected = expectations.join('\n')
 		const result = renderBadges(list, config, opts)
 		equal(result, expected, 'result was as expected')

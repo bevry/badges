@@ -80,7 +80,7 @@ export function shields({
 	color = 'yellow',
 	alt,
 	url,
-	title
+	title,
 }: shieldsOptions): string {
 	// Check
 	if (!left) throw new Error('left is missing')
@@ -164,7 +164,7 @@ interface nodeicoOptions extends npmOptions {
 /** Nodei.co Badge */
 export function nodeico({
 	npmPackageName,
-	nodeicoQueryString
+	nodeicoQueryString,
 }: nodeicoOptions): string {
 	// Prepare
 	if (!npmPackageName) throw new Error('npmPackageName is missing')
@@ -202,7 +202,7 @@ interface saucelabsOptions {
 /** Sauce Labs Browser Matrix Badge */
 export function saucelabsbm({
 	saucelabsUsername,
-	saucelabsAuthToken
+	saucelabsAuthToken,
 }: saucelabsOptions): string {
 	// Check
 	if (!saucelabsUsername) throw new Error('saucelabsUsername is missing')
@@ -224,7 +224,7 @@ saucelabsbm.badgeInline = false
 /** Sauce Labs Badge */
 export function saucelabs({
 	saucelabsUsername,
-	saucelabsAuthToken
+	saucelabsAuthToken,
 }: saucelabsOptions): string {
 	// Check
 	if (!saucelabsUsername) throw new Error('saucelabsUsername is missing')
@@ -249,7 +249,7 @@ interface travisOptions extends githubSlugOptions {
 /** Travis CI Badge */
 export function travisci({
 	githubSlug,
-	travisTLD = 'org'
+	travisTLD = 'org',
 }: travisOptions): string {
 	// Check
 	if (!githubSlug) throw new Error('githubSlug is missing')
@@ -259,9 +259,9 @@ export function travisci({
 		'https://img.shields.io/travis',
 		travisTLD === 'com' ? 'com' : '',
 		githubSlug,
-		'master.svg'
+		'master.svg',
 	]
-		.filter(i => Boolean(i))
+		.filter((i) => Boolean(i))
 		.join('/')
 	const url = `http://travis-ci.${travisTLD}/${githubSlug}`
 	const alt = 'Travis CI Build Status'
@@ -279,7 +279,7 @@ interface codeshipOptions {
 /** Codeship Badge */
 export function codeship({
 	codeshipProjectUUID,
-	codeshipProjectID
+	codeshipProjectID,
 }: codeshipOptions): string {
 	// Check
 	if (!codeshipProjectUUID) throw new Error('codeshipProjectUUID is missing')
@@ -367,7 +367,7 @@ interface sixtydevOptions {
 /** 60devs Tips Badge */
 export function sixtydevstips({
 	sixtydevstipsID,
-	sixtydevstipsURL
+	sixtydevstipsURL,
 }: sixtydevOptions): string {
 	// Check
 	if (!sixtydevstipsURL) {
@@ -397,13 +397,14 @@ interface githubsponsorsOptions {
 export function githubsponsors({
 	githubSponsorsURL,
 	githubSponsorsUsername,
-	githubUsername
+	githubUsername,
 }: githubsponsorsOptions): string {
 	if (!githubSponsorsURL) {
 		if (!githubSponsorsUsername && !githubUsername)
 			throw new Error('githubSponsorsUsername and githubUsername are missing')
-		githubSponsorsURL = `https://github.com/sponsors/${githubSponsorsUsername ||
-			githubUsername}`
+		githubSponsorsURL = `https://github.com/sponsors/${
+			githubSponsorsUsername || githubUsername
+		}`
 	}
 
 	// Create
@@ -425,7 +426,7 @@ interface patreonOptions {
 /** Patreon Badge */
 export function patreon({
 	patreonUsername,
-	patreonURL
+	patreonURL,
 }: patreonOptions): string {
 	// Check
 	if (!patreonURL) {
@@ -452,7 +453,7 @@ interface opencollectiveOptions {
 /** Open Collective Badge */
 export function opencollective({
 	opencollectiveUsername,
-	opencollectiveURL
+	opencollectiveURL,
 }: opencollectiveOptions): string {
 	// Check
 	if (!opencollectiveURL) {
@@ -481,7 +482,7 @@ interface gratipayOptions {
 /** Gratipay Badge */
 export function gratipay({
 	gratipayUsername,
-	gratipayURL
+	gratipayURL,
 }: gratipayOptions): string {
 	// Check
 	if (!gratipayURL) {
@@ -511,7 +512,7 @@ interface flattrOptions {
 export function flattr({
 	flattrCode,
 	flattrUsername,
-	flattrURL
+	flattrURL,
 }: flattrOptions): string {
 	// Check
 	if (!flattrURL) {
@@ -547,7 +548,7 @@ interface paypalOptions {
 export function paypal({
 	paypalURL,
 	paypalButtonID,
-	paypalUsername
+	paypalUsername,
 }: paypalOptions): string {
 	// Check
 	if (!paypalURL) {
@@ -629,7 +630,7 @@ interface buymeacoffeeOptions {
 /** Buy Me A Coffee Badge */
 export function buymeacoffee({
 	buymeacoffeeUsername,
-	buymeacoffeeURL
+	buymeacoffeeURL,
 }: buymeacoffeeOptions): string {
 	// Check
 	if (!buymeacoffeeURL) {
@@ -659,7 +660,7 @@ interface liberapayOptions {
 /** Liberapay Badge */
 export function liberapay({
 	liberapayUsername,
-	liberapayURL
+	liberapayURL,
 }: liberapayOptions): string {
 	// Check
 	if (!liberapayURL) {
@@ -693,7 +694,7 @@ export function thanksapp({
 	npmPackageName,
 	githubSlug,
 	thanksappUsername,
-	thanksappURL
+	thanksappURL,
 }: thanksappOptions): string {
 	// Check
 	if (!thanksappURL) {
@@ -777,7 +778,7 @@ interface gabeaconOptions {
  */
 export function gabeacon({
 	gaTrackingID,
-	githubSlug
+	githubSlug,
 }: gabeaconOptions): string {
 	// Check
 	if (!gaTrackingID) throw new Error('gaTrackingID is missing')
@@ -832,7 +833,7 @@ interface facebooklikeOptions extends homepageOptions {
 /** Facebook Like Button */
 export function facebooklike({
 	homepage,
-	facebookApplicationID
+	facebookApplicationID,
 }: facebooklikeOptions): string {
 	// Prepare
 	if (!homepage) throw new Error('homepage is missing')
@@ -860,7 +861,7 @@ interface facebookfollowOptions {
 /** Facebook Follow Button */
 export function facebookfollow({
 	facebookUsername,
-	facebookApplicationID
+	facebookApplicationID,
 }: facebookfollowOptions): string {
 	// Prepare
 	if (!facebookUsername) throw new Error('facebookUsername is missing')
@@ -905,7 +906,7 @@ twitterfollow.badgeScript = true
 
 /** Github Follow Button */
 export function githubfollow({
-	githubUsername
+	githubUsername,
 }: githubUsernameOptions): string {
 	// Prepare
 	if (!githubUsername) throw new Error('githubUsername is missing')
@@ -950,7 +951,7 @@ interface quoraOptions {
 export function quorafollow({
 	quoraUsername,
 	quoraRealname,
-	quoraCode
+	quoraCode,
 }: quoraOptions): string {
 	// Prepare
 	if (!quoraUsername) throw new Error('quoraUsername is missing')

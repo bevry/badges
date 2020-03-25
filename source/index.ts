@@ -57,7 +57,7 @@ export function renderBadges(
 	const results: string[] = []
 
 	// Render the badges
-	list.forEach(function(badgeName) {
+	list.forEach(function (badgeName) {
 		let badgeConfig = config
 
 		// Custom Config?

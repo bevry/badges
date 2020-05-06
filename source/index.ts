@@ -40,6 +40,16 @@ export interface RenderOptions {
 
 export type BadgeEntry = string | [string, object]
 export type BadgeEntries = BadgeEntry[]
+export type BadgesList = BadgeEntries
+export type BadgesOptions = RenderOptions
+export interface BadgesConfig {
+	[key: string]: any
+}
+export interface BadgesField {
+	list: BadgeEntries
+	config?: BadgesConfig
+	options?: RenderOptions
+}
 
 /**
  * Render specified badges with wrapping
@@ -49,8 +59,8 @@ export type BadgeEntries = BadgeEntry[]
  * @return The rendered badges
  */
 export function renderBadges(
-	list: BadgeEntries,
-	config: { [key: string]: any } = {},
+	list: BadgesList,
+	config: BadgesConfig = {},
 	options: RenderOptions = { filterCategory: false, filterScripts: true }
 ): string {
 	// Prepare

@@ -182,7 +182,7 @@ If you want to render badges inside your own project's readme files, check out t
 
 ``` html
 <script type="module">
-    import * as pkg from '//cdn.pika.dev/badges/^4.2.0'
+    import * as pkg from '//cdn.pika.dev/badges/^4.3.0'
 </script>
 ```
 
@@ -190,7 +190,7 @@ If you want to render badges inside your own project's readme files, check out t
 
 ``` html
 <script type="module">
-    import * as pkg from '//unpkg.com/badges@^4.2.0'
+    import * as pkg from '//unpkg.com/badges@^4.3.0'
 </script>
 ```
 
@@ -198,7 +198,7 @@ If you want to render badges inside your own project's readme files, check out t
 
 ``` html
 <script type="module">
-    import * as pkg from '//dev.jspm.io/badges@4.2.0'
+    import * as pkg from '//dev.jspm.io/badges@4.3.0'
 </script>
 ```
 
@@ -253,7 +253,7 @@ These changes can be done in multiple commits or the same, it doesn't matter, as
 
 These amazing people are maintaining this project:
 
-<ul><li><a href="http://balupton.com">Benjamin Lupton</a> — <a href="https://github.com/bevry/badges/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/badges">view contributions</a></li></ul>
+<ul><li><a href="https://github.com/balupton">Benjamin Lupton</a> — <a href="https://github.com/bevry/badges/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/badges">view contributions</a></li></ul>
 
 <h3>Sponsors</h3>
 
@@ -273,9 +273,8 @@ No sponsors yet! Will you be the first?
 
 These amazing people have contributed code to this project:
 
-<ul><li><a href="http://balupton.com">Benjamin Lupton</a> — <a href="https://github.com/bevry/badges/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/badges">view contributions</a></li>
-<li><a href="https://github.com/digitalsadhu">Richard Walker</a> — <a href="https://github.com/bevry/badges/commits?author=digitalsadhu" title="View the GitHub contributions of Richard Walker on repository bevry/badges">view contributions</a></li>
-<li><a href="http://github.com/apps/dependabot-preview">dependabot-preview[bot]</a> — <a href="https://github.com/bevry/badges/commits?author=dependabot-preview[bot]" title="View the GitHub contributions of dependabot-preview[bot] on repository bevry/badges">view contributions</a></li></ul>
+<ul><li><a href="https://github.com/balupton">Benjamin Lupton</a> — <a href="https://github.com/bevry/badges/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/badges">view contributions</a></li>
+<li><a href="https://github.com/digitalsadhu">Richard Walker</a> — <a href="https://github.com/bevry/badges/commits?author=digitalsadhu" title="View the GitHub contributions of Richard Walker on repository bevry/badges">view contributions</a></li></ul>
 
 <a href="https://github.com/bevry/badges/blob/master/CONTRIBUTING.md#files">Discover how you can contribute by heading on over to the <code>CONTRIBUTING.md</code> file.</a>
 

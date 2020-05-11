@@ -1,6 +1,6 @@
 {
   "name": "badges",
-  "version": "4.2.0",
+  "version": "4.3.0",
   "description": "The definitive collection of badges for rendering",
   "homepage": "https://github.com/bevry/badges",
   "license": "MIT",
@@ -20,7 +20,6 @@
     "crypto",
     "david",
     "david dm",
-    "dom",
     "donate",
     "donation",
     "facebook",
@@ -106,16 +105,20 @@
       "patreonUsername": "bevry",
       "paypalURL": "https://bevry.me/paypal",
       "wishlistURL": "https://bevry.me/wishlist",
-      "travisTLD": "com"
+      "travisTLD": "com",
+      "githubUsername": "bevry",
+      "githubRepository": "badges",
+      "githubSlug": "bevry/badges",
+      "npmPackageName": "badges"
     }
   },
   "funding": "https://bevry.me/fund",
   "author": "2015+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
   "maintainers": [
-    "Benjamin Lupton <b@lupton.cc> (http://balupton.com)"
+    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
   ],
   "contributors": [
-    "Benjamin Lupton <b@lupton.cc> (http://balupton.com)",
+    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)",
     "Richard Walker <digitalsadhu@gmail.com> (https://github.com/digitalsadhu)"
   ],
   "bugs": {
@@ -173,17 +176,17 @@
   "browser": "edition-browsers/index.js",
   "module": "edition-browsers/index.js",
   "devDependencies": {
-    "@bevry/update-contributors": "^1.0.1",
-    "@typescript-eslint/eslint-plugin": "^2.30.0",
-    "@typescript-eslint/parser": "^2.30.0",
-    "assert-helpers": "^6.1.0",
-    "eslint": "^6.8.0",
-    "eslint-config-bevry": "^3.3.0",
+    "@bevry/update-contributors": "^1.5.0",
+    "@typescript-eslint/eslint-plugin": "^2.31.0",
+    "@typescript-eslint/parser": "^2.31.0",
+    "assert-helpers": "^6.2.0",
+    "eslint": "^7.0.0",
+    "eslint-config-bevry": "^3.4.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.3",
-    "kava": "^4.4.0",
+    "kava": "^5.0.0",
     "prettier": "^2.0.5",
-    "projectz": "^1.19.1",
+    "projectz": "^2.1.0",
     "surge": "^0.21.3",
     "typedoc": "^0.17.6",
     "typescript": "^3.8.3",
@@ -214,8 +217,8 @@
     "our:verify:directory": "npx valid-directory",
     "our:verify:eslint": "npx eslint --fix --ignore-pattern '**/*.d.ts' --ignore-pattern '**/vendor/' --ignore-pattern '**/node_modules/' --ext .mjs,.js,.jsx,.ts,.tsx ./source",
     "our:verify:module": "npx valid-module",
-    "our:verify:prettier": "prettier --write .",
-    "our:verify:typescript": "tsc --noEmit --project tsconfig.json",
+    "our:verify:prettier": "npx prettier --write .",
+    "our:verify:typescript": "npx tsc --noEmit --project tsconfig.json",
     "test": "node ./edition-esnext/test.js"
   },
   "eslintConfig": {

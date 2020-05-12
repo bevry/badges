@@ -182,7 +182,7 @@ If you want to render badges inside your own project's readme files, check out t
 
 ``` html
 <script type="module">
-    import * as pkg from '//cdn.pika.dev/badges/^4.3.0'
+    import * as pkg from '//cdn.pika.dev/badges/^4.4.0'
 </script>
 ```
 
@@ -190,7 +190,7 @@ If you want to render badges inside your own project's readme files, check out t
 
 ``` html
 <script type="module">
-    import * as pkg from '//unpkg.com/badges@^4.3.0'
+    import * as pkg from '//unpkg.com/badges@^4.4.0'
 </script>
 ```
 
@@ -198,7 +198,7 @@ If you want to render badges inside your own project's readme files, check out t
 
 ``` html
 <script type="module">
-    import * as pkg from '//dev.jspm.io/badges@4.3.0'
+    import * as pkg from '//dev.jspm.io/badges@4.4.0'
 </script>
 ```
 

@@ -1,6 +1,6 @@
 {
   "name": "badges",
-  "version": "4.5.0",
+  "version": "4.6.0",
   "description": "The definitive collection of badges for rendering",
   "homepage": "https://github.com/bevry/badges",
   "license": "MIT",
@@ -176,22 +176,22 @@
   "browser": "edition-browsers/index.js",
   "module": "edition-browsers/index.js",
   "devDependencies": {
-    "@bevry/update-contributors": "^1.6.0",
+    "@bevry/update-contributors": "^1.7.0",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",
-    "assert-helpers": "^6.4.0",
+    "assert-helpers": "^6.5.0",
     "eslint": "^7.0.0",
-    "eslint-config-bevry": "^3.5.0",
+    "eslint-config-bevry": "^3.6.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.3",
-    "kava": "^5.1.0",
+    "kava": "^5.2.0",
     "prettier": "^2.0.5",
-    "projectz": "^2.2.0",
+    "projectz": "^2.3.0",
     "surge": "^0.21.3",
     "typedoc": "^0.17.7",
     "typescript": "^3.9.3",
-    "valid-directory": "^2.0.0",
-    "valid-module": "^1.0.0"
+    "valid-directory": "^2.1.0",
+    "valid-module": "^1.2.0"
   },
   "scripts": {
     "our:clean": "rm -Rf ./docs ./edition* ./es2015 ./es5 ./out ./.next",

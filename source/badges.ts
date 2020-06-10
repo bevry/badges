@@ -2,7 +2,9 @@
 import { stringify } from 'querystring'
 
 // Prepare for browser and deno
-const env = (globalThis as any)?.process?.env || {}
+type Env = { [key: string]: string }
+// @ts-ignore
+const env: Env = typeof process !== 'undefined' ? process.env : {}
 
 // ====================================
 // Custom Badges

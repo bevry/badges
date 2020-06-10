@@ -1,5 +1,8 @@
 // Import
-import querystring from 'querystring'
+import { stringify } from 'querystring'
+
+// Prepare for browser and deno
+const env = (globalThis as any)?.process?.env || {}
 
 // ====================================
 // Custom Badges
@@ -183,7 +186,7 @@ export function nodeico({
 	let image = `https://nodei.co/npm/${npmPackageName}.png`
 	const query =
 		typeof nodeicoQueryString === 'object'
-			? querystring.stringify(nodeicoQueryString)
+			? stringify(nodeicoQueryString)
 			: nodeicoQueryString
 	if (query) image += `?${query}`
 	return badge({ image, alt, url, title })
@@ -206,7 +209,7 @@ export function saucelabsbm({
 }: saucelabsOptions): string {
 	// Check
 	if (!saucelabsUsername) throw new Error('saucelabsUsername is missing')
-	saucelabsAuthToken = saucelabsAuthToken || process.env.SAUCELABS_AUTH_TOKEN
+	saucelabsAuthToken = saucelabsAuthToken || env.SAUCELABS_AUTH_TOKEN
 	if (!saucelabsAuthToken) throw new Error('saucelabsAuthToken is missing')
 
 	// Create
@@ -228,7 +231,7 @@ export function saucelabs({
 }: saucelabsOptions): string {
 	// Check
 	if (!saucelabsUsername) throw new Error('saucelabsUsername is missing')
-	saucelabsAuthToken = saucelabsAuthToken || process.env.SAUCELABS_AUTH_TOKEN
+	saucelabsAuthToken = saucelabsAuthToken || env.SAUCELABS_AUTH_TOKEN
 	if (!saucelabsAuthToken) throw new Error('saucelabsAuthToken is missing')
 
 	// Create
@@ -837,8 +840,7 @@ export function facebooklike({
 }: facebooklikeOptions): string {
 	// Prepare
 	if (!homepage) throw new Error('homepage is missing')
-	facebookApplicationID =
-		facebookApplicationID || process.env.FACEBOOK_APPLICATION_ID
+	facebookApplicationID = facebookApplicationID || env.FACEBOOK_APPLICATION_ID
 	if (!facebookApplicationID)
 		throw new Error('facebookApplicationID is missing')
 
@@ -865,8 +867,7 @@ export function facebookfollow({
 }: facebookfollowOptions): string {
 	// Prepare
 	if (!facebookUsername) throw new Error('facebookUsername is missing')
-	facebookApplicationID =
-		facebookApplicationID || process.env.FACEBOOK_APPLICATION_ID
+	facebookApplicationID = facebookApplicationID || env.FACEBOOK_APPLICATION_ID
 	if (!facebookApplicationID)
 		throw new Error('facebookApplicationID is missing')
 

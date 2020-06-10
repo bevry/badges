@@ -1,5 +1,10 @@
 # History
 
+## v4.7.0 2020 May 21
+
+-   Deno compatibility
+-   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+
 ## v4.6.0 2020 May 21
 
 -   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)

@@ -181,14 +181,14 @@ If you want to render badges inside your own project's readme files, check out t
 <a href="https://deno.land" title="Deno is a secure runtime for JavaScript and TypeScript, it is an alternative for Node.js"><h3>Deno</h3></a>
 
 ``` typescript
-import * as pkg from 'https://unpkg.com/badges@^4.9.0/edition-deno/index.ts'
+import * as pkg from 'https://unpkg.com/badges@^4.10.0/edition-deno/index.ts'
 ```
 
 <a href="https://www.pika.dev/cdn" title="100% Native ES Modules CDN"><h3>pika</h3></a>
 
 ``` html
 <script type="module">
-    import * as pkg from '//cdn.pika.dev/badges/^4.9.0'
+    import * as pkg from '//cdn.pika.dev/badges/^4.10.0'
 </script>
 ```
 
@@ -196,7 +196,7 @@ import * as pkg from 'https://unpkg.com/badges@^4.9.0/edition-deno/index.ts'
 
 ``` html
 <script type="module">
-    import * as pkg from '//unpkg.com/badges@^4.9.0'
+    import * as pkg from '//unpkg.com/badges@^4.10.0'
 </script>
 ```
 
@@ -204,7 +204,7 @@ import * as pkg from 'https://unpkg.com/badges@^4.9.0/edition-deno/index.ts'
 
 ``` html
 <script type="module">
-    import * as pkg from '//dev.jspm.io/badges@4.9.0'
+    import * as pkg from '//dev.jspm.io/badges@4.10.0'
 </script>
 ```
 

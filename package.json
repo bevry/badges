@@ -1,6 +1,6 @@
 {
   "name": "badges",
-  "version": "4.14.0",
+  "version": "4.15.0",
   "description": "The definitive collection of badges for rendering",
   "homepage": "https://github.com/bevry/badges",
   "license": "MIT",
@@ -174,6 +174,19 @@
       }
     },
     {
+      "description": "TypeScript compiled against ESNext for Node.js with Import for modules",
+      "directory": "edition-node-esm",
+      "entry": "index.js",
+      "tags": [
+        "javascript",
+        "import"
+      ],
+      "engines": {
+        "node": true,
+        "browsers": false
+      }
+    },
+    {
       "description": "TypeScript source code made to be compatible with Deno",
       "directory": "edition-deno",
       "entry": "index.ts",
@@ -189,36 +202,37 @@
     }
   ],
   "types": "./compiled-types/",
-  "type": "commonjs",
-  "main": "edition-esnext/index.js",
+  "type": "module",
+  "main": "index",
   "deno": "edition-deno/index.ts",
   "browser": "edition-browsers/index.js",
   "module": "edition-browsers/index.js",
   "devDependencies": {
-    "@bevry/update-contributors": "^1.12.0",
+    "@bevry/update-contributors": "^1.13.0",
     "@typescript-eslint/eslint-plugin": "^3.4.0",
     "@typescript-eslint/parser": "^3.4.0",
-    "assert-helpers": "^6.12.0",
+    "assert-helpers": "^6.13.0",
     "eslint": "^7.3.1",
-    "eslint-config-bevry": "^3.12.0",
+    "eslint-config-bevry": "^3.13.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "kava": "^5.7.0",
-    "make-deno-edition": "^0.13.0",
+    "kava": "^5.8.0",
+    "make-deno-edition": "^0.14.0",
     "prettier": "^2.0.5",
-    "projectz": "^2.10.1",
+    "projectz": "^2.11.0",
     "surge": "^0.21.3",
     "typedoc": "^0.17.7",
     "typescript": "^3.9.5",
-    "valid-directory": "^2.5.0",
+    "valid-directory": "^2.6.0",
     "valid-module": "^1.7.0"
   },
   "scripts": {
     "our:clean": "rm -Rf ./docs ./edition* ./es2015 ./es5 ./out ./.next",
-    "our:compile": "yarn run our:compile:deno && yarn run our:compile:edition-browsers && yarn run our:compile:edition-esnext && yarn run our:compile:types",
+    "our:compile": "yarn run our:compile:deno && yarn run our:compile:edition-browsers && yarn run our:compile:edition-esnext && yarn run our:compile:edition-node-esm && yarn run our:compile:types",
     "our:compile:deno": "make-deno-edition --attempt",
     "our:compile:edition-browsers": "tsc --module ESNext --target ES2019 --outDir ./edition-browsers --project tsconfig.json && ( test ! -d edition-browsers/source || ( mv edition-browsers/source edition-temp && rm -Rf edition-browsers && mv edition-temp edition-browsers ) )",
-    "our:compile:edition-esnext": "tsc --module commonjs --target ESNext --outDir ./edition-esnext --project tsconfig.json && ( test ! -d edition-esnext/source || ( mv edition-esnext/source edition-temp && rm -Rf edition-esnext && mv edition-temp edition-esnext ) )",
+    "our:compile:edition-esnext": "tsc --module commonjs --target ESNext --outDir ./edition-esnext --project tsconfig.json && ( test ! -d edition-esnext/source || ( mv edition-esnext/source edition-temp && rm -Rf edition-esnext && mv edition-temp edition-esnext ) ) && echo '{\"type\": \"commonjs\"}' > edition-esnext/package.json",
+    "our:compile:edition-node-esm": "tsc --module ESNext --target ESNext --outDir ./edition-node-esm --project tsconfig.json && ( test ! -d edition-node-esm/source || ( mv edition-node-esm/source edition-temp && rm -Rf edition-node-esm && mv edition-temp edition-node-esm ) ) && echo '{\"type\": \"module\"}' > edition-node-esm/package.json",
     "our:compile:types": "tsc --project tsconfig.json --emitDeclarationOnly --declaration --declarationMap --declarationDir ./compiled-types && ( test ! -d compiled-types/source || ( mv compiled-types/source edition-temp && rm -Rf compiled-types && mv edition-temp compiled-types ) )",
     "our:deploy": "echo no need for this project",
     "our:meta": "yarn run our:meta:contributors && yarn run our:meta:docs && yarn run our:meta:projectz",

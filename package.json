@@ -203,7 +203,7 @@
   ],
   "types": "./compiled-types/",
   "type": "module",
-  "main": "index",
+  "main": "index.cjs",
   "deno": "edition-deno/index.ts",
   "browser": "edition-browsers/index.js",
   "module": "edition-browsers/index.js",

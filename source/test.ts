@@ -48,6 +48,15 @@ kava.suite('badges', function (suite, test) {
 				travisTLD: 'com',
 			},
 		],
+		'githubworkflow',
+		[
+			'githubworkflow',
+			{
+				githubSlug: 'bevry/badges',
+				githubWorkflow: 'bevry',
+				githubEvent: 'push',
+			},
+		],
 		'codeship',
 		'coveralls',
 		'codeclimate',
@@ -94,6 +103,7 @@ kava.suite('badges', function (suite, test) {
 		codeshipProjectID: '123',
 		githubSponsorsUsername: 'balupton',
 		githubSlug: 'bevry/badges',
+		githubWorkflow: 'bevry',
 		nodeicoQueryString: { downloads: true, compact: true, height: 2 },
 
 		sixtydevstipsID: 'd2dcf439c9759e88f3ccec1cef394c10',
@@ -142,6 +152,8 @@ kava.suite('badges', function (suite, test) {
 		`<span class="badge-saucelabs"><a href="https://saucelabs.com/u/bevry" title="Check this project's browser tests on Sauce Labs"><img src="https://saucelabs.com/browser-matrix/bevry.svg?auth=123" alt="Sauce Labs Browser Matrix" /></a></span>`,
 		`<span class="badge-travisci"><a href="http://travis-ci.org/bevry/badges" title="Check this project's build status on TravisCI"><img src="https://img.shields.io/travis/bevry/badges/master.svg" alt="Travis CI Build Status" /></a></span>`,
 		`<span class="badge-travisci"><a href="http://travis-ci.com/bevry/badges" title="Check this project's build status on TravisCI"><img src="https://img.shields.io/travis/com/bevry/badges/master.svg" alt="Travis CI Build Status" /></a></span>`,
+		`<span class="badge-githubworkflow"><a href="https://github.com/bevry/badges/actions?query=workflow%3Abevry" title="View the status of this project's GitHub Workflow: bevry"><img src="https://github.com/bevry/badges/workflows/bevry/badge.svg" alt="Status of the GitHub Workflow: bevry" /></a></span>`,
+		`<span class="badge-githubworkflow"><a href="https://github.com/bevry/badges/actions?query=workflow%3Abevry" title="View the status of this project's GitHub Workflow: bevry"><img src="https://github.com/bevry/badges/workflows/bevry/badge.svg?event=push" alt="Status of the GitHub Workflow: bevry" /></a></span>`,
 		`<span class="badge-codeship"><a href="https://www.codeship.io/projects/123" title="Check this project's status on Codeship"><img src="https://img.shields.io/codeship/123/master.svg" alt="Codeship Status" /></a></span>`,
 		`<span class="badge-coveralls"><a href="https://coveralls.io/r/bevry/badges" title="View this project's coverage on Coveralls"><img src="https://img.shields.io/coveralls/bevry/badges.svg" alt="Coveralls Coverage Status" /></a></span>`,
 		`<span class="badge-codeclimate"><a href="https://codeclimate.com/github/bevry/badges" title="View this project's rating on Code Climate"><img src="https://img.shields.io/codeclimate/github/bevry/badges.svg" alt="Code Climate Rating" /></a></span>`,

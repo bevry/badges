@@ -1,5 +1,10 @@
 # History
 
+## v4.24.0 2020 November 23
+
+-   Add the `githubworkflow` badge for use with your GitHub Action Workflows
+-   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+
 ## v4.23.0 2020 October 29
 
 -   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)

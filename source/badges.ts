@@ -358,6 +358,42 @@ export function waffle({ githubSlug }: githubSlugOptions) {
 }
 waffle.badgeCategory = 'testing'
 
+interface githubworkflowOptions extends githubSlugOptions {
+	/** The name or location of the workflow file to show the badge for */
+	githubWorkflow: string
+	/** The branch to constrain the badge to */
+	githubBranch?: string
+	/** The event to constrain the badge to */
+	githubEvent?: string
+}
+
+/** Github Workflow Badge */
+export function githubworkflow({
+	githubWorkflow,
+	githubBranch,
+	githubEvent,
+	githubSlug,
+}: githubworkflowOptions): string {
+	// Check
+	if (!githubSlug) throw new Error('githubSlug is missing')
+	if (!githubWorkflow) throw new Error('githubWorkflow is missing')
+
+	// Create
+	// https://shields.io/category/build
+	// https://docs.github.com/en/free-pro-team@latest/actions/managing-workflow-runs/adding-a-workflow-status-badge#using-a-workflow-name
+	const image = new URL(
+		`https://github.com/${githubSlug}/workflows/${githubWorkflow}/badge.svg`
+	)
+	if (githubBranch) image.searchParams.set('branch', githubBranch)
+	if (githubEvent) image.searchParams.set('event', githubEvent)
+	const link = new URL(`https://github.com/${githubSlug}/actions`)
+	link.searchParams.set('query', `workflow:${githubWorkflow}`)
+	const alt = `Status of the GitHub Workflow: ${githubWorkflow}`
+	const title = `View the status of this project's GitHub Workflow: ${githubWorkflow}`
+	return badge({ image: image.toString(), url: link.toString(), alt, title })
+}
+githubworkflow.badgeCategory = 'testing'
+
 // ====================================
 // Funding Badges
 

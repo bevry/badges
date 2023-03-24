@@ -9,32 +9,32 @@ const env: Env = typeof process !== 'undefined' ? process.env : {}
 // ====================================
 // Custom Badges
 
-interface twitterOptions {
+export interface twitterOptions {
 	/**  The twitter username to tweet at */
 	twitterUsername: string
 }
 
-interface homepageOptions {
+export interface homepageOptions {
 	/** The page url that the badge will be for */
 	homepage: string
 }
 
-interface githubUsernameOptions {
+export interface githubUsernameOptions {
 	/** The github username to use */
 	githubUsername: string
 }
 
-interface githubSlugOptions {
+export interface githubSlugOptions {
 	/** The github slug of the project (e.g. bevry/badges) */
 	githubSlug: string
 }
 
-interface npmOptions {
+export interface npmOptions {
 	/** The npm package name */
 	npmPackageName: string
 }
 
-interface badgeOptions {
+export interface badgeOptions {
 	/** The URL to the image **/
 	image?: string
 	/** The alt attribute for the image */
@@ -64,7 +64,7 @@ export function badge({ image, alt, url, title }: badgeOptions): string {
 }
 badge.badgeCategory = 'custom'
 
-interface shieldsOptions {
+export interface shieldsOptions {
 	/** The text for the left side of the badge */
 	left: string
 	/** The text for the right side of the badge */
@@ -100,7 +100,7 @@ shields.badgeCategory = 'custom'
 // ====================================
 // Development Badges
 
-interface npmversionOptions {
+export interface npmversionOptions {
 	/** The repository slug (username/reponame) */
 	npmPackageName: string
 }
@@ -160,10 +160,12 @@ export function daviddmdev({ githubSlug }: githubSlugOptions): string {
 }
 daviddmdev.badgeCategory = 'development'
 
-interface nodeicoOptions extends npmOptions {
-	/** See https://nodei.co for options
-	defined as either a string param1=&param2=
-	or an object {param1: '', param2: ''} that will be serialized to param1=&param2= etc. */
+export interface nodeicoOptions extends npmOptions {
+	/**
+	 * See https://nodei.co for options
+	 * defined as either a string `param1=&param2=`
+	 * or an object `{param1: '', param2: ''}` that will be serialized to `param1=&param2=` etc.
+	 */
 	nodeicoQueryString?: string | { [index: string]: any }
 }
 /** Nodei.co Badge */
@@ -198,7 +200,7 @@ nodeico.badgeCategory = 'development'
 // ====================================
 // Testing Badges
 
-interface saucelabsOptions {
+export interface saucelabsOptions {
 	/** The username of the sauncelabs account to use */
 	saucelabsUsername: string
 	/** Falls back to the `SAUCELABS_AUTH_TOKEN` environment variable if it is set */
@@ -247,7 +249,7 @@ export function saucelabs({
 }
 saucelabs.badgeCategory = 'testing'
 
-interface travisOptions extends githubSlugOptions {
+export interface travisOptions extends githubSlugOptions {
 	/** The TLD to use for travis, use "com" if you have moved to travis-ci.com instead of travis-ci.org */
 	travisTLD?: string
 }
@@ -275,7 +277,7 @@ export function travisci({
 }
 travisci.badgeCategory = 'testing'
 
-interface codeshipOptions {
+export interface codeshipOptions {
 	/** The UUID for a specific project, which is available on the General tab in your project settings */
 	codeshipProjectUUID: string
 	/** The ID for a specific project, which is available via the URL for the codeship project page */
@@ -358,7 +360,7 @@ export function waffle({ githubSlug }: githubSlugOptions) {
 }
 waffle.badgeCategory = 'testing'
 
-interface githubworkflowOptions extends githubSlugOptions {
+export interface githubworkflowOptions extends githubSlugOptions {
 	/** The name or location of the workflow file to show the badge for */
 	githubWorkflow: string
 	/** The branch to constrain the badge to */
@@ -398,7 +400,7 @@ githubworkflow.badgeCategory = 'testing'
 // Funding Badges
 
 /** At least one of the properties must be provided */
-interface sixtydevOptions {
+export interface sixtydevOptions {
 	/** The 60devs username to donate to */
 	sixtydevstipsID?: string
 	/** The url to the 60devs donate page */
@@ -426,7 +428,7 @@ export function sixtydevstips({
 sixtydevstips.badgeCategory = 'funding'
 
 /** At least one of the properties must be provided */
-interface githubsponsorsOptions {
+export interface githubsponsorsOptions {
 	/** The url to the GitHub donate page */
 	githubSponsorsURL?: string
 	/** The GitHub username to donate to */
@@ -458,7 +460,39 @@ export function githubsponsors({
 githubsponsors.badgeCategory = 'funding'
 
 /** At least one of the properties must be provided */
-interface patreonOptions {
+export interface thanksdevOptions {
+	/** The url to the ThanksDev donate page */
+	thanksdevURL?: string
+	/** The GitHub username to donate to */
+	thanksdevGithubUsername?: string
+	/** The GitHub username fallback to donate to */
+	githubUsername?: string
+}
+/** ThanksDev Badge */
+export function thanksdev({
+	thanksdevURL,
+	thanksdevGithubUsername,
+	githubUsername,
+}: thanksdevOptions): string {
+	if (!thanksdevURL) {
+		if (!thanksdevGithubUsername && !githubUsername)
+			throw new Error('thanksdevGithubUsername and githubUsername are missing')
+		thanksdevURL = `https://thanks.dev/u/gh/${
+			thanksdevGithubUsername || githubUsername
+		}`
+	}
+
+	// Create
+	const image = 'https://img.shields.io/badge/thanksdev-donate-yellow.svg'
+	const url = thanksdevURL
+	const alt = 'ThanksDev donate button'
+	const title = 'Donate to this project using ThanksDev'
+	return badge({ image, alt, url, title })
+}
+thanksdev.badgeCategory = 'funding'
+
+/** At least one of the properties must be provided */
+export interface patreonOptions {
 	/** The Patreon username to donate to */
 	patreonUsername?: string
 	/** The url to the Patreon donate page */
@@ -485,7 +519,7 @@ export function patreon({
 patreon.badgeCategory = 'funding'
 
 /** At least one of the properties must be provided */
-interface opencollectiveOptions {
+export interface opencollectiveOptions {
 	/** The Open Collective username to donate to */
 	opencollectiveUsername?: string
 	/** The url to the Open Collective donate page */
@@ -514,7 +548,7 @@ export function opencollective({
 opencollective.badgeCategory = 'funding'
 
 /** At least one of the properties must be provided */
-interface gratipayOptions {
+export interface gratipayOptions {
 	/** The Gratipay username to donate to */
 	gratipayUsername?: string
 	/** The url to the Gratipay donate page */
@@ -541,7 +575,7 @@ export function gratipay({
 gratipay.badgeCategory = 'funding'
 
 /** At least one of the properties must be provided */
-interface flattrOptions {
+export interface flattrOptions {
 	/** The Flattr code to donate to (e.g. 344188/balupton-on-Flattr) */
 	flattrCode?: string
 	/** The Flattr username to donate to (e.g. balupton) */
@@ -576,7 +610,7 @@ export function flattr({
 flattr.badgeCategory = 'funding'
 
 /** At least one of the properties must be provided */
-interface paypalOptions {
+export interface paypalOptions {
 	/**  The url to the paypal donate page */
 	paypalURL?: string
 	/**  The Paypal button id */
@@ -615,7 +649,7 @@ export function paypal({
 }
 paypal.badgeCategory = 'funding'
 
-interface cryptoOptions {
+export interface cryptoOptions {
 	/** The url to the crypto donation page */
 	cryptoURL: string
 	/** @deprecated */
@@ -642,7 +676,7 @@ export function bitcoin(opts: cryptoOptions): string {
 }
 bitcoin.badgeCategory = 'funding'
 
-interface wishlistOptions {
+export interface wishlistOptions {
 	/** The url to the wishlist page */
 	wishlistURL: string
 }
@@ -661,7 +695,7 @@ export function wishlist({ wishlistURL }: wishlistOptions): string {
 wishlist.badgeCategory = 'funding'
 
 /** At least one of the properties must be provided */
-interface buymeacoffeeOptions {
+export interface buymeacoffeeOptions {
 	/**  The Buy Me A Coffee username to donate to */
 	buymeacoffeeUsername?: string
 	/**  The url to the Buy Me A Coffee donate page */
@@ -691,7 +725,7 @@ export function buymeacoffee({
 buymeacoffee.badgeCategory = 'funding'
 
 /** At least one of the properties must be provided */
-interface liberapayOptions {
+export interface liberapayOptions {
 	/** The Liberapay username to donate to */
 	liberapayUsername?: string
 	/** The url to the Liberapay donate page */
@@ -719,7 +753,7 @@ export function liberapay({
 liberapay.badgeCategory = 'funding'
 
 /** At least one of the properties must be provided */
-interface thanksappOptions {
+export interface thanksappOptions {
 	/** The repository slug (username/reponame) */
 	npmPackageName?: string
 	/** The github slug that the project lives at (e.g. bevry/badges) */
@@ -778,7 +812,7 @@ boostlab.badgeCategory = 'funding'
 // ====================================
 // Social Badges
 
-interface slackinOptions {
+export interface slackinOptions {
 	/** The slackin url (e.g. https://slack.bevry.me) */
 	slackinURL: string
 }
@@ -807,7 +841,7 @@ export function slackin({ slackinURL }: slackinOptions): string {
 }
 slackin.badgeCategory = 'social'
 
-interface gabeaconOptions {
+export interface gabeaconOptions {
 	/**  The google analytics tracing id (e.g. UA-XXXXX-XX) */
 	gaTrackingID: string
 	/**  The github slug that the project lives at (e.g. bevry/badges) */
@@ -867,7 +901,7 @@ export function hackernewssubmit({ homepage }: homepageOptions): string {
 hackernewssubmit.badgeCategory = 'social'
 hackernewssubmit.badgeScript = true
 
-interface facebooklikeOptions extends homepageOptions {
+export interface facebooklikeOptions extends homepageOptions {
 	/** The facebook application id that the badge is for, defaults to the environment variable `FACEBOOK_APPLICATION_ID` */
 	facebookApplicationID?: string
 }
@@ -892,7 +926,7 @@ export function facebooklike({
 facebooklike.badgeCategory = 'social'
 facebooklike.badgeScript = true
 
-interface facebookfollowOptions {
+export interface facebookfollowOptions {
 	/** The facebook username to follow */
 	facebookUsername: string
 	/** The facebook application id that the badge is for, defaults to the environment variable `FACEBOOK_APPLICATION_ID` */
@@ -978,7 +1012,7 @@ export function githubstar({ githubSlug }: githubSlugOptions): string {
 githubstar.badgeCategory = 'social'
 githubstar.badgeScript = true
 
-interface quoraOptions {
+export interface quoraOptions {
 	/**  The quora user to follow */
 	quoraUsername: string
 	/**  The quora user's name */

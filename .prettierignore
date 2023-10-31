@@ -46,6 +46,7 @@ docs/
 
 # Development Files
 test/
+**/*fixtures*
 
 # Ecosystem Caches
 .trunk/*/

@@ -221,7 +221,7 @@
     "typedoc": "^0.25.3",
     "typescript": "5.2.2",
     "valid-directory": "^4.0.0",
-    "valid-module": "^1.17.0"
+    "valid-module": "^2.1.0"
   },
   "scripts": {
     "our:clean": "rm -Rf ./docs ./edition* ./es2015 ./es5 ./out ./.next",

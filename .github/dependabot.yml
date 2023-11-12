@@ -1,7 +1,16 @@
 version: 2
 updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: '00:00'
+      timezone: Australia/Perth
   - package-ecosystem: npm
     directory: /
     schedule:
       interval: weekly
-      day: sunday
+      day: monday
+      time: '00:00'
+      timezone: Australia/Perth

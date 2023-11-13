@@ -61,7 +61,7 @@ export interface BadgesField {
 export function renderBadges(
 	list: BadgesList,
 	config: BadgesConfig = {},
-	options: RenderOptions = { filterCategory: false, filterScripts: true },
+	options: RenderOptions = { filterCategory: false, filterScripts: true }
 ): string {
 	// Prepare
 	const results: string[] = []

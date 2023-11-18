@@ -836,7 +836,53 @@ export function slackin({ slackinURL }: slackinOptions): string {
 	const image = `${slackinURL}/badge.svg`
 	const url = slackinURL
 	const alt = 'Slack community badge'
-	const title = "Join this project's slack community"
+	const title = "Join this project's community on Slack"
+	return badge({ image, alt, url, title })
+}
+slackin.badgeCategory = 'social'
+
+export interface discordOptions {
+	/** The discord server id */
+	discordServerID: string
+	/** The discord server invite code or url */
+	discordServerInvite?: string
+}
+/** Discord Badge */
+export function discord({
+	discordServerID,
+	discordServerInvite,
+}: discordOptions): string {
+	// Check
+	if (!discordServerID) throw new Error('discordServerID is missing')
+	discordServerInvite = (discordServerInvite || '')
+		.replace('https://discord.com/invite/', '')
+		.replace('https://discord.gg/', '')
+
+	// Create
+	const image = `https://img.shields.io/discord/${discordServerID}?logo=discord&amp;label=discord`
+	const url = discordServerInvite
+		? `https://discord.gg/${discordServerInvite}`
+		: `https://discord.com/channels/${discordServerID}`
+	const alt = 'Discord server badge'
+	const title = "Join this project's community on Discord"
+	return badge({ image, alt, url, title })
+}
+slackin.badgeCategory = 'social'
+
+export interface TwitchOptions {
+	/** The Twitch username */
+	twitchUsername: string
+}
+/** Twitch Badge */
+export function twitch({ twitchUsername }: TwitchOptions): string {
+	// Check
+	if (!twitchUsername) throw new Error('twitchUsername is missing')
+
+	// Create
+	const image = `https://img.shields.io/twitch/status/${twitchUsername}?logo=twitch`
+	const url = `https://www.twitch.tv/${twitchUsername}`
+	const alt = 'Twitch community badge'
+	const title = "Join this project's community on Twitch"
 	return badge({ image, alt, url, title })
 }
 slackin.badgeCategory = 'social'

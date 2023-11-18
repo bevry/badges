@@ -1,5 +1,10 @@
 # History
 
+## v4.35.0 2023 November 18
+
+-   Add `discord` and `twitch` badges
+-   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+
 ## v4.34.0 2023 November 15
 
 -   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)

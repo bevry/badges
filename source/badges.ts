@@ -218,7 +218,7 @@ export function saucelabsbm({
 
 	// Create
 	const image = `https://saucelabs.com/browser-matrix/${saucelabsUsername}.svg?auth=${escape(
-		saucelabsAuthToken
+		saucelabsAuthToken,
 	)}`
 	const url = `https://saucelabs.com/u/${saucelabsUsername}`
 	const alt = 'Sauce Labs Browser Matrix'
@@ -240,7 +240,7 @@ export function saucelabs({
 
 	// Create
 	const image = `https://saucelabs.com/browser-matrix/${saucelabsUsername}.svg?auth=${escape(
-		saucelabsAuthToken
+		saucelabsAuthToken,
 	)}`
 	const url = `https://saucelabs.com/u/${saucelabsUsername}`
 	const alt = 'Sauce Labs Browser Matrix'
@@ -351,7 +351,7 @@ export function waffle({ githubSlug }: githubSlugOptions) {
 	// Create
 	const label = 'ready'
 	const image = `https://badge.waffle.io/${githubSlug}.png?label=${escape(
-		label
+		label,
 	)}`
 	const url = `http://waffle.io/${githubSlug}`
 	const alt = 'Stories in Ready'
@@ -384,7 +384,7 @@ export function githubworkflow({
 	// https://shields.io/category/build
 	// https://docs.github.com/en/free-pro-team@latest/actions/managing-workflow-runs/adding-a-workflow-status-badge#using-a-workflow-name
 	const image = new URL(
-		`https://github.com/${githubSlug}/workflows/${githubWorkflow}/badge.svg`
+		`https://github.com/${githubSlug}/workflows/${githubWorkflow}/badge.svg`,
 	)
 	if (githubBranch) image.searchParams.set('branch', githubBranch)
 	if (githubEvent) image.searchParams.set('event', githubEvent)
@@ -629,13 +629,13 @@ export function paypal({
 	if (!paypalURL) {
 		if (paypalButtonID) {
 			paypalURL = `https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=${escape(
-				paypalButtonID
+				paypalButtonID,
 			)}`
 		} else if (paypalUsername) {
 			paypalURL = `https://paypal.me/${paypalUsername}`
 		} else {
 			throw new Error(
-				'paypalURL, paypalButtonID, or paypalUsername is missing, at least one must exist'
+				'paypalURL, paypalButtonID, or paypalUsername is missing, at least one must exist',
 			)
 		}
 	}
@@ -781,7 +781,7 @@ export function thanksapp({
 			thanksappURL = `https://givethanks.app/donate/github/${githubSlug}`
 		} else {
 			throw new Error(
-				'at least one of these is required: thanksappUsername, npmPackageName, githubSlug'
+				'at least one of these is required: thanksappUsername, npmPackageName, githubSlug',
 			)
 		}
 	}
@@ -964,9 +964,9 @@ export function facebooklike({
 
 	// Return
 	return `<iframe src="https://www.facebook.com/plugins/like.php?href=${escape(
-		homepage
+		homepage,
 	)}&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;font&amp;colorscheme=light&amp;action=like&amp;height=21&amp;appId=${escape(
-		facebookApplicationID
+		facebookApplicationID,
 	)}" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe>`
 }
 facebooklike.badgeCategory = 'social'
@@ -991,9 +991,9 @@ export function facebookfollow({
 
 	// Return
 	return `<iframe src="https://www.facebook.com/plugins/follow.php?href=https%3A%2F%2Fwww.facebook.com%2F${escape(
-		facebookUsername
+		facebookUsername,
 	)}&amp;layout=button_count&amp;show_faces=false&amp;colorscheme=light&amp;font&amp;width=450&amp;appId=${escape(
-		facebookApplicationID
+		facebookApplicationID,
 	)}" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height: 20px;" allowTransparency="true"></iframe>`
 }
 facebookfollow.badgeCategory = 'social'
@@ -1017,7 +1017,7 @@ export function twitterfollow({ twitterUsername }: twitterOptions): string {
 
 	// Return
 	return `<a href="https://twitter.com/${escape(
-		twitterUsername
+		twitterUsername,
 	)}" class="twitter-follow-button" data-show-count="false">Follow @${twitterUsername}</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>`
 }
 twitterfollow.badgeCategory = 'social'
@@ -1032,7 +1032,7 @@ export function githubfollow({
 
 	// Return
 	return `<iframe src="https://ghbtns.com/github-btn.html?user=${escape(
-		githubUsername
+		githubUsername,
 	)}&amp;type=follow&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="165" height="20"></iframe>`
 }
 githubfollow.badgeCategory = 'social'
@@ -1050,9 +1050,9 @@ export function githubstar({ githubSlug }: githubSlugOptions): string {
 
 	// Return
 	return `<iframe src="https://ghbtns.com/github-btn.html?user=${escape(
-		githubUsername
+		githubUsername,
 	)}&amp;repo=${escape(
-		githubRepository
+		githubRepository,
 	)}&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>`
 }
 githubstar.badgeCategory = 'social'
@@ -1082,7 +1082,7 @@ export function quorafollow({
 		<span data-name="${quoraUsername}">
 			Follow <a href="http://www.quora.com/${quoraUsername}">${quoraRealname}</a> on <a href="http://www.quora.com">Quora</a>
 			<script src="https://www.quora.com/widgets/follow?embed_code=${escape(
-				quoraCode
+				quoraCode,
 			)}"></script>
 		</span>`.replace(/\n\s*/g, '')
 }
